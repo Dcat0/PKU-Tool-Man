@@ -71,17 +71,73 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-        <CheckBox
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/checkbox_text"
-            android:orientation="vertical"
-            android:checked="true"
-            android:textSize="20dp"
-            android:text="记住密码"/>
+            android:text="密码"
+            android:textSize="28dp" />
+
+        <EditText
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/password_again"
+            android:layout_marginLeft="5dp"
+            android:maxLines="1"
+            android:textSize="28dp"
+            android:background="#DCDCDC"
+            android:hint="请再次输入密码"
+            />
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="姓名"
+            android:textSize="28dp" />
+
+        <EditText
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/name"
+            android:layout_marginLeft="5dp"
+            android:maxLines="1"
+            android:textSize="28dp"
+            android:background="#DCDCDC"
+            android:hint="请输入姓名"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="学号"
+            android:textSize="28dp" />
+
+        <EditText
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/student_id"
+            android:layout_marginLeft="5dp"
+            android:maxLines="1"
+            android:textSize="28dp"
+            android:background="#DCDCDC"
+            android:hint="请输入学号"
+            />
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -95,29 +151,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:layout_gravity="center"
-            android:onClick="Login"
-            android:id="@+id/login_button"
-            android:background="#00FF00"
-            android:paddingLeft="40dp"
-            android:paddingRight="40dp"
-            android:textSize="30dp"
-            android:text="登入" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:orientation="horizontal"
-        android:gravity="center">
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:onClick="Register"
+            android:onClick= "Register"
             android:id="@+id/register_button"
             android:background="#00FF00"
             android:paddingLeft="40dp"
