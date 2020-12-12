@@ -1,8 +1,10 @@
 package edu.pku.PKUToolMan.Controller;
 
 import edu.pku.PKUToolMan.Entity.User;
+import edu.pku.PKUToolMan.Service.UserService;
 import edu.pku.PKUToolMan.Utils.Result;
 import edu.pku.PKUToolMan.Utils.TokenUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,10 +13,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/user")
 public class UserController {
+
+    @Autowired
+    private UserService userService;
+
     @PostMapping("/register")
     public Result register(@RequestBody String nickname, @RequestBody String password,
                            @RequestBody String email, @RequestBody String phoneNum) {
         // check if conflicts database
+            // find user via nickname
+            // if user exists
         // insert database
         // handle error
         // success
@@ -33,6 +41,10 @@ public class UserController {
         return Result.SUCCESS().data("token", token);
     }
 
+    /*
+    * 使用了token，自带时间戳
+    * 前端调用后端/user/logout接口成功后，应自行销毁token
+    * */
     @PostMapping("/logout")
     public Result logout() {
         return Result.SUCCESS();

@@ -1,10 +1,8 @@
-package edu.pku.PKUToolMan.Service;
+package edu.pku.PKUToolMan.DAO;
 
 import edu.pku.PKUToolMan.Entity.User;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-public interface UserService {
+public interface UserDAO {
     public void create(User user);
     public User queryBy(int id);
     public User queryBy(String nickname);
