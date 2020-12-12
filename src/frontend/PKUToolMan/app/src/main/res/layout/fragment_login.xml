@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 
 
@@ -22,12 +23,11 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:text="账号"
-            android:textSize="28dp" />
+        <ImageView
+            android:layout_marginTop="45dp"
+            android:layout_width="45dp"
+            android:layout_height="50dp"
+            android:src="@drawable/username" />
 
         <EditText
             android:layout_width="250dp"
@@ -48,16 +48,16 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="密码"
-            android:textSize="28dp" />
+        <ImageView
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:src="@drawable/password" />
 
         <EditText
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:id="@+id/password"
+            android:layout_marginTop="5dp"
             android:layout_marginLeft="5dp"
             android:maxLines="1"
             android:textSize="28dp"
@@ -91,7 +91,7 @@
         android:gravity="center">
 
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:layout_gravity="center"
@@ -108,9 +108,8 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:orientation="horizontal"
-        android:gravity="center">
+        android:gravity="bottom">
 
         <Button
             android:layout_width="wrap_content"
@@ -119,11 +118,32 @@
             android:layout_gravity="center"
             android:onClick="Register"
             android:id="@+id/register_button"
-            android:background="#00FF00"
-            android:paddingLeft="40dp"
-            android:paddingRight="40dp"
-            android:textSize="30dp"
-            android:text="注册" />
+            android:background="@drawable/below_button"
+            android:textSize="20dp"
+            android:text="免费注册"
+            android:textColor="@android:color/holo_purple"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:textSize="20dp"
+            android:text="|" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:onClick="Register"
+            android:id="@+id/forget_button"
+            android:background="@drawable/below_button"
+            android:textSize="20dp"
+            android:text="忘记密码"
+            android:textColor="@android:color/holo_purple"/>
 
     </LinearLayout>
 
