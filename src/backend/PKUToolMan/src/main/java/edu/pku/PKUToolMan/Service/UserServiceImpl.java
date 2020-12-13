@@ -15,23 +15,23 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void create(User user) {
-
+        userDAO.create(user);
     }
 
     @Override
     @Transactional(propagation = Propagation.SUPPORTS)
     public User queryBy(int id) {
-        return null;
+        return userDAO.queryBy(id);
     }
 
     @Override
     @Transactional(propagation = Propagation.SUPPORTS)
     public User queryBy(String nickname) {
-        return null;
+        return userDAO.queryBy(nickname);
     }
 
     @Override
-    public void modifyWith(String nickname, String password, String email, String phoneNum) {
-
+    public void modifyWith(User user) {
+        userDAO.modifyWith(user);
     }
 }
