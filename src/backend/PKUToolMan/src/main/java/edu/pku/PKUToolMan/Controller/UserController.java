@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -18,19 +21,41 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/register")
-    public Result register(@RequestBody String nickname, @RequestBody String password,
-                           @RequestBody String email, @RequestBody String phoneNum) {
+    public Result register(@RequestBody Map<String, Object> map) {
+        String nickname = map.get("nickname").toString();
+        String password = map.get("password").toString();
+        String email = map.get("email").toString();
+        String phoneNum = map.get("phoneNum").toString();
+//            String nickname, String password,
+//                           String email, String phoneNum) {
+        System.out.println("nickname="+nickname+"\n"
+                +"password="+password+"\n"
+                +"email="+email+"\n"
+                +"phoneNum="+phoneNum+"\n"
+        );
         // check if conflicts database
-        User user;
-        user = userService.queryByNickname(nickname);
+        User user = null;
+        try {
+            user = userService.queryByNickname(nickname);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         if(user != null) {
             return Result.RESPONSE_ERROR().message("nickname used!");
         }
-        user = userService.queryByEmail(email);
+        try {
+            user = userService.queryByEmail(email);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         if(user != null) {
             return Result.RESPONSE_ERROR().message("email used!");
         }
-        user = userService.queryByPhoneNum(phoneNum);
+        try {
+            user = userService.queryByPhoneNum(phoneNum);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         if(user != null) {
             return Result.RESPONSE_ERROR().message("phoneNum used!");
         }
@@ -42,11 +67,16 @@ public class UserController {
             e.printStackTrace();
             return Result.RESPONSE_ERROR().message("register failed, unable to insert");
         }
-        return login(email, password);
+        Map<String, Object> logInfo = new HashMap<>();
+        logInfo.put("username", phoneNum);
+        logInfo.put("password", password);
+        return login(logInfo);
     }
 
     @PostMapping("/login")
-    public Result login(@RequestBody String username, @RequestBody String password) {
+    public Result login(@RequestBody Map<String, Object> map) {
+        String username = map.get("username").toString();
+        String password = map.get("password").toString();
         User loggingUser;
         // resolve username is email/phoneNum, and find
         try {
@@ -99,9 +129,12 @@ public class UserController {
     }
 
     @PostMapping("/modify")
-    public Result modify(@RequestBody String nickname, @RequestBody String password,
-                         @RequestBody String newPassword,
-                         @RequestBody String email, @RequestBody String phoneNum) {
+    public Result modify(@RequestBody Map<String, Object> map) {
+        String nickname = map.get("nickname").toString();
+        String password = map.get("password").toString();
+        String newPassword = map.get("newPassword").toString();
+        String email = map.get("email").toString();
+        String phoneNum = map.get("phoneNum").toString();
         User user;
         // find user via nickname
         try {
