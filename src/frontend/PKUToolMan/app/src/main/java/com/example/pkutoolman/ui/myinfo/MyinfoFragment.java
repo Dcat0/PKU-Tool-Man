@@ -13,6 +13,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import com.example.pkutoolman.R;
 
@@ -43,9 +45,11 @@ public class MyinfoFragment extends Fragment {
         btModify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentManager fm = getActivity().getSupportFragmentManager();
-                Fragment fg = new ModifyInfoFragment();
-                fm.beginTransaction().addToBackStack(null).replace(R.id.container,fg).commit();
+                //FragmentManager fm = getActivity().getSupportFragmentManager();
+                //Fragment fg = new ModifyInfoFragment();
+                //fm.beginTransaction().addToBackStack(null).replace(R.id.container,fg).commit();
+                NavController controller = Navigation.findNavController(v);
+                controller.navigate(R.id.navigation_modifyinfo);
             }
         });
 
