@@ -8,15 +8,27 @@
     </insert>
 
     <!--根据id查找用户-->
-    <select id="queryBy" parameterType="int" resultType="User">
+    <select id="queryById" parameterType="int" resultType="User">
         select id,nickname,password,email,phoneNum,coin from t_user
         where id=#{id}
     </select>
 
     <!--根据nickname查找用户-->
-    <select id="queryBy" parameterType="String" resultType="User">
+    <select id="queryByNickname" parameterType="String" resultType="User">
         select id,nickname,password,email,phoneNum,coin from t_user
         where nickname=#{nickname}
+    </select>
+
+    <!--根据email查找用户-->
+    <select id="queryByEmail" parameterType="String" resultType="User">
+        select id,nickname,password,email,phoneNum,coin from t_user
+        where email=#{email}
+    </select>
+
+    <!--根据phoneNum查找用户-->
+    <select id="queryByPhoneNum" parameterType="String" resultType="User">
+        select id,nickname,password,email,phoneNum,coin from t_user
+        where phoneNum=#{phoneNum}
     </select>
 
     <!--根据id修改用户-->

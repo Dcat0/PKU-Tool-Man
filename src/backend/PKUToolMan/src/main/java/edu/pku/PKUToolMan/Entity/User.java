@@ -11,7 +11,21 @@ public class User {
     private String phoneNum;
     private int coin;
 
-    public User() {
+    public User() { this.coin = 0; }
+    public User(String nickname, String password, String email, String phoneNum) {
+        this.nickname = nickname;
+        this.password = password;
+        this.email = email;
+        this.phoneNum = phoneNum;
+        this.coin = 0;
+    }
+    public User (int id, String nickname, String password, String email, String phoneNum) {
+        this.id = id;
+        this.nickname = nickname;
+        this.password = password;
+        this.email = email;
+        this.phoneNum = phoneNum;
+        this.coin = 0;
     }
 
     public int getid() { return id; }

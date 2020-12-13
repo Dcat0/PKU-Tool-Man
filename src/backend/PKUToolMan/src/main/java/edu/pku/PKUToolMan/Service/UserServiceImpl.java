@@ -20,14 +20,26 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional(propagation = Propagation.SUPPORTS)
-    public User queryBy(int id) {
-        return userDAO.queryBy(id);
+    public User queryById(int id) {
+        return userDAO.queryById(id);
     }
 
     @Override
     @Transactional(propagation = Propagation.SUPPORTS)
-    public User queryBy(String nickname) {
-        return userDAO.queryBy(nickname);
+    public User queryByNickname(String nickname) {
+        return userDAO.queryByNickname(nickname);
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.SUPPORTS)
+    public User queryByEmail(String email) {
+        return userDAO.queryByEmail(email);
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.SUPPORTS)
+    public User queryByPhoneNum(String phoneNum) {
+        return userDAO.queryByPhoneNum(phoneNum);
     }
 
     @Override

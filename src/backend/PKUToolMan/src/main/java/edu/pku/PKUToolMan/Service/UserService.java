@@ -3,8 +3,10 @@ package edu.pku.PKUToolMan.Service;
 import edu.pku.PKUToolMan.Entity.User;
 
 public interface UserService {
-    public void create(User user);
-    public User queryBy(int id);
-    public User queryBy(String nickname);
-    public void modifyWith(User user);
+    void create(User user);
+    User queryById(int id);
+    User queryByNickname(String nickname);
+    User queryByEmail(String email);
+    User queryByPhoneNum(String phoneNum);
+    void modifyWith(User user);
 }
