@@ -10,6 +10,8 @@ import android.text.Editable;
 
 import android.content.Intent;
 
+import com.example.pkutoolman.ui.chat.ChatActivity;
+
 public class LoginActivity extends AppCompatActivity {
     EditText username;  //用户名
     EditText password;  //密码
@@ -102,7 +104,7 @@ public class LoginActivity extends AppCompatActivity {
         if (result == "200") {
             Toast.makeText(this, "恭喜，通过", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent();
-            intent.setClass(LoginActivity.this,ChatActivity.class);
+            intent.setClass(LoginActivity.this, MainActivity.class);
             startActivity(intent);
         }
         else if(result == "401"){
