@@ -42,7 +42,7 @@ public class UserController {
             e.printStackTrace();
             return Result.RESPONSE_ERROR().message("register failed, unable to insert");
         }
-        return Result.SUCCESS();
+        return login(email, password);
     }
 
     @PostMapping("/login")
@@ -68,7 +68,7 @@ public class UserController {
         }
         // success
         String token = TokenUtil.sign(loggingUser);
-        return Result.SUCCESS().data("token", token);
+        return Result.SUCCESS().data("token", token).data("user", loggingUser);
     }
 
     /*

@@ -2,7 +2,7 @@ package edu.pku.PKUToolMan.Interceptor;
 
 import edu.pku.PKUToolMan.Utils.Result;
 import edu.pku.PKUToolMan.Utils.TokenUtil;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 * https://blog.csdn.net/songfei_dream/article/details/103335575?utm_medium=distribute.pc_relevant.none-task-blog-title-2&spm=1001.2101.3001.4242
 * */
 
-@Configuration
+@Component
 public class TokenInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -39,6 +39,7 @@ public class TokenInterceptor implements HandlerInterceptor {
             System.out.println("INTERCEPTION: token error");
         } catch (Exception e) {
             e.printStackTrace();
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             response.sendError(500);
             return false;
         }
