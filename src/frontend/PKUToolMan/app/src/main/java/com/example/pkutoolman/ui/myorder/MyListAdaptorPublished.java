@@ -8,6 +8,8 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.pkutoolman.R;
+import com.example.pkutoolman.baseclass.Data;
+import com.example.pkutoolman.baseclass.Order;
 
 public class MyListAdaptorPublished extends BaseAdapter {
 
@@ -21,7 +23,7 @@ public class MyListAdaptorPublished extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return 10;
+        return Data.getMyOrderInfo().size();
     }
 
     @Override
@@ -52,8 +54,10 @@ public class MyListAdaptorPublished extends BaseAdapter {
             holder.order_class = convertView.findViewById(R.id.order_class);
             convertView.setTag(holder);
         } else holder = (ViewHolder) convertView.getTag();
-        holder.order_uid.setText("12124");
-        holder.order_state.setText("完成");
+        Order o = Data.getMyOrderInfo().get(position);
+        System.out.printf("position %d  id %d\n", position, o.id);
+        holder.order_uid.setText(String.valueOf(o.id));
+        holder.order_state.setText(String.valueOf(o.state));
         holder.order_class.setText("取快递");
         holder.order_time.setText("2020-12-13");
         return convertView;
