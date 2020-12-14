@@ -48,13 +48,13 @@ public class User {
 
     @Override
     public String toString() {
-        return "Order{" +
-                "id='" + id + "\'" +
-                ", nickname='" + nickname + "\'" +
-                ", password='" + password + "\'" +
-                ", email='" + email + "\'" +
-                ", phoneNum='" + phoneNum + "\'" +
-                ", coin='" + coin + "\'" +
+        return "\"user\": {" +
+                "\"id\": \"" + id + "\"" +
+                ", \"nickname\": \"" + nickname + "\"" +
+                ", \"password\": \"" + password + "\"" +
+                ", \"email\": \"" + email + "\"" +
+                ", \"phoneNum\": \"" + phoneNum + "\"" +
+                ", \"coin\": \"" + coin + "\"" +
                 "}";
     }
 }

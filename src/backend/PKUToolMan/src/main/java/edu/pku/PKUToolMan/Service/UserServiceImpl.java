@@ -14,9 +14,7 @@ public class UserServiceImpl implements UserService {
     private UserDAO userDAO;
 
     @Override
-    public void create(User user) {
-        userDAO.create(user);
-    }
+    public void create(User user) { userDAO.create(user); }
 
     @Override
     @Transactional(propagation = Propagation.SUPPORTS)

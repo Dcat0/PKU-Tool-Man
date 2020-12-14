@@ -4,7 +4,7 @@
     <!--注册新建用户，使用generated key配置自增id-->
     <insert id="create" parameterType="User" useGeneratedKeys="true" keyProperty="id">
         insert into t_user
-        values{#{id},#{nickname},#{password},#{email},#{phoneNum},#{coin}}
+        values (#{id},#{nickname},#{password},#{email},#{phoneNum},#{coin})
     </insert>
 
     <!--根据id查找用户-->

@@ -1,7 +1,7 @@
 package edu.pku.PKUToolMan.Controller;
 
 import edu.pku.PKUToolMan.Entity.User;
-import edu.pku.PKUToolMan.Service.UserService;
+import edu.pku.PKUToolMan.Service.UserServiceImpl;
 import edu.pku.PKUToolMan.Utils.Result;
 import edu.pku.PKUToolMan.Utils.TokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +18,7 @@ import java.util.Map;
 public class UserController {
 
     @Autowired
-    private UserService userService;
+    private UserServiceImpl userService;
 
     @PostMapping("/register")
     public Result register(@RequestBody Map<String, Object> map) {
@@ -59,6 +59,12 @@ public class UserController {
         if(user != null) {
             return Result.RESPONSE_ERROR().message("phoneNum used!");
         }
+
+        System.out.flush();
+        System.out.println("CHECK THROUGH");
+        System.out.println(user);
+        System.out.flush();
+
         // insert database
         user = new User(nickname, password, email, phoneNum);
         try {
@@ -77,12 +83,21 @@ public class UserController {
     public Result login(@RequestBody Map<String, Object> map) {
         String username = map.get("username").toString();
         String password = map.get("password").toString();
+        System.out.flush();
+        System.out.println("LOGIN CONTROLLER");
+        System.out.println("    username:" + username);
+        System.out.println("    password:" + password);
+        System.out.flush();
         User loggingUser;
         // resolve username is email/phoneNum, and find
         try {
             if(username.contains("@")) {
+                System.out.println("    QUERY_BY_EMAIL:" + username);
+                System.out.flush();
                 loggingUser = userService.queryByEmail(username);
             } else {
+                System.out.println("    QUERY_BY_PHONENUM:" + username);
+                System.out.flush();
                 loggingUser = userService.queryByPhoneNum(username);
             }
         } catch (Exception e) {
