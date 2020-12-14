@@ -1,5 +1,7 @@
 package edu.pku.PKUToolMan.Utils;
 
+import com.alibaba.druid.support.json.JSONUtils;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -72,7 +74,18 @@ public class Result {
 
     public Result data(Map<String, Object> map) {
         this.setData(map);
-
         return this;
+    }
+
+    public String toJSONString() {
+        Map<String, Object> JSONMap = new HashMap<>();
+        JSONMap.put("code", code);
+        JSONMap.put("message", message);
+        if(data != null) {
+            JSONMap.put("data", data);
+        } else {
+            JSONMap.put("data", "");
+        }
+        return JSONUtils.toJSONString(JSONMap);
     }
 }

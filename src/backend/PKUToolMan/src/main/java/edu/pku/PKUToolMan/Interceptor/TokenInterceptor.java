@@ -1,5 +1,6 @@
 package edu.pku.PKUToolMan.Interceptor;
 
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import edu.pku.PKUToolMan.Utils.Result;
 import edu.pku.PKUToolMan.Utils.TokenUtil;
 import org.springframework.stereotype.Component;
@@ -30,6 +31,8 @@ public class TokenInterceptor implements HandlerInterceptor {
         response.setCharacterEncoding("utf-8");
         response.setContentType("application/json; charset=utf-8");
         String token = request.getHeader("token");
+        System.out.println(token);
+        System.out.flush();
         if(token != null) {
             boolean result = TokenUtil.verify(token);
             if(result) {
@@ -37,8 +40,9 @@ public class TokenInterceptor implements HandlerInterceptor {
             }
         }
         try {
-            response.getWriter().append(Result.AUTH_ERROR().toString());
+            response.getWriter().write(Result.AUTH_ERROR().toJSONString());
             System.out.println("INTERCEPTION: token error");
+            System.out.flush();
         } catch (Exception e) {
             e.printStackTrace();
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);

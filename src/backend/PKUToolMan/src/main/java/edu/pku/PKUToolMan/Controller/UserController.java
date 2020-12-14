@@ -126,7 +126,9 @@ public class UserController {
     }
 
     @PostMapping("/query")
-    public Result query(@RequestBody int id) {
+    public Result query(@RequestBody Map<String, Object> map) {
+        int id = Integer.parseInt(map.get("id").toString());
+        System.out.println("QUERY: id: " + id);
         User user;
         // find user via id in database
         try {
@@ -145,6 +147,7 @@ public class UserController {
 
     @PostMapping("/modify")
     public Result modify(@RequestBody Map<String, Object> map) {
+        int id = Integer.parseInt(map.get("id").toString());
         String nickname = map.get("nickname").toString();
         String password = map.get("password").toString();
         String newPassword = map.get("newPassword").toString();
@@ -153,12 +156,17 @@ public class UserController {
         User user;
         // find user via nickname
         try {
-            user = userService.queryByNickname(nickname);
+            user = userService.queryById(id);
         } catch (Exception e) {
             e.printStackTrace();
             return Result.RESPONSE_ERROR().message("database query error");
         }
+        if(user == null) {
+            return Result.RESPONSE_ERROR().message("no such user");
+        }
         // check password
+        System.out.println(user);
+        System.out.flush();
         if(!user.getPassword().equals(password)) {
             return Result.RESPONSE_ERROR().message("wrong password");
         }
