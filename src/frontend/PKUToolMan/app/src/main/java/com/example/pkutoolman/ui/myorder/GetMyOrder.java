@@ -15,7 +15,7 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 
 public class GetMyOrder {
-    static int a=10;
+    static int a=0;
     static public void getMyOrder(int userID, ArrayList<Order> publishList, ArrayList<Order> receiveList) {
         a++;
         System.out.printf("a=%d\n", a);

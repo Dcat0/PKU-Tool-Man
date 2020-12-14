@@ -71,19 +71,19 @@ public class MyorderFragment extends Fragment {
         mLv = root.findViewById(R.id.lv_myorder);
         bt1 = root.findViewById(R.id.bt_myorder_publish);
         bt2 = root.findViewById(R.id.bt_myorder_receive);
-        //mSrl = root.findViewById(R.id.myorder_swipeLayout);
+        mSrl = root.findViewById(R.id.myorder_swipeLayout);
 
         refresh(); //建立视图的时候刷新数据
 
         mLv.setAdapter(saPublish);
 
-       /* mSrl.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        mSrl.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 refresh();
                 mSrl.setRefreshing(false);
             }
-        });*/
+        });
 
         bt1.setOnClickListener(new View.OnClickListener() {
             @Override
