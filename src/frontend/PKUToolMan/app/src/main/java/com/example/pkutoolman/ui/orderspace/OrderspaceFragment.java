@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,12 +18,15 @@ import com.example.pkutoolman.R;
 public class OrderspaceFragment extends Fragment {
 
     private OrderspaceViewModel orderspaceViewModel;
+    private ListView lv;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         orderspaceViewModel =
                 new ViewModelProvider(this).get(OrderspaceViewModel.class);
         View root = inflater.inflate(R.layout.fragment_orderspace, container, false);
+        lv = root.findViewById(R.id.orderspace_lv);
         final TextView textView = root.findViewById(R.id.text_orderspace);
         orderspaceViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
@@ -30,6 +34,8 @@ public class OrderspaceFragment extends Fragment {
                 textView.setText(s);
             }
         });
+
+        lv.setAdapter(new OrderspaceListView(getContext()));
         return root;
     }
 }
