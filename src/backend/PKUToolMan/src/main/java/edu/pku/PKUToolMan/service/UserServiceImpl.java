@@ -1,7 +1,7 @@
-package edu.pku.PKUToolMan.Service;
+package edu.pku.PKUToolMan.service;
 
-import edu.pku.PKUToolMan.DAO.UserDAO;
-import edu.pku.PKUToolMan.Entity.User;
+import edu.pku.PKUToolMan.dao.UserDAO;
+import edu.pku.PKUToolMan.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;

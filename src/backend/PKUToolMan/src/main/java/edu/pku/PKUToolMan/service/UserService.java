@@ -1,8 +1,8 @@
-package edu.pku.PKUToolMan.DAO;
+package edu.pku.PKUToolMan.service;
 
-import edu.pku.PKUToolMan.Entity.User;
+import edu.pku.PKUToolMan.entity.User;
 
-public interface UserDAO {
+public interface UserService {
     void create(User user);
     User queryById(int id);
     User queryByNickname(String nickname);

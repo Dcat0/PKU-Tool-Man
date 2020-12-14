@@ -1,9 +1,9 @@
-package edu.pku.PKUToolMan.Controller;
+package edu.pku.PKUToolMan.controller;
 
-import edu.pku.PKUToolMan.Entity.User;
-import edu.pku.PKUToolMan.Service.UserServiceImpl;
-import edu.pku.PKUToolMan.Utils.Result;
-import edu.pku.PKUToolMan.Utils.TokenUtil;
+import edu.pku.PKUToolMan.entity.User;
+import edu.pku.PKUToolMan.service.UserServiceImpl;
+import edu.pku.PKUToolMan.utils.Result;
+import edu.pku.PKUToolMan.utils.TokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

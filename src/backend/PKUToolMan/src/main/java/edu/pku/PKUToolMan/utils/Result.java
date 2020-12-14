@@ -1,4 +1,4 @@
-package edu.pku.PKUToolMan.Utils;
+package edu.pku.PKUToolMan.utils;
 
 import com.alibaba.druid.support.json.JSONUtils;
 

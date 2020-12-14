@@ -1,4 +1,4 @@
-package edu.pku.PKUToolMan.Entity;
+package edu.pku.PKUToolMan.entity;
 
 import org.springframework.context.annotation.Configuration;
 

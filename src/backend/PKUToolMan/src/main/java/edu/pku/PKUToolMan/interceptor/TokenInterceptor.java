@@ -1,8 +1,7 @@
-package edu.pku.PKUToolMan.Interceptor;
+package edu.pku.PKUToolMan.interceptor;
 
-import com.fasterxml.jackson.databind.util.JSONPObject;
-import edu.pku.PKUToolMan.Utils.Result;
-import edu.pku.PKUToolMan.Utils.TokenUtil;
+import edu.pku.PKUToolMan.utils.Result;
+import edu.pku.PKUToolMan.utils.TokenUtil;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 

@@ -1,17 +1,11 @@
 package edu.pku.PKUToolMan;
 
-import edu.pku.PKUToolMan.Controller.UserController;
-import edu.pku.PKUToolMan.DAO.UserDAO;
-import edu.pku.PKUToolMan.Entity.User;
-import edu.pku.PKUToolMan.Service.UserServiceImpl;
+import edu.pku.PKUToolMan.dao.UserDAO;
+import edu.pku.PKUToolMan.entity.User;
+import edu.pku.PKUToolMan.service.UserServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.client.AutoConfigureMockRestServiceServer;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.web.client.MockRestServiceServer;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.sql.DataSource;
 

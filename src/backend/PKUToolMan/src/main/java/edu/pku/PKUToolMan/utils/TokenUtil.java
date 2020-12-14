@@ -1,10 +1,10 @@
-package edu.pku.PKUToolMan.Utils;
+package edu.pku.PKUToolMan.utils;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import edu.pku.PKUToolMan.Entity.User;
+import edu.pku.PKUToolMan.entity.User;
 
 import java.util.Date;
 

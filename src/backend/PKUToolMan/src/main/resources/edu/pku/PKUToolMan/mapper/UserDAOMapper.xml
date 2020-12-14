@@ -1,5 +1,5 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="edu.pku.PKUToolMan.DAO.UserDAO">
+<mapper namespace="edu.pku.PKUToolMan.dao.UserDAO">
 
     <!--注册新建用户，使用generated key配置自增id-->
     <insert id="create" parameterType="User" useGeneratedKeys="true" keyProperty="id">

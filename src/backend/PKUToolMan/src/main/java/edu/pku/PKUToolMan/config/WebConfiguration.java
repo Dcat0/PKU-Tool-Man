@@ -1,6 +1,6 @@
-package edu.pku.PKUToolMan.Config;
+package edu.pku.PKUToolMan.config;
 
-import edu.pku.PKUToolMan.Interceptor.TokenInterceptor;
+import edu.pku.PKUToolMan.interceptor.TokenInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
