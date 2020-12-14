@@ -2,31 +2,42 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginBottom="80dp"
     android:orientation="vertical">
+
+
     <Button
-        android:id="@+id/bt_1"
+        android:id="@+id/bt_myorder_publish"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="我发布的订单"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="30dp"
+        android:text="我发布的订单"
         android:textSize="20sp" />
 
     <Button
-        android:id="@+id/bt_2"
-        android:layout_toEndOf="@id/bt_1"
+        android:id="@+id/bt_myorder_receive"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="30dp"
+        android:layout_toRightOf="@id/bt_myorder_publish"
         android:text="我接收的订单"
         android:textSize="20sp" />
 
 
-    <ListView
-        android:id="@+id/lv"
-        android:layout_below="@id/bt_1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"></ListView>
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/myorder_swipeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/bt_myorder_publish">
+
+
+            <ListView
+                android:id="@+id/lv_myorder"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </RelativeLayout>

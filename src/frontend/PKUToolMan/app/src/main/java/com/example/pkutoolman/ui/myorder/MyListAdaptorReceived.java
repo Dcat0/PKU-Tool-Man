@@ -48,11 +48,11 @@ public class MyListAdaptorReceived extends BaseAdapter {
             convertView = mLayoutInflater.inflate(R.layout.myorder_received, null);
             System.out.println(convertView);
             holder = new ViewHolder();
-            holder.order_uid = convertView.findViewById(R.id.order_uid);
-            holder.order_state = convertView.findViewById(R.id.order_state);
-            holder.order_time = convertView.findViewById(R.id.order_time);
-            holder.order_publisher = convertView.findViewById(R.id.order_publisher);
-            holder.order_class = convertView.findViewById(R.id.order_class);
+            holder.order_uid = convertView.findViewById(R.id.receive_order_uid);
+            holder.order_state = convertView.findViewById(R.id.receive_order_state);
+            holder.order_time = convertView.findViewById(R.id.receive_order_ddtime);
+            holder.order_publisher = convertView.findViewById(R.id.receive_order_name);
+            holder.order_class = convertView.findViewById(R.id.receive_order_class);
             convertView.setTag(holder);
         } else holder = (ViewHolder) convertView.getTag();
 
