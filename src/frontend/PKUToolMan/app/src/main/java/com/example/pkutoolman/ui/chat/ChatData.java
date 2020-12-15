@@ -1,4 +1,4 @@
-package com.example.pkutoolman;
+package com.example.pkutoolman.ui.chat;
 
 public class ChatData {
     /**

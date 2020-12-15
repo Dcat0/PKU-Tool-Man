@@ -10,6 +10,8 @@ import android.text.Editable;
 
 import android.content.Intent;
 
+import com.example.pkutoolman.ui.chat.ChatActivity;
+
 public class LoginActivity extends AppCompatActivity {
     EditText username;  //用户名
     EditText password;  //密码

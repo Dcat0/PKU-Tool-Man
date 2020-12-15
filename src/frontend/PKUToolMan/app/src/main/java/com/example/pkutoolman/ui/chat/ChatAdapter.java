@@ -1,4 +1,4 @@
-package com.example.pkutoolman;
+package com.example.pkutoolman.ui.chat;
 
 import java.util.List;
 
@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import com.example.pkutoolman.R;
 
 public class ChatAdapter extends BaseAdapter {
     private Context context;
