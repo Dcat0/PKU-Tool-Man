@@ -31,25 +31,26 @@ public class OrderController {
         order.setState(OrderState.CREATED.ordinal());
 
         try {
-
             orderService.createOrder(order);
-            System.out.println("orderId=" + order.getOrderId());
-
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println(order.toString());
             return Result.RESPONSE_ERROR().message("create order failed, unable to insert");
         }
-
+        // 这里其实可以考虑返回order.orderId: order.getOrderId()
         return Result.SUCCESS();
     }
 
     @PostMapping("/myOrderList")
     public Result getMyOrderList(@RequestBody Map<String, Object> map) {
         int userId = (Integer)map.get("userID");
-        // List<Order> orderList = orderService.getMyOrderList(userId);
-        // return Result.SUCCESS().data("orders", orderList);
-        return Result.SUCCESS();
+        List<Order> orderList;
+        try {
+            orderList = orderService.getMyOrderList(userId);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Result.RESPONSE_ERROR().message("get myOrderList failed");
+        }
+        return Result.SUCCESS().data("orders", orderList);
     }
 
     @PostMapping("/receive")
