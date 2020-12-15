@@ -3,14 +3,23 @@
     <!-- 创建新订单 -->
     <insert id="createOrder" parameterType="Order" useGeneratedKeys="true" keyProperty="orderId">
         insert into t_order
-        values (null,#{userId},#{toolManId},#{place},#{destination},#{startTime},#{endTime},#{description},#{state})
+        values (null,#{userId},null,#{place},#{destination},#{startTime},#{endTime},#{description},#{state})
     </insert>
 
     <!--根据userId查找该用户发起的和接收的所有订单-->
     <select id="getMyOrderList" parameterType="int" resultType="Order">
         select orderId,userId,toolManId,place,destination,startTime,endTime,description,state from t_order
-        where userId=#{id} or toolManId=#{id}
+        where userId=#{userId} or toolManId=#{userId}
     </select>
+
+    <select id="queryOrder" parameterType="int" resultType="Order">
+        select orderId,userId,toolManId,place,destination,startTime,endTime,description,state from t_order
+        where orderId=#{orderId}
+    </select>
+
+    <update id="updateOrder" parameterType="Order">
+        update t_order set toolManId=#{toolManId}, state=#{state} where orderId=#{orderId}
+    </update>
 
 
 </mapper>

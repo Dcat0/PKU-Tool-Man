@@ -36,11 +36,11 @@ public class OrderController {
             e.printStackTrace();
             return Result.RESPONSE_ERROR().message("create order failed, unable to insert");
         }
-        // 这里其实可以考虑返回order.orderId: order.getOrderId()
+        // TODO: 这里其实可以考虑返回order.orderId: order.getOrderId()
         return Result.SUCCESS();
     }
 
-    @PostMapping("/myOrderList")
+    @PostMapping("/myorderlist")
     public Result getMyOrderList(@RequestBody Map<String, Object> map) {
         int userId = (Integer)map.get("userID");
         List<Order> orderList;
@@ -53,12 +53,30 @@ public class OrderController {
         return Result.SUCCESS().data("orders", orderList);
     }
 
+    // 加入了是否有重复接单、订单已结束、已取消之类的检查
     @PostMapping("/receive")
-    public Result receiveOrder(int orderId, int toolManId) {
-        Order order = orderService.queryOrder(orderId);
+    public Result receiveOrder(@RequestBody Map<String, Object> map) {
+        int orderId = (Integer)map.get("orderID");
+        int toolManId = (Integer)map.get("toolManID");
+        Order order;
+        try {
+            order = orderService.queryOrder(orderId);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Result.RESPONSE_ERROR().message("query order failed when receiving order");
+        }
+        if (order.getToolManId() != -1 || order.getState() != OrderState.CREATED.ordinal()) {
+            return Result.AUTH_ERROR().message("duplicated receiving or finished/cancelled/deleted order");
+        }
+
         order.setToolManId(toolManId);
         order.setState(OrderState.EXECUTING.ordinal());
-        orderService.updateOrder(order);
+        try {
+            orderService.updateOrder(order);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Result.RESPONSE_ERROR().message("update order failed when receiving order");
+        }
         return Result.SUCCESS();
     }
 

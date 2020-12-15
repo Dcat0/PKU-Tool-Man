@@ -17,10 +17,12 @@ public class Order {
     private int state;
 
     public Order() {
+        this.toolManId = -1;  // 为了检验toolManId之前是否为空值，设定为-1
     }
 
     public Order(int userId, String place, String destination, String description) {  // startTime
         this.userId = userId;
+        this.toolManId = -1;
         this.place = place;
         this.destination = destination;
         this.description = description;
