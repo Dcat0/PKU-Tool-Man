@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 
 @Configuration
 public class Order {
-    private String orderId;
+    private int orderId;
     private int userId;
     private int toolManId;
     private String place;
@@ -16,15 +16,17 @@ public class Order {
     private String description;
     private int state;
 
-    public Order(String orderId, int userId, String place, String destination, String description) {  // startTime
-        this.orderId = orderId;
+    public Order() {
+    }
+
+    public Order(int userId, String place, String destination, String description) {  // startTime
         this.userId = userId;
         this.place = place;
         this.destination = destination;
         this.description = description;
     }
 
-    public Order(String orderId, int userId, int toolManId, String place, String destination, LocalDateTime startTime,
+    public Order(int orderId, int userId, int toolManId, String place, String destination, LocalDateTime startTime,
                  LocalDateTime endTime, String description, int state) {
         this.orderId = orderId;
         this.userId = userId;
@@ -37,11 +39,11 @@ public class Order {
         this.state = state;
     }
 
-    public String getOrderId() {
+    public int getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(String orderId) {
+    public void setOrderId(int orderId) {
         this.orderId = orderId;
     }
 

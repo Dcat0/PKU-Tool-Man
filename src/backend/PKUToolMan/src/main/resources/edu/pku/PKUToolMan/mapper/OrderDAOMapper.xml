@@ -1,5 +1,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="edu.pku.PKUToolMan.dao.OrderDAO">
-
+    <!-- 创建新订单 -->
+    <insert id="createOrder" parameterType="Order" useGeneratedKeys="true" keyProperty="orderId">
+        insert into t_order
+        values (null,#{userId},#{toolManId},#{place},#{destination},#{startTime},#{endTime},#{description},#{state})
+    </insert>
 
 </mapper>

@@ -5,10 +5,11 @@ import edu.pku.PKUToolMan.entity.Order;
 import java.util.List;
 
 public interface OrderDAO {
-    void createOrder(int userId, String place, String destination, String description);  // startTime
+    void createOrder(Order order);
     List<Order> getMyOrderList(int userId);
-    void receiveOrder(int orderId, int toolManId);
-    void completeOrder(int orderId);
+    void updateOrder(Order order);
+    // void receiveOrder(int orderId, int toolManId);
+    // void completeOrder(int orderId);
     void deleteOrder(int orderId);
     Order queryOrder(int orderId);
     List<Order> getAllCreatedOrderList();
