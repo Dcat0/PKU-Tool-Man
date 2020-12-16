@@ -158,14 +158,20 @@ public class OrderController {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            return Result.RESPONSE_ERROR().message("query order failed when cancelling order");
+            return Result.RESPONSE_ERROR().message("query order failed when querying order");
         }
         return Result.SUCCESS().data("order", order);
     }
 
     @PostMapping("/orderlist")
-    public Result getAllOrderList(@RequestBody Map<String, Object> map) {
-        return Result.SUCCESS();
+    public Result getAllOrderList() {
+        List<Order> orders;
+        try {
+            orders = orderService.getAllCreatedOrderList();
+        } catch (Exception e) {
+            return Result.RESPONSE_ERROR().message("query order failed when getting all orderlist");
+        }
+        return Result.SUCCESS().data("orders", orders);
     }
 
 }
