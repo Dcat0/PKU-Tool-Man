@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
@@ -15,19 +16,25 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.pkutoolman.R;
 import com.example.pkutoolman.baseclass.Order;
 import com.example.pkutoolman.baseclass.Data;
+import com.example.pkutoolman.ui.myorder.MyorderViewModel;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class OrderinfoFragment extends Fragment {
+
+    private OrderinfoViewModel orderinfoViewModel;
     //控件
-    private Button btnBack, btnChat, btnReport, btnMap;
+    private ImageButton btnBack;
+    private Button btnChat, btnReport, btnMap;
     //buttons for order operation
     private Button btnOp1, btnOp2;
     //信息显示组件
@@ -55,6 +62,7 @@ public class OrderinfoFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState){
         System.out.println("on create view");
+        orderinfoViewModel = new ViewModelProvider(this).get(OrderinfoViewModel.class);
         View root = inflater.inflate(R.layout.fragment_orderinfo, container, false);
         //获得组件
         btnBack = root.findViewById(R.id.btn_back);
