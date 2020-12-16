@@ -232,5 +232,11 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
+    public void  Back(View v){
+        Intent intent = new Intent();
+        intent.setClass(RegisterActivity.this,LoginActivity.class);
+        startActivity(intent);
+    }
+
 
 }
