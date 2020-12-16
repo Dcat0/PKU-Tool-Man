@@ -19,7 +19,7 @@ public class OrderspaceListView extends BaseAdapter {
     }
     @Override
     public int getCount() {
-        return 10;
+        return 2;
     }
 
     @Override
@@ -33,7 +33,7 @@ public class OrderspaceListView extends BaseAdapter {
     }
 
     static class ViewHolder {
-        public TextView order_uid, order_state, order_time, order_class;
+        public TextView order_uid, order_state, order_time, order_class, order_publisher;
     }
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -47,12 +47,14 @@ public class OrderspaceListView extends BaseAdapter {
             holder.order_state = convertView.findViewById(R.id.order_state);
             holder.order_time = convertView.findViewById(R.id.order_time);
             holder.order_class = convertView.findViewById(R.id.order_class);
+            holder.order_publisher = convertView.findViewById(R.id.order_publisher);
             convertView.setTag(holder);
         } else holder = (ViewHolder) convertView.getTag();
-        holder.order_uid.setText("12124");
-        holder.order_state.setText("完成");
-        holder.order_class.setText("取快递");
-        holder.order_time.setText("2020-12-13");
+        holder.order_uid.setText("订单编号:2048");
+        holder.order_state.setText("订单状态:未接取");
+        holder.order_class.setText("订单类型:取快递");
+        holder.order_time.setText("截止时间:2020-12-17");
+        holder.order_publisher.setText("发布者:&CGT");
         return convertView;
     }
 }
