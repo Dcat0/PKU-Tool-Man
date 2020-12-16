@@ -139,7 +139,7 @@
                 android:background="@color/gray" />
 
             <include
-                android:id="+id/order_info_list"
+                android:id="@+id/order_info_list"
                 layout="@layout/orderinfo_list" />
 
             <LinearLayout

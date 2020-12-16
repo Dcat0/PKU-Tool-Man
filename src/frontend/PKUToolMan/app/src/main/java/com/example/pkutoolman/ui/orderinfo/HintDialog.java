@@ -29,6 +29,11 @@ public class HintDialog extends Dialog implements View.OnClickListener{
     //组件内容
     private String title, message;
 
+    //设置组件内容
+    public void setMessage(String msg){
+        message = msg;
+    }
+
     public HintDialog(@NonNull Context context){
         super(context);
     }
@@ -69,8 +74,8 @@ public class HintDialog extends Dialog implements View.OnClickListener{
         btnConfirm.setOnClickListener(this);
     }
 
-    public void onClick(View v){
-        switch(v.getId()){
+    public void onClick(View v) {
+        switch (v.getId()) {
             case R.id.bt_cancel:
                 Toast.makeText(getContext(), "取消成功", Toast.LENGTH_LONG).show();
                 dismiss();
@@ -82,8 +87,4 @@ public class HintDialog extends Dialog implements View.OnClickListener{
         }
     }
 
-    //设置组件内容
-    public void setMessage(String msg){
-        message = msg;
-    }
 }

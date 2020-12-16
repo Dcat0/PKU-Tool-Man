@@ -80,6 +80,7 @@ public class OrderinfoFragment extends Fragment {
         currOrder = new Order(12345678, 0, 1,
                 "未名湖底", "博雅塔顶", "摸一条鱼");
         currOrder.state = 1;
+        myRole = 0;
         //*************************以上仅供演示效果************************************
 
         //显示信息
