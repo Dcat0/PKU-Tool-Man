@@ -34,7 +34,6 @@ public class OrderinfoFragment extends Fragment {
 
     private OrderinfoViewModel orderinfoViewModel;
     //控件
-    private ImageView btnBack;
     private Button btnChat, btnReport, btnMap;
     //buttons for order operation
     private Button btnOp1, btnOp2;
@@ -66,8 +65,6 @@ public class OrderinfoFragment extends Fragment {
         orderinfoViewModel = new ViewModelProvider(this).get(OrderinfoViewModel.class);
         View root = inflater.inflate(R.layout.fragment_orderinfo, container, false);
         //获得组件
-        btnBack = root.findViewById(R.id.btn_back);
-        btnChat = root.findViewById(R.id.btn_chat);
         btnReport = root.findViewById(R.id.btn_report);
         btnMap = root.findViewById(R.id.btn_map);
         btnOp1 = root.findViewById(R.id.btn_order_op1);
@@ -183,23 +180,6 @@ public class OrderinfoFragment extends Fragment {
     }
 
     private void setButtonListener(){
-        btnBack.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                //返回上一界面
-                Navigation.findNavController(v).navigateUp();
-            }
-        });
-
-        btnChat.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                //跳转到聊天界面
-                //Navigation.……
-                Toast.makeText(getContext(), "开启聊天框", Toast.LENGTH_LONG).show();
-            }
-        });
-
         btnReport.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){

@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/publish_time"
         android:layout_alignParentRight="true"
-        android:layout_marginVertical="5dp"
+        android:layout_marginVertical="4dp"
         android:textColor="@color/black" />
 
     <TextView
@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/end_time"
         android:layout_alignParentRight="true"
-        android:layout_marginVertical="5dp"
+        android:layout_marginVertical="4dp"
         android:textColor="@color/black" />
 
     <TextView
@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/place"
         android:layout_alignParentRight="true"
-        android:layout_marginVertical="5dp"
+        android:layout_marginVertical="4dp"
         android:textColor="@color/black" />
 
     <TextView
@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/destination"
         android:layout_alignParentRight="true"
-        android:layout_marginVertical="5dp"
+        android:layout_marginVertical="4dp"
         android:textColor="@color/black" />
 
     <TextView
@@ -46,7 +46,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_marginVertical="5dp"
+        android:layout_marginVertical="4dp"
         android:text="订单编号"
         android:textColor="@color/dark_gray" />
 
@@ -55,7 +55,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_marginVertical="5dp"
+        android:layout_marginVertical="4dp"
         android:textColor="@color/black" />
 
     <TextView
@@ -63,7 +63,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/order_id_hint"
-        android:layout_marginVertical="5dp"
+        android:layout_marginVertical="4dp"
         android:text="发布时间"
         android:textColor="@color/dark_gray" />
 
@@ -73,7 +73,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/order_id"
         android:layout_alignParentRight="true"
-        android:layout_marginVertical="5dp"
+        android:layout_marginVertical="4dp"
         android:textColor="@color/black" />
 
     <TextView
@@ -81,7 +81,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/publish_time_hint"
-        android:layout_marginVertical="5dp"
+        android:layout_marginVertical="4dp"
         android:text="结束时间"
         android:textColor="@color/dark_gray" />
 
@@ -90,7 +90,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/end_time_hint"
-        android:layout_marginVertical="5dp"
+        android:layout_marginVertical="4dp"
         android:text="执行地址"
         android:textColor="@color/dark_gray" />
 
@@ -99,7 +99,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/place_hint"
-        android:layout_marginVertical="5dp"
+        android:layout_marginVertical="4dp"
         android:text="送货地址"
         android:textColor="@color/dark_gray" />
 
@@ -108,7 +108,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/destination_hint"
-        android:layout_marginVertical="5dp"
+        android:layout_marginVertical="4dp"
         android:text="订单描述"
         android:textColor="@color/dark_gray" />
 </RelativeLayout>
