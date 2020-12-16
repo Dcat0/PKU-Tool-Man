@@ -1,6 +1,7 @@
 package com.example.pkutoolman.ui.orderinfo;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,7 +22,11 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.pkutoolman.ChatActivity;
+import com.example.pkutoolman.LoginActivity;
+import com.example.pkutoolman.MainActivity;
 import com.example.pkutoolman.R;
+import com.example.pkutoolman.RegisterActivity;
 import com.example.pkutoolman.baseclass.Order;
 import com.example.pkutoolman.baseclass.Data;
 import com.example.pkutoolman.ui.myorder.MyorderViewModel;
@@ -196,6 +201,9 @@ public class OrderinfoFragment extends Fragment {
             public void onClick(View v){
                 //跳转到聊天界面
                 //Navigation.……
+                Intent intent = new Intent();
+                intent.setClass(getContext(), ChatActivity.class);
+                startActivity(intent);
                 Toast.makeText(getContext(), "开启聊天框", Toast.LENGTH_LONG).show();
             }
         });
