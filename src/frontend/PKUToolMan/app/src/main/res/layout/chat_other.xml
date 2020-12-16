@@ -21,6 +21,6 @@
         android:padding="8dp"
         android:background="#FFFFCC"
         android:textColor="#000000"
-        android:text="权志龙好帅！！！" />
+        android:text="我到了！！！" />
 
 </LinearLayout>
