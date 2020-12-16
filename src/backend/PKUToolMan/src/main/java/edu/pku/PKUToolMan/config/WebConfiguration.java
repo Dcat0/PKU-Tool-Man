@@ -38,6 +38,7 @@ public class WebConfiguration implements WebMvcConfigurer {
         excludePath.add("/order/receive");
         excludePath.add("/order/complete");
         excludePath.add("/order/delete");
+        excludePath.add("/order/cancel");
         excludePath.add("/order/query");
         excludePath.add("/order/orderlist");
         excludePath.add("/error");

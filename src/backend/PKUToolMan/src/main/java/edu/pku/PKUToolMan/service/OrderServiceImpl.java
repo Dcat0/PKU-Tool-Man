@@ -31,18 +31,6 @@ public class OrderServiceImpl implements OrderService {
         orderDAO.updateOrder(order);
     }
 
-    /*
-    @Override
-    public void receiveOrder(int orderId, int toolManId) {
-        orderDAO.receiveOrder(orderId, toolManId);
-    }*/
-
-    /*
-    @Override
-    public void completeOrder(int orderId) {
-        orderDAO.completeOrder(orderId);
-    }*/
-
     @Override
     public void deleteOrder(int orderId) {
         orderDAO.deleteOrder(orderId);
@@ -60,18 +48,4 @@ public class OrderServiceImpl implements OrderService {
         return orderDAO.getAllCreatedOrderList();
     }
 
-    @Override
-    public void cancelOrder(int userId, int orderId) {
-        orderDAO.cancelOrder(userId, orderId);
-    }
-
-    @Override
-    public void sendReport() {
-        orderDAO.sendReport();
-    }
-
-    @Override
-    public void updateState(int orderId, int userId, int newState) {
-        orderDAO.updateState(orderId, userId, newState);
-    }
 }
