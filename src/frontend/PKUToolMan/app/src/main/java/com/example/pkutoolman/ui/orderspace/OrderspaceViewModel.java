@@ -10,7 +10,7 @@ public class OrderspaceViewModel extends ViewModel {
 
     public OrderspaceViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is orderspace fragment");
+        mText.setValue("OrderSpace");
     }
 
     public LiveData<String> getText() {
