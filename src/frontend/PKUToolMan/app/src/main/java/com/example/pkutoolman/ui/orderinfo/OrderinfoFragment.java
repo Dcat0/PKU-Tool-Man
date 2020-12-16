@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
@@ -33,7 +34,7 @@ public class OrderinfoFragment extends Fragment {
 
     private OrderinfoViewModel orderinfoViewModel;
     //控件
-    private ImageButton btnBack;
+    private ImageView btnBack;
     private Button btnChat, btnReport, btnMap;
     //buttons for order operation
     private Button btnOp1, btnOp2;

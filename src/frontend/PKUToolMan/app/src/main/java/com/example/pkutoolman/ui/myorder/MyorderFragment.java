@@ -18,6 +18,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.pkutoolman.R;
@@ -105,6 +106,7 @@ public class MyorderFragment extends Fragment {
             {
                 System.out.println(position);
                 // 每个Item跳转的时候需要用Navigate,并通过Buddle向orderInfo的Fragment中传递信息
+                Navigation.findNavController(root).navigate(R.id.navigation_orderinfo);
                 Toast.makeText(getContext(), String.valueOf(position), Toast.LENGTH_LONG).show();
             }
         });
