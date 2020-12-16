@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package com.example.pkutoolman.baseclass;
 
 import android.util.JsonReader;

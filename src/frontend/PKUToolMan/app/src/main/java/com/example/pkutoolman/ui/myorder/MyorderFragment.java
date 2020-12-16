@@ -106,17 +106,11 @@ public class MyorderFragment extends Fragment {
             {
                 System.out.println(position);
                 // 每个Item跳转的时候需要用Navigate,并通过Buddle向orderInfo的Fragment中传递信息
-                Navigation.findNavController(root).navigate(R.id.navigation_orderinfo);
-                Toast.makeText(getContext(), String.valueOf(position), Toast.LENGTH_LONG).show();
-            }
-        });*/
-        mLv.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-            public void onItemClick(AdapterView<?> arg0, View view, int position,long id)
-            {
-                System.out.println(position);
+                Navigation.findNavController(view).navigate(R.id.navigation_orderinfo);
                 Toast.makeText(getContext(), String.valueOf(position), Toast.LENGTH_LONG).show();
             }
         });
+
         return root;
     }
 
