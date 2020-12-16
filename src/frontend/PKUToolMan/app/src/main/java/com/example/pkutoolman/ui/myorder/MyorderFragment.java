@@ -109,6 +109,13 @@ public class MyorderFragment extends Fragment {
                 Navigation.findNavController(root).navigate(R.id.navigation_orderinfo);
                 Toast.makeText(getContext(), String.valueOf(position), Toast.LENGTH_LONG).show();
             }
+        });*/
+        mLv.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            public void onItemClick(AdapterView<?> arg0, View view, int position,long id)
+            {
+                System.out.println(position);
+                Toast.makeText(getContext(), String.valueOf(position), Toast.LENGTH_LONG).show();
+            }
         });
         return root;
     }
