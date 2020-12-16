@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:background="@drawable/tool_man">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:textSize="20dp"
+        android:text="欢迎来到PKUToolMan" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_marginTop="45dp"
+            android:layout_width="45dp"
+            android:layout_height="50dp"
+            android:src="@drawable/username" />
+
+        <EditText
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/username"
+            android:layout_marginTop="50dp"
+            android:layout_marginLeft="5dp"
+            android:maxLines="1"
+            android:textSize="28dp"
+            android:background="#DCDCDC"
+            android:hint="请输入账号"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:src="@drawable/password" />
+
+        <EditText
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/password"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:maxLines="1"
+            android:textSize="28dp"
+            android:background="#DCDCDC"
+            android:hint="请输入密码"
+            android:password="true"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/checkbox_text"
+            android:orientation="vertical"
+            android:checked="true"
+            android:textSize="20dp"
+            android:text="记住密码"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <Button
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:onClick="Login"
+            android:id="@+id/login_button"
+            android:background="#00FF00"
+            android:paddingLeft="40dp"
+            android:paddingRight="40dp"
+            android:textSize="30dp"
+            android:text="登入" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="bottom">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:onClick="Register"
+            android:id="@+id/register_button"
+            android:background="@drawable/below_button"
+            android:textSize="20dp"
+            android:text="免费注册"
+            android:textColor="@android:color/holo_purple"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:textSize="20dp"
+            android:text="|" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:onClick="Register"
+            android:id="@+id/forget_button"
+            android:background="@drawable/below_button"
+            android:textSize="20dp"
+            android:text="忘记密码"
+            android:textColor="@android:color/holo_purple"/>
+
+    </LinearLayout>
+
+</LinearLayout>
+

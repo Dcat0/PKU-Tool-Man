@@ -9,7 +9,8 @@
         android:id="@+id/navigation_myorder"
         android:name="com.example.pkutoolman.ui.myorder.MyorderFragment"
         android:label="@string/title_myorder"
-        tools:layout="@layout/fragment_myorder" />
+        tools:layout="@layout/fragment_myorder" >
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_orderspace"
@@ -37,5 +38,11 @@
             app:destination="@id/navigation_myinfo" />
     </fragment>
 
+    <fragment
+        android:id="@+id/navigation_orderinfo"
+        android:name="com.example.pkutoolman.ui.orderinfo.OrderinfoFragment"
+        android:label="@string/title_orderinfo"
+        tools:layout="@layout/fragment_orderinfo" >
+    </fragment>
 
 </navigation>
