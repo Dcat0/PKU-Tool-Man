@@ -135,7 +135,7 @@ public class OrderinfoFragment extends Fragment {
         }
         else{
             String name = (myRole == 0) ? receiver.getNickName() : publisher.getNickName();
-            userName.setText(name);
+            userName.setText("you_know_who");               //仅供演示
         }
     }
 
