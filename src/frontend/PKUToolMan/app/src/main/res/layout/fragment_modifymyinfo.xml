@@ -14,14 +14,14 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
-        android:gravity="center"
-        android:textSize="20sp"
         android:text="请修改个人信息"
-        android:textStyle="bold"/>
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
 
 
@@ -56,15 +56,15 @@
                     android:textSize="20sp" />
 
                 <EditText
+                    android:id="@+id/student_nickname"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/student_nickname"
                     android:layout_marginStart="5dp"
-                    android:maxLines="1"
-                    android:textSize="23sp"
-                    android:background="#DCDCDC"
+                    android:background="@drawable/bg_edittext_select"
                     android:gravity="center"
-                    android:hint="Wyxoi" />
+                    android:hint="Wyxoi"
+                    android:maxLines="1"
+                    android:textSize="23sp" />
 
             </LinearLayout>
 
@@ -83,15 +83,15 @@
                     android:textSize="20sp" />
 
                 <EditText
+                    android:id="@+id/student_newemail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/student_newemail"
                     android:layout_marginStart="5dp"
-                    android:maxLines="1"
-                    android:textSize="23sp"
-                    android:background="#DCDCDC"
+                    android:background="@drawable/bg_edittext_select"
                     android:gravity="center"
-                    android:hint="fyc@pku.edu.cn" />
+                    android:hint="fyc@pku.edu.cn"
+                    android:maxLines="1"
+                    android:textSize="23sp" />
 
             </LinearLayout>
 
@@ -110,15 +110,15 @@
                     android:textSize="20sp" />
 
                 <EditText
+                    android:id="@+id/student_newphone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/student_newphone"
                     android:layout_marginStart="5dp"
-                    android:maxLines="1"
-                    android:textSize="23sp"
-                    android:background="#DCDCDC"
+                    android:background="@drawable/bg_edittext_select"
                     android:gravity="center"
-                    android:hint="13857558347" />
+                    android:hint="13857558347"
+                    android:maxLines="1"
+                    android:textSize="23sp" />
 
             </LinearLayout>
 
@@ -137,16 +137,16 @@
                     android:textSize="20sp" />
 
                 <EditText
+                    android:id="@+id/student_oldpassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/student_oldpassword"
                     android:layout_marginStart="5dp"
-                    android:maxLines="1"
-                    android:textSize="23sp"
-                    android:background="#DCDCDC"
+                    android:background="@drawable/bg_edittext_select"
                     android:gravity="center"
                     android:hint="请输入原密码"
-                    android:password="true"/>
+                    android:maxLines="1"
+                    android:password="true"
+                    android:textSize="23sp" />
 
             </LinearLayout>
 
@@ -165,16 +165,16 @@
                     android:textSize="20sp" />
 
                 <EditText
+                    android:id="@+id/student_newpassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/student_newpassword"
                     android:layout_marginStart="5dp"
-                    android:maxLines="1"
-                    android:textSize="23sp"
-                    android:background="#DCDCDC"
+                    android:background="@drawable/bg_edittext_select"
                     android:gravity="center"
                     android:hint="请输入新密码"
-                    android:password="true"/>
+                    android:maxLines="1"
+                    android:password="true"
+                    android:textSize="23sp" />
 
             </LinearLayout>
 
@@ -193,16 +193,16 @@
                     android:textSize="20sp" />
 
                 <EditText
+                    android:id="@+id/student_repassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/student_repassword"
                     android:layout_marginStart="5dp"
-                    android:maxLines="1"
-                    android:textSize="23sp"
-                    android:background="#DCDCDC"
+                    android:background="@drawable/bg_edittext_select"
                     android:gravity="center"
                     android:hint="请重复新密码"
-                    android:password="true"/>
+                    android:maxLines="1"
+                    android:password="true"
+                    android:textSize="23sp" />
 
             </LinearLayout>
 

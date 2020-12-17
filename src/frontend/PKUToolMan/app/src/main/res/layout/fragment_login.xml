@@ -31,16 +31,15 @@
             android:src="@drawable/username" />
 
         <EditText
+            android:id="@+id/username"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:id="@+id/username"
-            android:layout_marginTop="50dp"
             android:layout_marginLeft="5dp"
-            android:maxLines="1"
-            android:textSize="28dp"
-            android:background="#DCDCDC"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/bg_edittext_select"
             android:hint="请输入账号"
-            />
+            android:maxLines="1"
+            android:textSize="28dp" />
 
     </LinearLayout>
 
@@ -55,17 +54,16 @@
             android:src="@drawable/password" />
 
         <EditText
+            android:id="@+id/password"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:id="@+id/password"
-            android:layout_marginTop="5dp"
             android:layout_marginLeft="5dp"
-            android:maxLines="1"
-            android:textSize="28dp"
-            android:background="#DCDCDC"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/bg_edittext_select"
             android:hint="请输入密码"
+            android:maxLines="1"
             android:password="true"
-            />
+            android:textSize="28dp" />
 
     </LinearLayout>
 
@@ -97,7 +95,8 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:background="@drawable/btn_shape_in_order_gray"
+            android:background="#00FFFFFF"
+            android:foreground="?selectableItemBackground"
             android:gravity="center"
             android:onClick="Login"
             android:paddingLeft="40dp"
