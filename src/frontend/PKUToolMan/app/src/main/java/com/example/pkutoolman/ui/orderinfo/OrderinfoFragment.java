@@ -1,6 +1,7 @@
 package com.example.pkutoolman.ui.orderinfo;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,7 +22,11 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.pkutoolman.ChatActivity;
+import com.example.pkutoolman.LoginActivity;
+import com.example.pkutoolman.MainActivity;
 import com.example.pkutoolman.R;
+import com.example.pkutoolman.RegisterActivity;
 import com.example.pkutoolman.baseclass.Order;
 import com.example.pkutoolman.baseclass.Data;
 import com.example.pkutoolman.ui.myorder.MyorderViewModel;
@@ -34,6 +39,7 @@ public class OrderinfoFragment extends Fragment {
 
     private OrderinfoViewModel orderinfoViewModel;
     //控件
+    private ImageView btnBack;
     private Button btnChat, btnReport, btnMap;
     //buttons for order operation
     private Button btnOp1, btnOp2;
@@ -65,6 +71,8 @@ public class OrderinfoFragment extends Fragment {
         orderinfoViewModel = new ViewModelProvider(this).get(OrderinfoViewModel.class);
         View root = inflater.inflate(R.layout.fragment_orderinfo, container, false);
         //获得组件
+        btnBack = root.findViewById(R.id.btn_back);
+        btnChat = root.findViewById(R.id.btn_chat);
         btnReport = root.findViewById(R.id.btn_report);
         btnMap = root.findViewById(R.id.btn_map);
         btnOp1 = root.findViewById(R.id.btn_order_op1);
@@ -180,6 +188,26 @@ public class OrderinfoFragment extends Fragment {
     }
 
     private void setButtonListener(){
+        btnBack.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                //返回上一界面
+                Navigation.findNavController(v).navigateUp();
+            }
+        });
+
+        btnChat.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                //跳转到聊天界面
+                //Navigation.……
+                Intent intent = new Intent();
+                intent.setClass(getContext(), ChatActivity.class);
+                startActivity(intent);
+                Toast.makeText(getContext(), "开启聊天框", Toast.LENGTH_LONG).show();
+            }
+        });
+
         btnReport.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
