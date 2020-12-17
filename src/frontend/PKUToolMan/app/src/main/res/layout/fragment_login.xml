@@ -93,17 +93,17 @@
         android:gravity="center">
 
         <Button
+            android:id="@+id/login_button"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:layout_gravity="center"
+            android:background="@drawable/btn_shape_in_order_gray"
+            android:gravity="center"
             android:onClick="Login"
-            android:id="@+id/login_button"
-            android:background="#00FF00"
             android:paddingLeft="40dp"
             android:paddingRight="40dp"
-            android:textSize="30dp"
-            android:text="登入" />
+            android:text="登入"
+            android:textSize="30dp" />
 
     </LinearLayout>
 

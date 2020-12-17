@@ -21,9 +21,16 @@
             android:layout_weight="1"
             android:background="#00FFFFFF"
             android:text="我发布的订单"
-            android:textColor="@color/dark_gray"
+            android:textColor="@color/color_text_select"
             android:textSize="20sp"
             android:textStyle="bold" />
+
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center"
+            android:background="@color/gray">
+        </View>
 
         <Button
             android:id="@+id/bt_myorder_receive"
@@ -33,7 +40,7 @@
             android:layout_weight="1"
             android:background="#00FFFFFF"
             android:text="我接收的订单"
-            android:textColor="@color/dark_gray"
+            android:textColor="@color/color_text_select"
             android:textSize="20sp"
             android:textStyle="bold" />
     </LinearLayout>
