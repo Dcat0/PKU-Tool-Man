@@ -9,7 +9,8 @@
         android:id="@+id/navigation_myorder"
         android:name="com.example.pkutoolman.ui.myorder.MyorderFragment"
         android:label="@string/title_myorder"
-        tools:layout="@layout/fragment_myorder" />
+        tools:layout="@layout/fragment_myorder" >
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_orderspace"
@@ -21,5 +22,27 @@
         android:id="@+id/navigation_myinfo"
         android:name="com.example.pkutoolman.ui.myinfo.MyinfoFragment"
         android:label="@string/title_myinfo"
-        tools:layout="@layout/fragment_myinfo" />
+        tools:layout="@layout/fragment_myinfo" >
+        <action
+            android:id="@+id/action_navigation_myinfo_to_navigation_modifyinfo"
+            app:destination="@id/navigation_modifyinfo" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_modifyinfo"
+        android:name="com.example.pkutoolman.ui.myinfo.ModifyInfoFragment"
+        android:label="修改信息"
+        tools:layout="@layout/fragment_modifymyinfo">
+        <action
+            android:id="@+id/action_navigation_modifyinfo_to_navigation_myinfo"
+            app:destination="@id/navigation_myinfo" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_orderinfo"
+        android:name="com.example.pkutoolman.ui.orderinfo.OrderinfoFragment"
+        android:label="@string/title_orderinfo"
+        tools:layout="@layout/fragment_orderinfo" >
+    </fragment>
+
 </navigation>

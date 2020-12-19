@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
@@ -60,6 +62,27 @@ public class ChatActivity extends Activity {
             personChats.add(personChat);
         }
 
+        //加载数据库中信息
+        ChatDatabase_sqlite chat_content = new ChatDatabase_sqlite(ChatActivity.this);
+        SQLiteDatabase db = chat_content.getWritableDatabase();
+        Cursor cursor = db.rawQuery("select * from chat", null);
+        while (cursor.moveToNext()){
+            int is_my_send = cursor.getInt(cursor.getColumnIndex("is_from_me"));
+            String message_content = cursor.getString(cursor.getColumnIndex("message_content"));
+            ChatData personChat = new ChatData();
+            //代表自己发送
+            if(is_my_send == 1){
+                personChat.setMeSend(true);
+            }
+            if(is_my_send == 0){
+                personChat.setMeSend(false);
+            }
+            //得到发送内容
+            personChat.setChatMessage(message_content);
+            //加入集合
+            personChats.add(personChat);
+        }
+        
         lv_chat_dialog = (ListView) findViewById(R.id.lv_chat_dialog);
         Button btn_chat_message_send = (Button) findViewById(R.id.button_message_send);
         et_chat_message = (EditText) findViewById(R.id.et_chat_message);

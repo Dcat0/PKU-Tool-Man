@@ -48,10 +48,10 @@ public class MyListAdaptorPublished extends BaseAdapter {
             convertView = mLayoutInflater.inflate(R.layout.myorder_published, null);
             System.out.println(convertView);
             holder = new ViewHolder();
-            holder.order_uid = convertView.findViewById(R.id.order_uid);
-            holder.order_state = convertView.findViewById(R.id.order_state);
-            holder.order_time = convertView.findViewById(R.id.order_time);
-            holder.order_class = convertView.findViewById(R.id.order_class);
+            holder.order_uid = convertView.findViewById(R.id.publish_order_uid);
+            holder.order_state = convertView.findViewById(R.id.publish_order_state);
+            holder.order_time = convertView.findViewById(R.id.publish_order_ddtime);
+            holder.order_class = convertView.findViewById(R.id.publish_order_class);
             convertView.setTag(holder);
         } else holder = (ViewHolder) convertView.getTag();
         Order o = Data.getMyOrderInfo().get(position);

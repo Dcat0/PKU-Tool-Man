@@ -30,7 +30,6 @@ public class Post extends Thread {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println(t.result);
         return t.result;
     }
 

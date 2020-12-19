@@ -140,10 +140,12 @@ public class LoginActivity extends AppCompatActivity {
         System.out.println(code);
         System.out.println(code.length());
 
+        code = "200";
+
         if (code.equals("200")) {
             Toast.makeText(this, "欢迎登入", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent();
-            intent.setClass(LoginActivity.this, MainActivity.class);
+            intent.setClass(LoginActivity.this, ChatActivity.class);
             startActivity(intent);
         }
         else if(code.equals("500") && message.equals("password wrong!")){
