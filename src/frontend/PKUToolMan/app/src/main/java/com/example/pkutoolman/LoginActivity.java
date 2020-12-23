@@ -24,6 +24,8 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_login);
+        //隐藏标题栏
+        getSupportActionBar().hide();
         username = (EditText) findViewById(R.id.username);  //获取用户名
         password = (EditText) findViewById(R.id.password);  //获取密码
         username.addTextChangedListener(new JumpTextWatcher_username()); //输入回车符号则跳至password文本框

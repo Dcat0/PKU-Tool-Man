@@ -1,9 +1,14 @@
 package com.example.pkutoolman;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Window;
+import android.widget.Toast;
 
+import com.example.pkutoolman.ui.PublishActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -28,5 +33,15 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
+
+        //设置悬浮的添加订单按钮的响应事件
+        FloatingActionButton fab = findViewById(R.id.btn_add_order);
+        fab.setOnClickListener(v->{
+            //Toast.makeText(this, "打开订单发布界面", Toast.LENGTH_LONG).show()
+            //跳转界面
+            Intent intent = new Intent();
+            intent.setClass(MainActivity.this, PublishActivity.class);
+            startActivity(intent);
+        });
     }
 }

@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
@@ -35,7 +36,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class OrderinfoFragment extends Fragment {
+public class OrderinfoActivity extends AppCompatActivity {
 
     private OrderinfoViewModel orderinfoViewModel;
     //控件
@@ -60,31 +61,26 @@ public class OrderinfoFragment extends Fragment {
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        System.out.println("onDestroyOrderInfoView");
-    }
-
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState){
-        System.out.println("on create view");
-        orderinfoViewModel = new ViewModelProvider(this).get(OrderinfoViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_orderinfo, container, false);
+    public void onCreate(Bundle savedInstanceState){
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.fragment_orderinfo);
+        //隐藏标题栏
+        getSupportActionBar().hide();
         //获得组件
-        btnBack = root.findViewById(R.id.btn_back);
-        btnChat = root.findViewById(R.id.btn_chat);
-        btnReport = root.findViewById(R.id.btn_report);
-        btnMap = root.findViewById(R.id.btn_map);
-        btnOp1 = root.findViewById(R.id.btn_order_op1);
-        btnOp2 = root.findViewById(R.id.btn_order_op2);
-        userName = root.findViewById(R.id.user_name);
-        orderState = root.findViewById(R.id.order_state_info);
-        orderID = root.findViewById(R.id.order_id);
-        publishTime = root.findViewById(R.id.publish_time);
-        endTime = root.findViewById(R.id.end_time);
-        place = root.findViewById(R.id.place);
-        destination = root.findViewById(R.id.destination);
-        description = root.findViewById(R.id.description);
+        btnBack = findViewById(R.id.btn_back);
+        btnChat = findViewById(R.id.btn_chat);
+        btnReport = findViewById(R.id.btn_report);
+        btnMap = findViewById(R.id.btn_map);
+        btnOp1 = findViewById(R.id.btn_order_op1);
+        btnOp2 = findViewById(R.id.btn_order_op2);
+        userName = findViewById(R.id.user_name);
+        orderState = findViewById(R.id.order_state_info);
+        orderID = findViewById(R.id.order_id);
+        publishTime = findViewById(R.id.publish_time);
+        endTime = findViewById(R.id.end_time);
+        place = findViewById(R.id.place);
+        destination = findViewById(R.id.destination);
+        description = findViewById(R.id.description);
 
         //接受传入的信息
         //Bundle bun = getArguments();
@@ -105,8 +101,6 @@ public class OrderinfoFragment extends Fragment {
         setOrderOp();
         //设置响应
         setButtonListener();
-
-        return root;
     }
 
     private void setOrderState(){
@@ -192,7 +186,8 @@ public class OrderinfoFragment extends Fragment {
             @Override
             public void onClick(View v){
                 //返回上一界面
-                Navigation.findNavController(v).navigateUp();
+                //Navigation.findNavController(v).navigateUp();
+                finish();
             }
         });
 
@@ -202,9 +197,9 @@ public class OrderinfoFragment extends Fragment {
                 //跳转到聊天界面
                 //Navigation.……
                 Intent intent = new Intent();
-                intent.setClass(getContext(), ChatActivity.class);
+                intent.setClass(OrderinfoActivity.this, ChatActivity.class);
                 startActivity(intent);
-                Toast.makeText(getContext(), "开启聊天框", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "开启聊天框", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -213,7 +208,7 @@ public class OrderinfoFragment extends Fragment {
             public void onClick(View v){
                 //跳转到举报界面
                 //Navigatin.……
-                Toast.makeText(getContext(), "进入举报", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "进入举报", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -222,7 +217,7 @@ public class OrderinfoFragment extends Fragment {
             public void onClick(View v){
                 //跳转到地图界面
                 //Navigation.……
-                Toast.makeText(getContext(), "打开地图", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "打开地图", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -233,12 +228,12 @@ public class OrderinfoFragment extends Fragment {
                     //取消订单
                     if (myRole == 0) {
                         //向后端发送取消请求
-                        Toast.makeText(getContext(), "取消订单", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "取消订单", Toast.LENGTH_LONG).show();
                     }
                     //取消接收
                     else if (currOrder.state == 2) {
                         //向后端发送取消接收请求
-                        Toast.makeText(getContext(), "取消接收", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "取消接收", Toast.LENGTH_LONG).show();
                     }
                 }
             }
@@ -251,12 +246,12 @@ public class OrderinfoFragment extends Fragment {
                     //完成订单
                     if (myRole == 0) {
                         //向后端发送完成请求
-                        Toast.makeText(getContext(), "完成订单", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "完成订单", Toast.LENGTH_LONG).show();
                     }
                     //接收订单
                     else if (currOrder.state == 0) {
                         //向后端发送接收请求
-                        Toast.makeText(getContext(), "接收订单", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "接收订单", Toast.LENGTH_LONG).show();
                     }
                 }
             }

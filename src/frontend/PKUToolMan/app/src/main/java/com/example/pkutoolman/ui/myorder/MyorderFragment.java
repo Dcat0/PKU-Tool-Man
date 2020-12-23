@@ -1,6 +1,7 @@
 package com.example.pkutoolman.ui.myorder;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,9 +22,12 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.example.pkutoolman.MainActivity;
 import com.example.pkutoolman.R;
 import com.example.pkutoolman.baseclass.Order;
 import com.example.pkutoolman.baseclass.Data;
+import com.example.pkutoolman.ui.PublishActivity;
+import com.example.pkutoolman.ui.orderinfo.OrderinfoActivity;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -106,8 +110,9 @@ public class MyorderFragment extends Fragment {
             {
                 System.out.println(position);
                 // 每个Item跳转的时候需要用Navigate,并通过Buddle向orderInfo的Fragment中传递信息
-                Navigation.findNavController(view).navigate(R.id.navigation_orderinfo);
-                Toast.makeText(getContext(), String.valueOf(position), Toast.LENGTH_LONG).show();
+                Intent intent = new Intent();
+                intent.setClass(getActivity(), OrderinfoActivity.class);
+                startActivity(intent);
             }
         });
 

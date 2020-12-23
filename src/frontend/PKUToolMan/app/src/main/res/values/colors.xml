@@ -15,6 +15,8 @@
     <color name="blue">#7393A7</color>
     <color name="dark_blue">#6C737E</color>
 
+    <color name="hint_color">@color/gray</color>
+
     <!--theme1-->
     <color name="background_1">#FFFFFF</color>
     <color name="status_bar_bg_1">#222831</color>
@@ -37,8 +39,6 @@
 
     <color name="btn_normal_1">#999999</color>
     <color name="btn_colorful_1">#CC7351</color>
-
-    <color name="hint_color">#999999</color>
 
     <!--theme2-->
     <color name="background">#FFFFFF</color>
