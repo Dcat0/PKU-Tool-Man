@@ -45,4 +45,11 @@
         tools:layout="@layout/fragment_orderinfo" >
     </fragment>
 
+    <fragment
+        android:id="@+id/navigation_ordercreate"
+        android:name="com.example.pkutoolman.ui.orderspace.OrderCreateFragment"
+        android:label="@string/title_ordercreate"
+        tools:layout="@layout/fragment_order_create" >
+    </fragment>
+
 </navigation>
