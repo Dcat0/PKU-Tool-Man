@@ -201,8 +201,7 @@
                         android:layout_width="1dp"
                         android:layout_height="25dp"
                         android:layout_gravity="center"
-                        android:background="@color/purple_200">
-                    </View>
+                        android:background="@color/icon_colorful"></View>
 
                     <TextView
                         android:layout_width="0dp"
@@ -236,8 +235,7 @@
                         android:layout_width="1dp"
                         android:layout_height="25dp"
                         android:layout_gravity="center"
-                        android:background="@color/purple_200">
-                    </View>
+                        android:background="@color/icon_colorful"></View>
 
                     <TextView
                         android:layout_width="0dp"
@@ -261,10 +259,10 @@
                     <Button
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:textSize="20sp"
-                        android:text="查看成就"
                         android:background="@drawable/below_button"
-                        android:textColor="@color/purple_200"
+                        android:text="查看成就"
+                        android:textColor="@color/btn_colorful"
+                        android:textSize="20sp"
                         android:textStyle="bold">
 
                     </Button>
@@ -295,13 +293,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/edge">
+
                     <Button
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:textSize="25sp"
-                        android:text="退出登录"
                         android:background="@drawable/below_button"
-                        android:textColor="@color/purple_200">
+                        android:text="退出登录"
+                        android:textColor="@color/btn_colorful"
+                        android:textSize="25sp">
 
                     </Button>
                 </LinearLayout>
@@ -323,14 +322,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/edge">
+
                     <Button
+                        android:id="@+id/gotomodify_button"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:id="@+id/gotomodify_button"
-                        android:textSize="25sp"
-                        android:text="修改信息"
                         android:background="@drawable/below_button"
-                        android:textColor="@color/purple_200">
+                        android:text="修改信息"
+                        android:textColor="@color/btn_colorful"
+                        android:textSize="25sp">
 
                     </Button>
                 </LinearLayout>

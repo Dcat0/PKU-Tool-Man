@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -12,141 +12,152 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
         android:layout_gravity="center"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        android:textSize="20dp"
-        android:text="欢迎来到PKUToolMan" />
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:layout_marginTop="45dp"
-            android:layout_width="45dp"
-            android:layout_height="50dp"
-            android:src="@drawable/username" />
-
-        <EditText
-            android:id="@+id/username"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="50dp"
-            android:background="@drawable/bg_edittext_select"
-            android:hint="请输入账号"
-            android:maxLines="1"
-            android:textSize="28dp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:src="@drawable/password" />
-
-        <EditText
-            android:id="@+id/password"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="5dp"
-            android:background="@drawable/bg_edittext_select"
-            android:hint="请输入密码"
-            android:maxLines="1"
-            android:password="true"
-            android:textSize="28dp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/checkbox_text"
-            android:orientation="vertical"
-            android:checked="true"
-            android:textSize="20dp"
-            android:text="记住密码"/>
-
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:orientation="horizontal"
-        android:gravity="center">
-
-        <Button
-            android:id="@+id/login_button"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="#00FFFFFF"
-            android:foreground="?selectableItemBackground"
-            android:gravity="center"
-            android:onClick="Login"
-            android:paddingLeft="40dp"
-            android:paddingRight="40dp"
-            android:text="登入"
-            android:textSize="30dp" />
-
-    </LinearLayout>
+        android:text="欢迎来到PKUToolMan"
+        android:textSize="20dp" />
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="bottom">
+        android:layout_centerVertical="true"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
 
-        <Button
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="45dp"
+                android:layout_height="50dp"
+                android:src="@drawable/username" />
+
+            <EditText
+                android:id="@+id/username"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/bg_edittext_select"
+                android:hint="请输入账号"
+                android:maxLines="1"
+                android:textColor="@color/text_emphasis"
+                android:textSize="28dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:src="@drawable/password" />
+
+            <EditText
+                android:id="@+id/password"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/bg_edittext_select"
+                android:hint="请输入密码"
+                android:maxLines="1"
+                android:password="true"
+                android:textColor="@color/text_emphasis"
+                android:textSize="28dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/checkbox_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:orientation="vertical"
+                android:text="记住密码"
+                android:textSize="20dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:gravity="center"
-            android:layout_gravity="center"
-            android:onClick="Register"
-            android:id="@+id/register_button"
-            android:background="@drawable/below_button"
-            android:textSize="20dp"
-            android:text="免费注册"
-            android:textColor="@android:color/holo_purple"
-            />
+            android:orientation="horizontal">
 
-        <TextView
+            <Button
+                android:id="@+id/login_button"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="#00FFFFFF"
+                android:foreground="?selectableItemBackground"
+                android:gravity="center"
+                android:onClick="Login"
+                android:paddingLeft="40dp"
+                android:paddingRight="40dp"
+                android:text="登入"
+                android:textColor="@color/black"
+                android:textSize="30dp"
+                app:backgroundTint="@null" />
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:textSize="20dp"
-            android:text="|" />
+            android:gravity="bottom"
+            android:orientation="horizontal">
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:onClick="Register"
-            android:id="@+id/forget_button"
-            android:background="@drawable/below_button"
-            android:textSize="20dp"
-            android:text="忘记密码"
-            android:textColor="@android:color/holo_purple"/>
+            <Button
+                android:id="@+id/register_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/below_button"
+                android:gravity="center"
+                android:onClick="Register"
+                android:text="免费注册"
+                android:textColor="@color/btn_colorful"
+                android:textSize="20dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:text="|"
+                android:textSize="20dp" />
+
+            <Button
+                android:id="@+id/forget_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/below_button"
+                android:gravity="center"
+                android:onClick="Register"
+                android:text="忘记密码"
+                android:textColor="@color/btn_colorful"
+                android:textSize="20dp" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
-</LinearLayout>
+
+</RelativeLayout>
 

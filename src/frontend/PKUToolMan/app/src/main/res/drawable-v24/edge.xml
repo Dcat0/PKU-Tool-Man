@@ -8,5 +8,5 @@
         android:bottomRightRadius="5dp"
         android:bottomLeftRadius="5dp"/>
     <!-- 这里设置边框 -->
-    <stroke android:width="2dp" android:color="@color/purple_200" />
+    <stroke android:width="2dp" android:color="@color/btn_colorful" />
 </shape>

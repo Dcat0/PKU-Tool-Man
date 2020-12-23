@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#c2c2c2"
@@ -10,16 +11,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal" >
+
         <Button
             android:id="@+id/chat_back"
             style="?android:attr/buttonStyleSmall"
-            android:layout_width="30dp"
+            android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_gravity="center|right"
             android:layout_marginRight="4dp"
-            android:background="#FFFFFF"
-            android:textColor="#000000"
-            android:text="&#060;" />
+            android:background="@drawable/ic_back"
+            android:textColor="@color/black"
+            app:backgroundTint="@null" />
 
         <TextView
             android:layout_marginLeft="0dp"
@@ -78,7 +80,8 @@
             android:layout_gravity="center|right"
             android:layout_marginRight="4dp"
             android:background="#66FF00"
-            android:text="发送"/>
+            android:text="发送"
+            app:backgroundTint="@null"/>
     </LinearLayout>
 
 </LinearLayout>
