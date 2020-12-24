@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/order")
@@ -23,6 +25,7 @@ public class OrderController {
     private OrderServiceImpl orderService;
 
     private static DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    private static Set<Integer> curReceiveOrderSet = new HashSet<>();
 
     @PostMapping("/add")
     public Result createOrder(@RequestBody Map<String, Object> map) {
@@ -76,7 +79,13 @@ public class OrderController {
             e.printStackTrace();
             return Result.RESPONSE_ERROR().message("query order failed when receiving order");
         }
+
+        while(curReceiveOrderSet.contains(orderId)) {
+            // waiting
+        }
+        curReceiveOrderSet.add(orderId);
         if (order.getToolManId() != -1 || order.getState() != OrderState.CREATED.ordinal()) {
+            curReceiveOrderSet.remove(new Integer(orderId));
             return Result.AUTH_ERROR().message("duplicated receiving or finished/cancelled/deleted order");
         }
 
@@ -85,9 +94,11 @@ public class OrderController {
         try {
             orderService.updateOrder(order);
         } catch (Exception e) {
+            curReceiveOrderSet.remove(new Integer(orderId));
             e.printStackTrace();
             return Result.RESPONSE_ERROR().message("update order failed when receiving order");
         }
+        curReceiveOrderSet.remove(new Integer(orderId));
         return Result.SUCCESS();
     }
 
