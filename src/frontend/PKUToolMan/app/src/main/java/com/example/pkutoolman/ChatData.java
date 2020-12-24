@@ -1,23 +1,17 @@
 package com.example.pkutoolman;
 
 public class ChatData {
-    /**
-     * id
-     */
-    private int id;
-    /**
-     * 姓名
-     */
-    private String name;
-    /**
-     * 聊天内容
-     */
-    private String chatMessage;
-    /**
-     *
-     * @return 是否为本人发送
-     */
-    private boolean isMeSend;
+
+    private int id;//id
+
+    private String name;//姓名
+
+    private String chatMessage;//聊天内容
+
+    private String time;//姓名
+
+    private boolean isMeSend;//是否为本人发送
+
     public int getId() {
         return id;
     }
@@ -42,12 +36,19 @@ public class ChatData {
     public void setMeSend(boolean isMeSend) {
         this.isMeSend = isMeSend;
     }
-    public ChatData(int id, String name, String chatMessage, boolean isMeSend) {
+    public String getTime() {
+        return time;
+    }
+    public void setTime(String time) {
+        this.time = time;
+    }
+    public ChatData(int id, String name, String chatMessage, boolean isMeSend, String time) {
         super();
         this.id = id;
         this.name = name;
         this.chatMessage = chatMessage;
         this.isMeSend = isMeSend;
+        this.time = time;
     }
     public ChatData() {
         super();
