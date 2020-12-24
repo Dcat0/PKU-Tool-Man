@@ -23,7 +23,6 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".ChatActivity" />
         <activity android:name=".ui.orderinfo.OrderinfoActivity" />
-        <activity android:name=".ui.PublishActivity" />
     </application>
     <uses-permission android:name="android.permission.INTERNET" ></uses-permission>
 </manifest>
