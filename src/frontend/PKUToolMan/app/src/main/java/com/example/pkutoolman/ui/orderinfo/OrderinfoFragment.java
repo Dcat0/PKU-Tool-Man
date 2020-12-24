@@ -87,8 +87,9 @@ public class OrderinfoFragment extends Fragment {
         description = root.findViewById(R.id.description);
 
         //接受传入的信息
-        //Bundle bun = getArguments();
-        //currOrder = bun.get("……");
+        Bundle bun = getArguments();
+        int order_id = bun.getInt("order-id");
+        System.out.printf("order_id is %d\n", order_id);
         //……
         //*************************以下仅供演示界面效果**********************************
         currOrder = new Order(12345678, 0, 1,

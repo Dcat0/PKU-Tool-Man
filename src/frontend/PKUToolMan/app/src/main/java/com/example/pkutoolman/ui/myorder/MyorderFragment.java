@@ -51,6 +51,7 @@ public class MyorderFragment extends Fragment {
     private SimpleAdapter saPublish, saReceive;
     private SwipeRefreshLayout mSrl;
     private ArrayList<Map<String, Object>> messageListPublish = new ArrayList<>(), messageListReceive = new ArrayList<>();
+    private String nowView;
 
     @Override
     public void onDestroy() {
@@ -76,6 +77,7 @@ public class MyorderFragment extends Fragment {
 
         refresh(); //建立视图的时候刷新数据
 
+        nowView = "publish";
         mLv.setAdapter(saPublish);
 
         mSrl.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -89,6 +91,7 @@ public class MyorderFragment extends Fragment {
         bt1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                nowView = "publish";
                 mLv.setAdapter(saPublish);
             }
         });
@@ -96,6 +99,7 @@ public class MyorderFragment extends Fragment {
         bt2.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+                nowView = "receive";
                 mLv.setAdapter(saReceive);
             }
         });
@@ -106,7 +110,12 @@ public class MyorderFragment extends Fragment {
             {
                 System.out.println(position);
                 // 每个Item跳转的时候需要用Navigate,并通过Buddle向orderInfo的Fragment中传递信息
-                Navigation.findNavController(view).navigate(R.id.navigation_orderinfo);
+                Bundle bundle = new Bundle();
+                int orderID;
+                if (nowView == "receive") orderID = (int)messageListReceive.get(position).get("uid");
+                    else orderID = (int)messageListPublish.get(position).get("uid");
+                bundle.putInt("order-id", orderID);
+                Navigation.findNavController(view).navigate(R.id.navigation_orderinfo, bundle);
                 Toast.makeText(getContext(), String.valueOf(position), Toast.LENGTH_LONG).show();
             }
         });
