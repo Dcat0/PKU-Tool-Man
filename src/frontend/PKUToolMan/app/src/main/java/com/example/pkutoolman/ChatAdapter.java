@@ -72,9 +72,14 @@ public class ChatAdapter extends BaseAdapter {
                 arg1 = View.inflate(context, R.layout.chat_sender, null);
                 holderView.tv_chat_me_message = (TextView) arg1.findViewById(R.id.tv_chat_me_message);
                 holderView.tv_chat_me_message.setText(entity.getChatMessage());
+                holderView.my_message_time = (TextView) arg1.findViewById(R.id.my_message_time);
+                holderView.my_message_time.setText(entity.getTime());
             } else {
                 arg1 = View.inflate(context, R.layout.chat_other, null);
-
+                holderView.tvname = (TextView) arg1.findViewById(R.id.tvname);
+                holderView.tvname.setText(entity.getChatMessage());
+                holderView.other_message_time = (TextView) arg1.findViewById(R.id.other_message_time);
+                holderView.other_message_time.setText(entity.getTime());
             }
             arg1.setTag(holderView);
         } else {
@@ -86,6 +91,9 @@ public class ChatAdapter extends BaseAdapter {
 
     class HolderView {
         TextView tv_chat_me_message;
+        TextView my_message_time;
+        TextView tvname;
+        TextView other_message_time;
     }
 
     @Override

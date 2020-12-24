@@ -47,7 +47,9 @@
             android:layout_height="wrap_content"
             android:divider="#0000"
             android:dividerHeight="8dp"
-            android:background="#FFFFFF">
+            android:background="#FFFFFF"
+            android:stackFromBottom="true"
+            android:transcriptMode="alwaysScroll">
         </ListView>
     </LinearLayout>
 
