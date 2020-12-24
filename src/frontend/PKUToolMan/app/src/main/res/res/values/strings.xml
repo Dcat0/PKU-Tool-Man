@@ -1,6 +1,0 @@
-<resources>
-    <string name="app_name">PKUToolMan</string>
-    <string name="title_myorder">我的订单</string>
-    <string name="title_orderspace">订单广场</string>
-    <string name="title_myinfo">我的信息</string>
-</resources>
