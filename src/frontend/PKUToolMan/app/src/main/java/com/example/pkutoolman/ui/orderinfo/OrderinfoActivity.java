@@ -91,7 +91,8 @@ public class OrderinfoActivity extends AppCompatActivity {
 
         //接受传入的信息
         Intent intent = getIntent();
-        int orderID = intent.getIntExtra("orderID", 0);
+        int orderID = intent.getIntExtra("orderID", -1);
+        System.out.println(orderID);
         //向后端获取order信息
         try{ getOrderInfo(orderID); }
         catch(JSONException ex){
