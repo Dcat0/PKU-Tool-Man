@@ -14,6 +14,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import com.example.pkutoolman.R;
 
@@ -42,6 +44,8 @@ public class OrderspaceFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getContext(), "发布订单", Toast.LENGTH_LONG).show();
+                NavController controller = Navigation.findNavController(v);
+                controller.navigate(R.id.navigation_ordercreate);
             }
         });
         lv.setAdapter(new OrderspaceListView(getContext()));
