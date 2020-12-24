@@ -140,28 +140,30 @@ public class LoginActivity extends AppCompatActivity {
         String code = (result_json.getString("code")).toString();
         String message = (result_json.getString("message")).toString();
 
-        //获得id和昵称
-        JSONObject json_data = result_json.getJSONObject("data");
-        String token = json_data.getString("token").toString();
-
-        JSONObject user_data = json_data.getJSONObject("user");
-        String id = user_data.getString("id").toString();
-        String nickname = user_data.getString("nickname").toString();
-
-        Data.setUserID(Integer.parseInt(id));
-        Data.setNickName(nickname);
-        Data.setToken(token);
-
-        System.out.println(code);
-        System.out.println(code.length());
-        System.out.println(Data.getUserID());
-        System.out.println(Data.getNickName());
 
 
 
-        code = "200";
+
+        //code = "200";
 
         if (code.equals("200")) {
+            //获得id和昵称
+            JSONObject json_data = result_json.getJSONObject("data");
+            String token = json_data.getString("token").toString();
+
+            JSONObject user_data = json_data.getJSONObject("user");
+            String id = user_data.getString("id").toString();
+            String nickname = user_data.getString("nickname").toString();
+
+            Data.setUserID(Integer.parseInt(id));
+            Data.setNickName(nickname);
+            Data.setToken(token);
+
+            System.out.println(code);
+            System.out.println(code.length());
+            System.out.println(Data.getUserID());
+            System.out.println(Data.getNickName());
+
             Toast.makeText(this, "欢迎登入", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent();
             intent.setClass(LoginActivity.this, MainActivity.class);
