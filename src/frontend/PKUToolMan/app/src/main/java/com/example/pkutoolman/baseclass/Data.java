@@ -8,10 +8,7 @@ import java.util.List;
 public class Data {
     private static int userID;
     private static String nickName;
-<<<<<<< HEAD
-=======
     private static String token;
->>>>>>> zkm--interface
     private static List<Order> myOrderInfo = new ArrayList<Order>();
 
     public static void setUserID(int _userID) {
@@ -31,9 +28,6 @@ public class Data {
     public static String getToken(){
         return token;
     }
-
-    public static void setNickName(String name) { nickName = name; }
-    public static String getNickName() { return nickName; }
 
     public static void setMyOrderInfo(List<Order> a) {
         myOrderInfo = a;
