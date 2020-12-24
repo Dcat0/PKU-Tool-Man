@@ -33,7 +33,6 @@ public class WebConfiguration implements WebMvcConfigurer {
         List<String> excludePath = new ArrayList<>();
         excludePath.add("/user/login");
         excludePath.add("/user/register");
-        excludePath.add("/user/forget");
         excludePath.add("/order/add");
         excludePath.add("/order/myorderlist");
         excludePath.add("/order/receive");
@@ -42,6 +41,8 @@ public class WebConfiguration implements WebMvcConfigurer {
         excludePath.add("/order/cancel");
         excludePath.add("/order/query");
         excludePath.add("/order/orderlist");
+        excludePath.add("/chat/update");
+        excludePath.add("/chat/query");
         excludePath.add("/error");
         registry.addInterceptor(tokenInterceptor)
                 .addPathPatterns("/**")
