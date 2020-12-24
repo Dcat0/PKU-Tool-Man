@@ -13,11 +13,11 @@ import java.util.List;
 // https://blog.csdn.net/songfei_dream/article/details/103335575?utm_medium=distribute.pc_relevant.none-task-blog-title-2&spm=1001.2101.3001.4242
 @Configuration
 public class WebConfiguration implements WebMvcConfigurer {
-    //private TokenInterceptor tokenInterceptor;
+    private TokenInterceptor tokenInterceptor;
 
-    //public WebConfiguration(TokenInterceptor tokenInterceptor) {
-    //    this.tokenInterceptor = tokenInterceptor;
-    //}
+    public WebConfiguration(TokenInterceptor tokenInterceptor) {
+        this.tokenInterceptor = tokenInterceptor;
+    }
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
@@ -44,9 +44,9 @@ public class WebConfiguration implements WebMvcConfigurer {
         excludePath.add("/chat/update");
         excludePath.add("/chat/query");
         excludePath.add("/error");
-        //registry.addInterceptor(tokenInterceptor)
-        //        .addPathPatterns("/**")
-        //        .excludePathPatterns(excludePath);
+        registry.addInterceptor(tokenInterceptor)
+                .addPathPatterns("/**")
+                .excludePathPatterns(excludePath);
         WebMvcConfigurer.super.addInterceptors(registry);
     }
 }
