@@ -100,40 +100,41 @@ public class MyorderFragment extends Fragment {
         //刷新数据信息
         // 异步获取数据 分为两个部分订单
         ArrayList<Order> publishOrderList = new ArrayList<>(), receiveOrderList = new ArrayList<>();
-        GetMyOrder.getMyOrder(123, publishOrderList, receiveOrderList);
+        GetMyOrder.getMyOrder(1, publishOrderList, receiveOrderList);
         messageListPublish.clear();
         messageListReceive.clear();
         // 准备放到页面中
         for (Order o : publishOrderList) {
             Map<String, Object> m = new HashMap<>();
             m.put("uid", o.id);
-            m.put("ddtime", "2020-12-14");
+            m.put("ddtime", o.endTime);
             m.put("class", "拿快递");
             if (o.state == 0) { //未被接受
                 m.put("state", "未被接收");
                 m.put("img", R.drawable.baseline_update_black_24dp);
             } else if (o.state == 1) { //已完成
-                m.put("state", "已完成");
-                m.put("img", R.drawable.baseline_check_circle_green_700_24dp);
-            } else { //已被接收
                 m.put("state", "已被接受");
                 m.put("img", R.drawable.baseline_history_green_a700_24dp);
+            } else if (o.state == 2){ //已被接收
+                m.put("state", "已完成");
+                m.put("img", R.drawable.baseline_check_circle_green_700_24dp);
+            } else // 已取消
+            {
+                m.put("state", "已取消");
+                m.put("img", R.drawable.baseline_https_red_700_24dp);
             }
             messageListPublish.add(m);
         }
         for (Order o : receiveOrderList) {
             Map<String, Object> m = new HashMap<>();
             m.put("uid", o.id);
-            m.put("ddtime", "2020-12-14");
+            m.put("ddtime", o.endTime);
             m.put("class", "拿快递");
             m.put("name", o.userID);
-            if (o.state == 0) { //未被接受
-                m.put("state", "不可能");
-                m.put("img", R.drawable.baseline_update_black_24dp);
-            } else if (o.state == 1) { //已完成
+            if (o.state == 2) { //已完成
                 m.put("state", "已完成");
                 m.put("img", R.drawable.baseline_check_circle_green_700_24dp);
-            } else { //已被接收
+            } else if (o.state == 1){ //已被接收
                 m.put("state", "正在进行");
                 m.put("img", R.drawable.baseline_history_green_a700_24dp);
             }
