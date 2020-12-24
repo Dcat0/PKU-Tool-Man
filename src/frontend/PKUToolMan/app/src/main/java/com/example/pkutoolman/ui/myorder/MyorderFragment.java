@@ -51,7 +51,6 @@ public class MyorderFragment extends Fragment {
     private SimpleAdapter saPublish, saReceive;
     private SwipeRefreshLayout mSrl;
     private ArrayList<Map<String, Object>> messageListPublish = new ArrayList<>(), messageListReceive = new ArrayList<>();
-    private String nowView;
 
     @Override
     public void onDestroy() {
@@ -77,7 +76,6 @@ public class MyorderFragment extends Fragment {
 
         refresh(); //建立视图的时候刷新数据
 
-        nowView = "publish";
         mLv.setAdapter(saPublish);
 
         mSrl.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -91,7 +89,6 @@ public class MyorderFragment extends Fragment {
         bt1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                nowView = "publish";
                 mLv.setAdapter(saPublish);
             }
         });
@@ -99,7 +96,6 @@ public class MyorderFragment extends Fragment {
         bt2.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                nowView = "receive";
                 mLv.setAdapter(saReceive);
             }
         });
@@ -110,12 +106,7 @@ public class MyorderFragment extends Fragment {
             {
                 System.out.println(position);
                 // 每个Item跳转的时候需要用Navigate,并通过Buddle向orderInfo的Fragment中传递信息
-                Bundle bundle = new Bundle();
-                int orderID;
-                if (nowView == "receive") orderID = (int)messageListReceive.get(position).get("uid");
-                    else orderID = (int)messageListPublish.get(position).get("uid");
-                bundle.putInt("order-id", orderID);
-                Navigation.findNavController(view).navigate(R.id.navigation_orderinfo, bundle);
+                Navigation.findNavController(view).navigate(R.id.navigation_orderinfo);
                 Toast.makeText(getContext(), String.valueOf(position), Toast.LENGTH_LONG).show();
             }
         });
@@ -128,40 +119,41 @@ public class MyorderFragment extends Fragment {
         //刷新数据信息
         // 异步获取数据 分为两个部分订单
         ArrayList<Order> publishOrderList = new ArrayList<>(), receiveOrderList = new ArrayList<>();
-        GetMyOrder.getMyOrder(123, publishOrderList, receiveOrderList);
+        GetMyOrder.getMyOrder(1, publishOrderList, receiveOrderList);
         messageListPublish.clear();
         messageListReceive.clear();
         // 准备放到页面中
         for (Order o : publishOrderList) {
             Map<String, Object> m = new HashMap<>();
             m.put("uid", o.id);
-            m.put("ddtime", "2020-12-14");
+            m.put("ddtime", o.endTime);
             m.put("class", "拿快递");
             if (o.state == 0) { //未被接受
                 m.put("state", "未被接收");
                 m.put("img", R.drawable.baseline_update_black_24dp);
             } else if (o.state == 1) { //已完成
-                m.put("state", "已完成");
-                m.put("img", R.drawable.baseline_check_circle_green_700_24dp);
-            } else { //已被接收
                 m.put("state", "已被接受");
                 m.put("img", R.drawable.baseline_history_green_a700_24dp);
+            } else if (o.state == 2){ //已被接收
+                m.put("state", "已完成");
+                m.put("img", R.drawable.baseline_check_circle_green_700_24dp);
+            } else // 已取消
+            {
+                m.put("state", "已取消");
+                m.put("img", R.drawable.baseline_https_red_700_24dp);
             }
             messageListPublish.add(m);
         }
         for (Order o : receiveOrderList) {
             Map<String, Object> m = new HashMap<>();
             m.put("uid", o.id);
-            m.put("ddtime", "2020-12-14");
+            m.put("ddtime", o.endTime);
             m.put("class", "拿快递");
             m.put("name", o.userID);
-            if (o.state == 0) { //未被接受
-                m.put("state", "不可能");
-                m.put("img", R.drawable.baseline_update_black_24dp);
-            } else if (o.state == 1) { //已完成
+            if (o.state == 2) { //已完成
                 m.put("state", "已完成");
                 m.put("img", R.drawable.baseline_check_circle_green_700_24dp);
-            } else { //已被接收
+            } else if (o.state == 1){ //已被接收
                 m.put("state", "正在进行");
                 m.put("img", R.drawable.baseline_history_green_a700_24dp);
             }
