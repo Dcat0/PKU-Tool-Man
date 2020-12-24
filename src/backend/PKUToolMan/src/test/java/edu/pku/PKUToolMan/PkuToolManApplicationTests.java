@@ -24,7 +24,6 @@ class ApplicationTest {
 	}
 }
 
-/*
 @SpringBootTest
 class UserDAOTest {
 	@Autowired
@@ -331,7 +330,6 @@ class UserServiceImplTest {
 		System.out.println(modifiedUser);
 	}
 }
-*/
 
 @SpringBootTest
 class OrderDAOTest {

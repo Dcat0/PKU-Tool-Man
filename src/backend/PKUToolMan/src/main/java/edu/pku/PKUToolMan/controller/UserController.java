@@ -113,6 +113,7 @@ public class UserController {
         }
         // success
         String token = TokenUtil.sign(loggingUser);
+        loggingUser.setPassword(null);
         return Result.SUCCESS().data("token", token).data("user", loggingUser);
     }
 
@@ -122,6 +123,37 @@ public class UserController {
     * */
     @PostMapping("/logout")
     public Result logout() {
+        return Result.SUCCESS();
+    }
+
+    @PostMapping("/forget")
+    public Result forget(@RequestBody Map<String, Object> map) {
+        String email = map.get("email").toString();
+        String phoneNum = map.get("phoneNum").toString();
+        String newPassword = map.get("newPassword").toString();
+
+        User user = null;
+        try {
+            user = userService.queryByEmail(email);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Result.RESPONSE_ERROR().message("database query error");
+        }
+        if(user == null) {
+            return Result.RESPONSE_ERROR().message("email not exist");
+        }
+        if(!user.getPhoneNum().equals(phoneNum)) {
+            return Result.RESPONSE_ERROR().message("phoneNum wrong");
+        }
+
+        user.setPassword(newPassword);
+        try {
+            userService.modifyWith(user);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Result.RESPONSE_ERROR().message("update failed");
+        }
+
         return Result.SUCCESS();
     }
 
@@ -171,7 +203,9 @@ public class UserController {
             return Result.RESPONSE_ERROR().message("wrong password");
         }
         // modify database
-        if(newPassword == null) newPassword = password; // if frontend rule is that?
+        if(newPassword == null) {
+            newPassword = password; // if frontend rule is that?
+        }
         user = new User(user.getid(), nickname, newPassword, email, phoneNum);
         try {
             userService.modifyWith(user);
