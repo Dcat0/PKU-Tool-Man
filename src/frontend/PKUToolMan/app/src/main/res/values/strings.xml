@@ -8,5 +8,4 @@
     <string name="order_not_received">待接受</string>
     <string name="order_complete">已完成</string>
     <string name="order_received">进行中</string>
-
 </resources>
