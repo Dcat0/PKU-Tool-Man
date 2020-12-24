@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -31,6 +32,7 @@ public class MyorderFragment extends Fragment {
     private SimpleAdapter saPublish, saReceive;
     private SwipeRefreshLayout mSrl;
     private ArrayList<Map<String, Object>> messageListPublish = new ArrayList<>(), messageListReceive = new ArrayList<>();
+    private String nowView;
 
     @Override
     public void onDestroy() {
@@ -55,7 +57,7 @@ public class MyorderFragment extends Fragment {
         mSrl = root.findViewById(R.id.myorder_swipeLayout);
 
         refresh(); //建立视图的时候刷新数据
-
+        nowView = "publish";
         mLv.setAdapter(saPublish);
 
         mSrl.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -69,6 +71,7 @@ public class MyorderFragment extends Fragment {
         bt1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                nowView = "publish";
                 mLv.setAdapter(saPublish);
             }
         });
@@ -76,6 +79,7 @@ public class MyorderFragment extends Fragment {
         bt2.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+                nowView = "receive";
                 mLv.setAdapter(saReceive);
             }
         });
@@ -87,6 +91,8 @@ public class MyorderFragment extends Fragment {
                 System.out.println(position);
                 // 每个Item跳转的时候需要用Navigate,并通过Buddle向orderInfo的Fragment中传递信息
                 Intent intent = new Intent();
+                if (nowView == "publish") intent.putExtra("order-id", Integer.valueOf( ((TextView)view.findViewById(R.id.publish_order_uid)).getText().toString()) );
+                    else intent.putExtra("order-id", Integer.valueOf( ((TextView)view.findViewById(R.id.receive_order_uid)).getText().toString()));
                 intent.setClass(getActivity(), OrderinfoActivity.class);
                 startActivity(intent);
             }

@@ -86,6 +86,11 @@ public class OrderinfoActivity extends AppCompatActivity {
         //Bundle bun = getArguments();
         //int order_id = bun.getInt("order-id");
         //System.out.printf("order_id is %d\n", order_id);
+
+        Intent intent = getIntent();
+        int order_id = intent.getIntExtra("order-id", -1);
+        System.out.println(order_id);
+
         //……
         //*************************以下仅供演示界面效果**********************************
         currOrder = new Order(12345678, 0, 1,
