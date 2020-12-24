@@ -3,6 +3,7 @@ package edu.pku.PKUToolMan.entity;
 import org.springframework.context.annotation.Configuration;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Configuration
 public class Order {
@@ -18,6 +19,16 @@ public class Order {
 
     public Order() {
         this.toolManId = -1;  // 为了检验toolManId之前是否为空值，设定为-1
+    }
+
+    public Order(int userId, String place, String destination, LocalDateTime startTime, LocalDateTime endTime,
+                 String description) {
+        this.userId = userId;
+        this.place = place;
+        this.destination = destination;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.description = description;
     }
 
     public Order(int userId, String place, String destination, String description) {  // startTime
@@ -126,5 +137,21 @@ public class Order {
                 ", description='" + description + '\'' +
                 ", state=" + state +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Order order = (Order) o;
+        return orderId == order.orderId && userId == order.userId && toolManId == order.toolManId
+                && state == order.state && Objects.equals(place, order.place)
+                && Objects.equals(destination, order.destination) && Objects.equals(startTime, order.startTime)
+                && Objects.equals(endTime, order.endTime) && Objects.equals(description, order.description);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(orderId, userId, toolManId, place, destination, startTime, endTime, description, state);
     }
 }
