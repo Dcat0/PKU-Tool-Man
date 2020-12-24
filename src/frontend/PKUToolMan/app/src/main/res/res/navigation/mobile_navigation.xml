@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_myorder">
+
+    <fragment
+        android:id="@+id/navigation_myorder"
+        android:name="com.example.pkutoolman.ui.myorder.MyorderFragment"
+        android:label="@string/title_myorder"
+        tools:layout="@layout/fragment_myorder" />
+
+    <fragment
+        android:id="@+id/navigation_orderspace"
+        android:name="com.example.pkutoolman.ui.orderspace.OrderspaceFragment"
+        android:label="@string/title_orderspace"
+        tools:layout="@layout/fragment_orderspace" />
+
+    <fragment
+        android:id="@+id/navigation_myinfo"
+        android:name="com.example.pkutoolman.ui.myinfo.MyinfoFragment"
+        android:label="@string/title_myinfo"
+        tools:layout="@layout/fragment_myinfo" />
+</navigation>
