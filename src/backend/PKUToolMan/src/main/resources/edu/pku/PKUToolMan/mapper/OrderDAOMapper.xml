@@ -1,0 +1,34 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.pku.PKUToolMan.dao.OrderDAO">
+    <!-- 创建新订单 -->
+    <insert id="createOrder" parameterType="Order" useGeneratedKeys="true" keyProperty="orderId">
+        insert into t_order
+        values (null,#{userId},-1,#{place},#{destination},#{startTime},#{endTime},#{description},#{state})
+    </insert>
+
+    <!--根据userId查找该用户发起的和接收的所有订单-->
+    <select id="getMyOrderList" parameterType="int" resultType="Order">
+        select orderId,userId,toolManId,place,destination,startTime,endTime,description,state from t_order
+        where userId=#{userId} or toolManId=#{userId}
+    </select>
+
+    <select id="queryOrder" parameterType="int" resultType="Order">
+        select orderId,userId,toolManId,place,destination,startTime,endTime,description,state from t_order
+        where orderId=#{orderId}
+    </select>
+
+    <update id="updateOrder" parameterType="Order">
+        update t_order set toolManId=#{toolManId}, state=#{state} where orderId=#{orderId}
+    </update>
+
+    <delete id="deleteOrder" parameterType="int">
+        delete from t_order where orderId=#{orderId}
+    </delete>
+
+    <select id="getAllCreatedOrderList" resultType="Order">
+        select orderId,userId,toolManId,place,destination,startTime,endTime,description,state from t_order
+        where state=0
+    </select>
+
+
+</mapper>
