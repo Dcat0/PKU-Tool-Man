@@ -27,7 +27,7 @@
 
     <select id="getAllCreatedOrderList" resultType="Order">
         select orderId,userId,toolManId,place,destination,startTime,endTime,description,state from t_order
-        where state=1
+        where state=0
     </select>
 
 

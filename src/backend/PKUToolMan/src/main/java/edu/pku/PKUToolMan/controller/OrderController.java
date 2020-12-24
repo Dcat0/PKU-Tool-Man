@@ -10,8 +10,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/order")
@@ -20,6 +24,9 @@ public class OrderController {
     @Autowired
     private OrderServiceImpl orderService;
 
+    private static DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    private static Set<Integer> curReceiveOrderSet = new HashSet<>();
+
     @PostMapping("/add")
     public Result createOrder(@RequestBody Map<String, Object> map) {
         int userId = (Integer)map.get("userID");
@@ -27,7 +34,11 @@ public class OrderController {
         String destination = map.get("destination").toString();
         String description = map.get("description").toString();
         // get startTime
-        Order order = new Order(userId, place, destination, description);
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime startTime = LocalDateTime.parse(map.get("startTime").toString(), df);
+        LocalDateTime endTime = LocalDateTime.parse(map.get("endTime").toString(), df);
+
+        Order order = new Order(userId, place, destination, startTime, endTime, description);
         order.setState(OrderState.CREATED.ordinal());
 
         try {
@@ -68,7 +79,13 @@ public class OrderController {
             e.printStackTrace();
             return Result.RESPONSE_ERROR().message("query order failed when receiving order");
         }
+
+        while(curReceiveOrderSet.contains(orderId)) {
+            // waiting
+        }
+        curReceiveOrderSet.add(orderId);
         if (order.getToolManId() != -1 || order.getState() != OrderState.CREATED.ordinal()) {
+            curReceiveOrderSet.remove(new Integer(orderId));
             return Result.AUTH_ERROR().message("duplicated receiving or finished/cancelled/deleted order");
         }
 
@@ -77,9 +94,11 @@ public class OrderController {
         try {
             orderService.updateOrder(order);
         } catch (Exception e) {
+            curReceiveOrderSet.remove(new Integer(orderId));
             e.printStackTrace();
             return Result.RESPONSE_ERROR().message("update order failed when receiving order");
         }
+        curReceiveOrderSet.remove(new Integer(orderId));
         return Result.SUCCESS();
     }
 
@@ -95,6 +114,9 @@ public class OrderController {
         } catch (Exception e) {
             e.printStackTrace();
             return Result.RESPONSE_ERROR().message("query order failed when completing order");
+        }
+        if (order.getState() != OrderState.EXECUTING.ordinal()) {
+            return Result.AUTH_ERROR().message("wrong order state");
         }
         order.setState(OrderState.FINISHED.ordinal());
         try {
