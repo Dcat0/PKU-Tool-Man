@@ -6,9 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -28,11 +30,16 @@ public class MyorderFragment extends Fragment {
 
     private MyorderViewModel myorderViewModel;
     private ListView mLv;
-    private Button bt1,bt2;
+    private TextView hint;
+    private Button bt1, bt2;
+    private Spinner sn1, sn2;
     private SimpleAdapter saPublish, saReceive;
     private SwipeRefreshLayout mSrl;
     private ArrayList<Map<String, Object>> messageListPublish = new ArrayList<>(), messageListReceive = new ArrayList<>();
-    private String nowView;
+    private String nowView, selectType;
+    private static String[] _selectType = {"全部", "取快递", "购物", "带饭"};
+    private int selectStatus;
+    private ArrayList<Order> publishOrderList = new ArrayList<>(), receiveOrderList = new ArrayList<>();
 
     @Override
     public void onDestroy() {
@@ -55,15 +62,43 @@ public class MyorderFragment extends Fragment {
         bt1 = root.findViewById(R.id.bt_myorder_publish);
         bt2 = root.findViewById(R.id.bt_myorder_receive);
         mSrl = root.findViewById(R.id.myorder_swipeLayout);
+        sn1 = root.findViewById(R.id.order_type_selector);
+        sn2 = root.findViewById(R.id.order_status_selector);
+        hint = root.findViewById(R.id.hint_no_order);
 
-        refresh(); //建立视图的时候刷新数据
         nowView = "publish";
+        refresh(true); //建立视图的时候刷新数据 true表示需要从后端拉取数据
+
         mLv.setAdapter(saPublish);
+        sn1.setAdapter(new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, new String[]{"全部", "取快递", "购物", "带饭"}));
+        sn2.setAdapter(new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, new String[]{"全部", "未被接收", "已被接受", "已完成", "已取消"}));
+
+        sn1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectType = _selectType[position];
+                refresh(false);
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
+        sn2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectStatus = position - (nowView=="publish"?1:0);
+                refresh(false);
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
 
         mSrl.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                refresh();
+                refresh(true);
                 mSrl.setRefreshing(false);
             }
         });
@@ -71,16 +106,24 @@ public class MyorderFragment extends Fragment {
         bt1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                nowView = "publish";
-                mLv.setAdapter(saPublish);
+                if (nowView == "receive") {
+                    nowView = "publish";
+                    mLv.setAdapter(saPublish);
+                    sn1.setAdapter(new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, new String[]{"全部", "取快递", "购物", "带饭"}));
+                    sn2.setAdapter(new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, new String[]{"全部", "未被接收", "已被接受", "已完成", "已取消"}));
+                }
             }
         });
 
         bt2.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                nowView = "receive";
-                mLv.setAdapter(saReceive);
+                if (nowView == "publish") {
+                    nowView = "receive";
+                    mLv.setAdapter(saReceive);
+                    sn1.setAdapter(new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, new String[]{"全部", "取快递", "购物", "带饭"}));
+                    sn2.setAdapter(new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, new String[]{"全部", "正在进行", "已完成"}));
+                }
             }
         });
 
@@ -101,52 +144,77 @@ public class MyorderFragment extends Fragment {
         return root;
     }
 
-    public void refresh() {
+    public void refresh(boolean get) {
 
-        //刷新数据信息
-        // 异步获取数据 分为两个部分订单
-        ArrayList<Order> publishOrderList = new ArrayList<>(), receiveOrderList = new ArrayList<>();
-        GetMyOrder.getMyOrder(1, publishOrderList, receiveOrderList);
+        //刷新数据信息 如果get=true要从后端拉去
+        //此处的数据信息要根据两个下拉框的内容来筛选
+        if (get) {
+            publishOrderList.clear();
+            receiveOrderList.clear();
+            GetMyOrder.getMyOrder(1, publishOrderList, receiveOrderList);
+        }
         messageListPublish.clear();
         messageListReceive.clear();
         // 准备放到页面中
-        for (Order o : publishOrderList) {
-            Map<String, Object> m = new HashMap<>();
-            m.put("uid", o.id);
-            m.put("ddtime", o.endTime);
-            m.put("class", "拿快递");
-            if (o.state == 0) { //未被接受
-                m.put("state", "未被接收");
-                m.put("img", R.drawable.baseline_update_black_24dp);
-            } else if (o.state == 1) { //已完成
-                m.put("state", "已被接受");
-                m.put("img", R.drawable.baseline_history_green_a700_24dp);
-            } else if (o.state == 2){ //已被接收
-                m.put("state", "已完成");
-                m.put("img", R.drawable.baseline_check_circle_green_700_24dp);
-            } else // 已取消
+        if (nowView == "publish") {
+            for (Order o : publishOrderList)
+            if (("取快递" == selectType || selectType == "全部") && (selectStatus == -1 || selectStatus == o.state))
             {
-                m.put("state", "已取消");
-                m.put("img", R.drawable.baseline_https_red_700_24dp);
+                Map<String, Object> m = new HashMap<>();
+                m.put("uid", o.id);
+                m.put("ddtime", o.endTime);
+                m.put("class", "取快递");
+                if (o.state == 0) { //未被接受
+                    m.put("state", "未被接收");
+                    m.put("img", R.drawable.baseline_update_black_24dp);
+                } else if (o.state == 1) { //已完成
+                    m.put("state", "已被接受");
+                    m.put("img", R.drawable.baseline_history_green_a700_24dp);
+                } else if (o.state == 2) { //已被接收
+                    m.put("state", "已完成");
+                    m.put("img", R.drawable.baseline_check_circle_green_700_24dp);
+                } else // 已取消
+                {
+                    m.put("state", "已取消");
+                    m.put("img", R.drawable.baseline_https_red_700_24dp);
+                }
+                messageListPublish.add(m);
             }
-            messageListPublish.add(m);
-        }
-        for (Order o : receiveOrderList) {
-            Map<String, Object> m = new HashMap<>();
-            m.put("uid", o.id);
-            m.put("ddtime", o.endTime);
-            m.put("class", "拿快递");
-            m.put("name", o.userID);
-            if (o.state == 2) { //已完成
-                m.put("state", "已完成");
-                m.put("img", R.drawable.baseline_check_circle_green_700_24dp);
-            } else if (o.state == 1){ //已被接收
-                m.put("state", "正在进行");
-                m.put("img", R.drawable.baseline_history_green_a700_24dp);
+            if (messageListPublish.size() == 0) {
+                mLv.setVisibility(View.GONE);
+                hint.setVisibility(View.VISIBLE);
+            } else {
+                mLv.setVisibility(View.VISIBLE);
+                hint.setVisibility(View.GONE);
             }
-            messageListReceive.add(m);
         }
-        // 获取数据后加载到SimpleAdapter中 第一次进入是CreateView中 以后的调用是下拉刷新
+        if (nowView == "receive") {
+            for (Order o : receiveOrderList)
+            if (("取快递" == selectType || selectType == "全部") && (selectStatus == 0 || selectStatus == o.state))
+            {
+                Map<String, Object> m = new HashMap<>();
+                m.put("uid", o.id);
+                m.put("ddtime", o.endTime);
+                m.put("class", "取快递");
+                m.put("name", o.userID);
+                if (o.state == 2) { //已完成
+                    m.put("state", "已完成");
+                    m.put("img", R.drawable.baseline_check_circle_green_700_24dp);
+                } else if (o.state == 1) { //已被接收
+                    m.put("state", "正在进行");
+                    m.put("img", R.drawable.baseline_history_green_a700_24dp);
+                }
+                messageListReceive.add(m);
+            }
+            if (messageListReceive.size() == 0) {
+                mLv.setVisibility(View.GONE);
+                hint.setVisibility(View.VISIBLE);
+            } else {
+                mLv.setVisibility(View.VISIBLE);
+                hint.setVisibility(View.GONE);
+            }
+        }
+        //  第一次进入refresh()就是切换到我的订单界面 此时saPublish和saReceive都为空 需要初始化
 
         if (saPublish == null)
             saPublish = new SimpleAdapter(getContext(),
@@ -166,8 +234,11 @@ public class MyorderFragment extends Fragment {
                         R.id.receive_order_ddtime, R.id.publish_order_class}
         );
 
-        saReceive.notifyDataSetChanged();
-        saPublish.notifyDataSetChanged();
+        if (nowView == "receive") {
+            saReceive.notifyDataSetChanged();
+        } else {
+            saPublish.notifyDataSetChanged();
+        }
 
     }
 
