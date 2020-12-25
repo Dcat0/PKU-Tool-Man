@@ -180,13 +180,8 @@ public class MyorderFragment extends Fragment {
                 }
                 messageListPublish.add(m);
             }
-            if (messageListPublish.size() == 0) {
-                mLv.setVisibility(View.GONE);
-                hint.setVisibility(View.VISIBLE);
-            } else {
-                mLv.setVisibility(View.VISIBLE);
-                hint.setVisibility(View.GONE);
-            }
+            if (messageListPublish.size() == 0) hint.setVisibility(View.VISIBLE);
+              else hint.setVisibility(View.GONE);
         }
         if (nowView == "receive") {
             for (Order o : receiveOrderList)
@@ -206,13 +201,8 @@ public class MyorderFragment extends Fragment {
                 }
                 messageListReceive.add(m);
             }
-            if (messageListReceive.size() == 0) {
-                mLv.setVisibility(View.GONE);
-                hint.setVisibility(View.VISIBLE);
-            } else {
-                mLv.setVisibility(View.VISIBLE);
-                hint.setVisibility(View.GONE);
-            }
+            if (messageListReceive.size() == 0) hint.setVisibility(View.VISIBLE);
+              else hint.setVisibility(View.GONE);
         }
         //  第一次进入refresh()就是切换到我的订单界面 此时saPublish和saReceive都为空 需要初始化
 

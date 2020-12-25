@@ -80,20 +80,24 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
-        <ListView
-            android:id="@+id/lv_myorder"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/hint_no_order"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="还没有任何订单哦"
-            android:gravity="center"
-            android:visibility="gone"></TextView>
+            <TextView
+                android:id="@+id/hint_no_order"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="还没有任何订单哦"
+                android:gravity="center"
+                android:visibility="gone"></TextView>
 
+            <ListView
+                android:id="@+id/lv_myorder"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </LinearLayout>
