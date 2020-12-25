@@ -168,7 +168,7 @@ public class LoginActivity extends AppCompatActivity {
         if (code.equals("200")) {
             Toast.makeText(this, "欢迎登入", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent();
-            intent.setClass(LoginActivity.this, Map.class);
+            intent.setClass(LoginActivity.this, MainActivity.class);
             startActivity(intent);
         }
         else if(code.equals("500") && message.equals("password wrong!")){
