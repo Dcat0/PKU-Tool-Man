@@ -4,9 +4,9 @@
     <string name="title_orderspace">订单广场</string>
     <string name="title_myinfo">我的信息</string>
     <string name="OrderspaceButton">发布订单</string>
-    <string name="title_orderinfo">订单详情</string>
     <string name="order_not_received">待接受</string>
     <string name="order_complete">已完成</string>
     <string name="order_received">进行中</string>
-    <string name="title_ordercreate">发布订单</string>
+    <string name="order_canceled">被取消</string>
+    <string name="title_ordercreate">创建订单</string>
 </resources>
