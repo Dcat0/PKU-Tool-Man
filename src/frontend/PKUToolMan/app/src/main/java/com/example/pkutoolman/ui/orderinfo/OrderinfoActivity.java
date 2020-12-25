@@ -37,6 +37,8 @@ import com.example.pkutoolman.ui.myorder.MyorderViewModel;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -94,13 +96,16 @@ public class OrderinfoActivity extends AppCompatActivity {
         int orderID = intent.getIntExtra("orderID", -1);
         System.out.println(orderID);
         //向后端获取order信息
-        try{ getOrderInfo(orderID); }
-        catch(JSONException ex){
+        try{
+            if (!getOrderInfo(orderID))
+                return;
+        } catch(JSONException ex){
             ex.printStackTrace();
         }
         //向后端获取对方用户信息
         try {
-            getOtherInfo(otherID);
+            if (!getOtherInfo(otherID))
+                return;
         } catch(JSONException ex) {
             ex.printStackTrace();
         }
@@ -143,35 +148,46 @@ public class OrderinfoActivity extends AppCompatActivity {
         setButtonListener();
     }
 
-    private void getOrderInfo(int id) throws JSONException {
-        String request_order_json = "{" + "\"orderID\":"+"\"" + orderID + "\"" + "}";
+    private boolean getOrderInfo(int id) throws JSONException {
+        String request_order_json = "{" + "\"orderID\":"+"\"" + id + "\"" + "}";
         System.out.println(request_order_json);
-        JSONObject result_json = Post.post("http://121.196.103.2:8080/order/query", request_order_json);
+        JSONObject result_json = Post.post(Data.getBaseURL()+"/order/query", request_order_json);
         System.out.println("login_result:");
         //断网
         if(result_json == null){
             Toast.makeText(this, "无网络连接，请重试", Toast.LENGTH_SHORT).show();
             finish();
+            return false;
         }
-        System.out.println(result_json.toString());
 
+        System.out.println(result_json.toString());
         //获取状态码与执行信息
         String code = (result_json.getString("code")).toString();
         String message = (result_json.getString("message")).toString();
+        //请求失败
+        if (!code.equals("200")){
+            Toast.makeText(this, "服务器响应失败", Toast.LENGTH_SHORT).show();
+            finish();
+            return false;
+        }
+
         //获取订单信息
         JSONObject json_data = result_json.getJSONObject("data");
         JSONObject order_data = json_data.getJSONObject("order");
 
-        publisherID = order_data.getInt("userID");
-        receiverID = order_data.getInt("toolmanID");
+        publisherID = order_data.getInt("userId");
+        receiverID = order_data.getInt("toolmanId");
         String place = order_data.getString("place");
         String destination = order_data.getString("desztination");
-        String descripiton = order_data.getString("description");
+        String description = order_data.getString("description");
         int state = order_data.getInt("state");
-        String endTime = order_data.getString("endtime");
+        //返回的是String吗？
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String startTime = df.format((LocalDateTime)order_data.get("startTime"));
+        String endTime = df.format((LocalDateTime)order_data.get("endTime"));
 
-        currOrder = new Order(id, publisherID, receiverID, place, destination, descripiton);
-        //********获取开始、截止时间的接口是啥？************
+        currOrder = new Order(id, publisherID, receiverID, place,
+                destination, startTime, endTime, description, state);
         currState = state;
 
         //确定当前用户是接收方或发送方
@@ -189,35 +205,46 @@ public class OrderinfoActivity extends AppCompatActivity {
         }
         else
             otherID = publisherID;
+
+        return true;
     }
 
-    private void getOtherInfo(int id) throws JSONException {
+    private boolean getOtherInfo(int id) throws JSONException {
         if (otherID == -1) {
             otherName = "";
             otherCredit = 0;
-            return;
+            return true;
         }
 
-        String request_user_json = "{" + "\"userID\":"+"\"" + otherID + "\"" + "}";
+        String request_user_json = "{" + "\"userID\":"+"\"" + id + "\"" + "}";
         System.out.println(request_user_json);
-        JSONObject result_json = Post.post("http://121.196.103.2:8080/user/query", request_user_json);
+        JSONObject result_json = Post.post(Data.getBaseURL()+"/user/query", request_user_json);
         System.out.println("login_result:");
         //断网
         if(result_json == null){
             Toast.makeText(this, "无网络连接，请重试", Toast.LENGTH_SHORT).show();
             finish();
+            return false;
         }
         System.out.println(result_json.toString());
 
         //获取状态码与执行信息
         String code = (result_json.getString("code")).toString();
         String message = (result_json.getString("message")).toString();
-        //***********获取失败的处理*******************
+        //请求失败
+        if (!code.equals("200")){
+            Toast.makeText(this, "服务器响应失败", Toast.LENGTH_SHORT).show();
+            finish();
+            return false;
+        }
+
         //获取对方信息
         JSONObject json_data = result_json.getJSONObject("data");
         JSONObject user_data = json_data.getJSONObject("user");
 
         otherName = user_data.getString("nickname");
+
+        return true;
     }
 
     private void setOrderState(){
@@ -322,25 +349,140 @@ public class OrderinfoActivity extends AppCompatActivity {
                     //取消订单
                     if (myRole == 0) {
                         //向后端发送取消请求
-                        Toast.makeText(getApplicationContext(), "取消订单", Toast.LENGTH_LONG).show();
+                        try {
+                            String resultCode = request("/order/cancel");
+                            if (resultCode.equals("000")) {
+                                Toast.makeText(getApplicationContext(), "无网络连接，请重试",
+                                        Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                            if (resultCode.equals("403")) {
+                                Toast.makeText(getApplicationContext(), "订单已被接收！",
+                                        Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                            if (resultCode.equals("500")) {
+                                Toast.makeText(getApplicationContext(), "服务器响应失败！",
+                                        Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                            //取消成功，提示信息并退出该订单界面
+                            Toast.makeText(getApplicationContext(), "订单已取消",
+                                    Toast.LENGTH_SHORT).show();
+                            finish();
+                        } catch (JSONException ex){
+                            ex.printStackTrace();
+                        }
+                        //Toast.makeText(getApplicationContext(), "取消订单", Toast.LENGTH_LONG).show();
                     }
                     //接收订单
                     else {
                         //向后端发送接收请求
-                        Toast.makeText(getApplicationContext(), "接收订单", Toast.LENGTH_LONG).show();
+                        try {
+                            String resultCode = request("/order/receive");
+                            if (resultCode.equals("000")) {
+                                Toast.makeText(getApplicationContext(), "无网络连接，请重试",
+                                        Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                            if (resultCode.equals("403")) {
+                                Toast.makeText(getApplicationContext(), "订单状态已改变，无法接收！",
+                                        Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                            if (resultCode.equals("500")) {
+                                Toast.makeText(getApplicationContext(), "服务器响应失败！",
+                                        Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                            //成功，提示信息并退出该订单界面
+                            Toast.makeText(getApplicationContext(), "订单已接收",
+                                    Toast.LENGTH_SHORT).show();
+                            //提示后的响应可以再修改（如刷新订单详情界面）
+                            finish();
+                        } catch (JSONException ex){
+                            ex.printStackTrace();
+                        }
+                        //Toast.makeText(getApplicationContext(), "接收订单", Toast.LENGTH_LONG).show();
                     }
                 }
                 else if (currState == 1){
                     //完成订单
                     if (myRole == 0){
-                        Toast.makeText(getApplicationContext(), "完成订单", Toast.LENGTH_LONG).show();
+                        try {
+                            String resultCode = request("/order/complete");
+                            if (resultCode.equals("000")) {
+                                Toast.makeText(getApplicationContext(), "无网络连接，请重试",
+                                        Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                            if (resultCode.equals("403")) {
+                                Toast.makeText(getApplicationContext(), "订单状态已改变，无法完成订单！",
+                                        Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                            if (resultCode.equals("500")) {
+                                Toast.makeText(getApplicationContext(), "服务器响应失败！",
+                                        Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                            //成功，提示信息并退出该订单界面
+                            Toast.makeText(getApplicationContext(), "订单已完成",
+                                    Toast.LENGTH_SHORT).show();
+                            finish();
+                        } catch (JSONException ex){
+                            ex.printStackTrace();
+                        }
+                        //Toast.makeText(getApplicationContext(), "完成订单", Toast.LENGTH_LONG).show();
                     }
                     //取消接收
                     else {
-                        Toast.makeText(getApplicationContext(), "取消接收 ", Toast.LENGTH_LONG).show();
+                        try {
+                            //后端取消接收接口是啥？？？？待修改
+                            String resultCode = request("/order/cancel");
+                            if (resultCode.equals("000")) {
+                                Toast.makeText(getApplicationContext(), "无网络连接，请重试",
+                                        Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                            if (resultCode.equals("403")) {
+                                Toast.makeText(getApplicationContext(), "订单已被接收！",//提示词待改
+                                        Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                            if (resultCode.equals("500")) {
+                                Toast.makeText(getApplicationContext(), "服务器响应失败！",
+                                        Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                            //取消成功，提示信息并退出该订单界面
+                            Toast.makeText(getApplicationContext(), "订单已取消",        //提示词待改
+                                    Toast.LENGTH_SHORT).show();
+                            finish();
+                        } catch (JSONException ex) {
+                            ex.printStackTrace();
+                        }
+                        //Toast.makeText(getApplicationContext(), "取消接收 ", Toast.LENGTH_LONG).show();
                     }
                 }
             }
         });
+    }
+
+    private String request(String path) throws JSONException{
+        String request_json = "{" + "\"orderID\":"+"\"" + currOrder.id + "\"" + "}";
+        System.out.println(request_json);
+        JSONObject result_json = Post.post(Data.getBaseURL()+path, request_json);
+        System.out.println("login_result:");
+        //断网
+        if(result_json == null)
+            return "000";
+
+        System.out.println(result_json.toString());
+        //获取状态码与执行信息
+        String code = (result_json.getString("code")).toString();
+        String message = (result_json.getString("message")).toString();
+
+        return code;
     }
 }
