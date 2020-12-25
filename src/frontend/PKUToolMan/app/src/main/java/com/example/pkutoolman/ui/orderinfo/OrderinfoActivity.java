@@ -149,7 +149,7 @@ public class OrderinfoActivity extends AppCompatActivity {
     }
 
     private boolean getOrderInfo(int id) throws JSONException {
-        String request_order_json = "{" + "\"orderID\":"+"\"" + id + "\"" + "}";
+        String request_order_json = "{" + "\"orderID\":"+ String.valueOf(id) + "}";
         System.out.println(request_order_json);
         JSONObject result_json = Post.post(Data.getBaseURL()+"/order/query", request_order_json);
         System.out.println("login_result:");
@@ -176,15 +176,17 @@ public class OrderinfoActivity extends AppCompatActivity {
         JSONObject order_data = json_data.getJSONObject("order");
 
         publisherID = order_data.getInt("userId");
-        receiverID = order_data.getInt("toolmanId");
+        receiverID = order_data.getInt("toolManId");
         String place = order_data.getString("place");
-        String destination = order_data.getString("desztination");
+        String destination = order_data.getString("destination");
         String description = order_data.getString("description");
         int state = order_data.getInt("state");
         //返回的是String吗？
-        DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        /*DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String startTime = df.format((LocalDateTime)order_data.get("startTime"));
-        String endTime = df.format((LocalDateTime)order_data.get("endTime"));
+        String endTime = df.format((LocalDateTime)order_data.get("endTime"));*/
+        String startTime = order_data.getString("startTime");
+        String endTime = order_data.getString("endTime");
 
         currOrder = new Order(id, publisherID, receiverID, place,
                 destination, startTime, endTime, description, state);
@@ -194,7 +196,7 @@ public class OrderinfoActivity extends AppCompatActivity {
         if (Data.getUserID() == publisherID)
             myRole = 0;
         else myRole = 1;
-
+        System.out.printf("myrole is %d\n", myRole);
         //获得对方信息
         //先确定对方的用户ID
         if (myRole == 0){
@@ -215,10 +217,10 @@ public class OrderinfoActivity extends AppCompatActivity {
             otherCredit = 0;
             return true;
         }
-
-        String request_user_json = "{" + "\"userID\":"+"\"" + id + "\"" + "}";
+        id = 4; // 测试
+        String request_user_json = "{" + "\"id\":"+ String.valueOf(id) + "}";
         System.out.println(request_user_json);
-        JSONObject result_json = Post.post(Data.getBaseURL()+"/user/query", request_user_json);
+        JSONObject result_json = Post.post(Data.getBaseURL()+"/user/query", request_user_json, Data.getToken());
         System.out.println("login_result:");
         //断网
         if(result_json == null){
@@ -296,12 +298,13 @@ public class OrderinfoActivity extends AppCompatActivity {
         }
         //接收者
         else {
-            //未被接收，设置接收功能
+            //未被接收，设置接收功能 不可能有0状态 ?
             if (currState == 0)
                 btnOp.setText("接收订单");
             //被接受，设置取消接收功能
             else
-                btnOp.setText("取消接收");
+                //btnOp.setText("取消接收"); 不知道接了之后能不能被取消
+                btnOp.setVisibility(View.GONE);
         }
     }
 
@@ -350,7 +353,8 @@ public class OrderinfoActivity extends AppCompatActivity {
                     if (myRole == 0) {
                         //向后端发送取消请求
                         try {
-                            String resultCode = request("/order/cancel");
+                            String request_json = "{\"orderID\":" + String.valueOf(currOrder.id) + "}";
+                            String resultCode = request("/order/cancel", request_json);
                             if (resultCode.equals("000")) {
                                 Toast.makeText(getApplicationContext(), "无网络连接，请重试",
                                         Toast.LENGTH_SHORT).show();
@@ -379,7 +383,8 @@ public class OrderinfoActivity extends AppCompatActivity {
                     else {
                         //向后端发送接收请求
                         try {
-                            String resultCode = request("/order/receive");
+                            String request_json = "{\"orderID\":" + String.valueOf(currOrder.id) + ",\"toolManID\":" + String.valueOf(Data.getUserID()) + "}";
+                            String resultCode = request("/order/receive", request_json);
                             if (resultCode.equals("000")) {
                                 Toast.makeText(getApplicationContext(), "无网络连接，请重试",
                                         Toast.LENGTH_SHORT).show();
@@ -410,7 +415,8 @@ public class OrderinfoActivity extends AppCompatActivity {
                     //完成订单
                     if (myRole == 0){
                         try {
-                            String resultCode = request("/order/complete");
+                            String request_json = "{\"orderID\":" + String.valueOf(currOrder.id) + ",\"userID\":" + String.valueOf(publisherID) +"}";
+                            String resultCode = request("/order/complete", request_json);
                             if (resultCode.equals("000")) {
                                 Toast.makeText(getApplicationContext(), "无网络连接，请重试",
                                         Toast.LENGTH_SHORT).show();
@@ -438,8 +444,8 @@ public class OrderinfoActivity extends AppCompatActivity {
                     //取消接收
                     else {
                         try {
-                            //后端取消接收接口是啥？？？？待修改
-                            String resultCode = request("/order/cancel");
+                            //后端取消接收接口是啥？？？？待修改  没有取消接收
+                            String resultCode = request("/order/cancel" , "");
                             if (resultCode.equals("000")) {
                                 Toast.makeText(getApplicationContext(), "无网络连接，请重试",
                                         Toast.LENGTH_SHORT).show();
@@ -469,8 +475,7 @@ public class OrderinfoActivity extends AppCompatActivity {
         });
     }
 
-    private String request(String path) throws JSONException{
-        String request_json = "{" + "\"orderID\":"+"\"" + currOrder.id + "\"" + "}";
+    private String request(String path, String request_json) throws JSONException{
         System.out.println(request_json);
         JSONObject result_json = Post.post(Data.getBaseURL()+path, request_json);
         System.out.println("login_result:");

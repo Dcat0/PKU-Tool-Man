@@ -15,7 +15,7 @@ import java.sql.PreparedStatement;
 public class Post extends Thread {
 
     private JSONObject result;
-    private String url, jsonMessage;
+    private String url, jsonMessage, token;
 
     public static JSONObject post(String url, String jsonMessage) {
         // 比如 url = "http://121.196.103.2:8080/user/login"
@@ -24,6 +24,24 @@ public class Post extends Thread {
         Post t = new Post();
         t.url = url;
         t.jsonMessage = jsonMessage;
+        t.token = null;
+        t.start();
+        try {
+            t.join(); //主UI线程等待该线程执行完毕
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return t.result;
+    }
+
+    public static JSONObject post(String url, String jsonMessage, String token) {
+        // 比如 url = "http://121.196.103.2:8080/user/login"
+        // jsonMessage = "{\"username\":\"hello\",\"password\":\"1234\"}"
+
+        Post t = new Post();
+        t.url = url;
+        t.jsonMessage = jsonMessage;
+        t.token = token;
         t.start();
         try {
             t.join(); //主UI线程等待该线程执行完毕
@@ -38,6 +56,7 @@ public class Post extends Thread {
         try {
             HttpURLConnection conn = (HttpURLConnection)new URL(url).openConnection();
             conn.setRequestProperty("Content-Type", "application/json");
+            if (token != null) conn.setRequestProperty("token", token);
             conn.setRequestMethod("POST");
             conn.setDoOutput(true);
             conn.setDoInput(true);
