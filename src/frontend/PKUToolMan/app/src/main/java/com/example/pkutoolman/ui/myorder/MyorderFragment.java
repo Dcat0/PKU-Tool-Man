@@ -14,11 +14,13 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.pkutoolman.R;
+import com.example.pkutoolman.baseclass.Data;
 import com.example.pkutoolman.baseclass.Order;
 import com.example.pkutoolman.ui.orderinfo.OrderinfoActivity;
 
@@ -51,6 +53,12 @@ public class MyorderFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         System.out.println("onDestroyView");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        refresh(true);
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -134,8 +142,8 @@ public class MyorderFragment extends Fragment {
                 System.out.println(position);
                 // 每个Item跳转的时候需要用Navigate,并通过Buddle向orderInfo的Fragment中传递信息
                 Intent intent = new Intent();
-                if (nowView == "publish") intent.putExtra("order-id", Integer.valueOf( ((TextView)view.findViewById(R.id.publish_order_uid)).getText().toString()) );
-                    else intent.putExtra("order-id", Integer.valueOf( ((TextView)view.findViewById(R.id.receive_order_uid)).getText().toString()));
+                if (nowView == "publish") intent.putExtra("orderID", Integer.valueOf( ((TextView)view.findViewById(R.id.publish_order_uid)).getText().toString()) );
+                    else intent.putExtra("orderID", Integer.valueOf( ((TextView)view.findViewById(R.id.receive_order_uid)).getText().toString()));
                 intent.setClass(getActivity(), OrderinfoActivity.class);
                 startActivity(intent);
             }
@@ -151,7 +159,7 @@ public class MyorderFragment extends Fragment {
         if (get) {
             publishOrderList.clear();
             receiveOrderList.clear();
-            GetMyOrder.getMyOrder(1, publishOrderList, receiveOrderList);
+            GetMyOrder.getMyOrder(Data.getUserID(), publishOrderList, receiveOrderList);
         }
         messageListPublish.clear();
         messageListReceive.clear();
