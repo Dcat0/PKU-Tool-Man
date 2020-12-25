@@ -22,6 +22,14 @@ import android.widget.Toast;
 
 import com.example.pkutoolman.LoginActivity;
 import com.example.pkutoolman.R;
+import com.example.pkutoolman.baseclass.Data;
+import com.example.pkutoolman.baseclass.Post;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class OrderCreateFragment extends Fragment {
 
@@ -31,6 +39,7 @@ public class OrderCreateFragment extends Fragment {
     private EditText txt_place1, txt_place2, txt_day, txt_hour, txt_minute, txt_description;
     private Button btn_create;
     private String st_type;
+    private static DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     public static OrderCreateFragment newInstance() {
         return new OrderCreateFragment();
@@ -92,6 +101,7 @@ public class OrderCreateFragment extends Fragment {
                 Navigation.findNavController(v).navigateUp();
             }
         });
+
         btn_create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,12 +113,17 @@ public class OrderCreateFragment extends Fragment {
                 String st_minute = txt_minute.getText().toString().trim();
                 String description = txt_description.getText().toString().trim();
 
-                if(create_check(type,place1,place2,st_day,st_hour,st_minute,description))
-                    Navigation.findNavController(v).navigateUp();
+
+                try {
+                    if(create_check(type,place1,place2,st_day,st_hour,st_minute,description))
+                        Navigation.findNavController(v).navigateUp();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
-    private boolean create_check(String type, String place1, String place2, String st_day, String st_hour, String st_minute, String description){
+    private boolean create_check(String type, String place1, String place2, String st_day, String st_hour, String st_minute, String description) throws JSONException {
         if (TextUtils.isEmpty(type)||TextUtils.isEmpty(place1)||TextUtils.isEmpty(place2)
                 ||TextUtils.isEmpty(st_day)||TextUtils.isEmpty(st_hour)||TextUtils.isEmpty(st_minute)
                 ||TextUtils.isEmpty(description)) {
@@ -135,8 +150,38 @@ public class OrderCreateFragment extends Fragment {
             Toast.makeText(getContext(), "订单最短时限为30分钟", Toast.LENGTH_SHORT).show();
             return false;
         }
-
+        LocalDateTime time = LocalDateTime.now();
+        System.out.println(time.toString());
+        time = time.plusDays(day).plusHours(hour).plusMinutes(minute);
         System.out.println(type+" "+day+" "+hour+" "+minute);
-        return true;
+        System.out.println(time.toString());
+
+        //创建请求json
+        String request_create_json = "{" + "\"type\":"+"\"" + type + "\"" + ","
+                + "\"place\":" + "\"" + place1 + "\"" + "," + "\"destination\":"+"\"" + place2 + "\"" + ","
+                + "\"endtime\":"+"\"" + time + "\"" + "," + "\"description\":"+"\"" + description + "\"" + ","
+                + "\"userID\":"+"\"" + Data.getUserID() + "\"" + "}";
+
+        System.out.println(request_create_json);
+
+        JSONObject result_json = Post.post(Data.getBaseURL()+"/order/add", request_create_json);
+
+        System.out.println("create_result:");
+
+        //断网情况下，会返回null
+        if(result_json == null){
+            Toast.makeText(getContext(), "无网络连接，请重试", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        System.out.println(result_json.toString());
+
+        String code = (result_json.getString("code")).toString();
+        String message = (result_json.getString("message")).toString();
+
+        if(code.equals("200")){
+            return true;
+        }
+
+        return false;
     }
 }
