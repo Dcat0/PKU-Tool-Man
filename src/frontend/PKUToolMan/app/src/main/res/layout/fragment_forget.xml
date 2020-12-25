@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:textSize="20dp"
+        android:text="欢迎来到PKUToolMan" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="30dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="邮箱"
+            android:textSize="28dp" />
+
+        <EditText
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/forget_email"
+            android:layout_marginLeft="5dp"
+            android:maxLines="1"
+            android:textSize="28dp"
+            android:background="#DCDCDC"
+            android:hint="请输入注册邮箱"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="手机"
+            android:textSize="28dp" />
+
+        <EditText
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/forget_phone"
+            android:layout_marginLeft="5dp"
+            android:maxLines="1"
+            android:textSize="28dp"
+            android:background="#DCDCDC"
+            android:hint="请输入注册手机号"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="密码"
+            android:textSize="28dp" />
+
+        <EditText
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/forget_password"
+            android:layout_marginLeft="5dp"
+            android:maxLines="1"
+            android:textSize="28dp"
+            android:background="#DCDCDC"
+            android:hint="请输入密码"
+            android:password="true"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="密码"
+            android:textSize="28dp" />
+
+        <EditText
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/forget_password_again"
+            android:layout_marginLeft="5dp"
+            android:maxLines="1"
+            android:textSize="28dp"
+            android:background="#DCDCDC"
+            android:hint="请再次输入密码"
+            android:password="true"
+            />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/forget_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/btn_shape_in_order"
+            android:gravity="center"
+            android:onClick="Forget"
+            android:paddingLeft="40dp"
+            android:paddingRight="40dp"
+            android:text="重置"
+            android:textColor="@color/purple_200"
+            android:textSize="30dp" />
+
+        <Button
+            android:id="@+id/forget_back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="16dp"
+            android:background="@drawable/btn_shape_in_order_gray"
+            android:gravity="center"
+            android:onClick="ForgetBack"
+            android:paddingLeft="40dp"
+            android:paddingRight="40dp"
+            android:text="返回"
+            android:textColor="@color/gray"
+            android:textSize="30dp" />
+
+    </LinearLayout>
+
+</LinearLayout>
+

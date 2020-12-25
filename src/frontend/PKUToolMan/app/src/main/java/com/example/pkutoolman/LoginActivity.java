@@ -101,6 +101,12 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void LoginForget(View v){
+        Intent intent = new Intent();
+        intent.setClass(LoginActivity.this,ForgetActivity.class);
+        startActivity(intent);
+    }
+
     //验证username和password
     private void login_check(String user_in,String password_in) throws JSONException {
 
@@ -162,7 +168,7 @@ public class LoginActivity extends AppCompatActivity {
         if (code.equals("200")) {
             Toast.makeText(this, "欢迎登入", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent();
-            intent.setClass(LoginActivity.this, MainActivity.class);
+            intent.setClass(LoginActivity.this, Map.class);
             startActivity(intent);
         }
         else if(code.equals("500") && message.equals("password wrong!")){

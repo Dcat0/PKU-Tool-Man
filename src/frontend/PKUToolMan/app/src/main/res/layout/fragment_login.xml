@@ -139,7 +139,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:layout_gravity="center"
-            android:onClick="Register"
+            android:onClick="LoginForget"
             android:id="@+id/forget_button"
             android:background="@drawable/below_button"
             android:textSize="20dp"

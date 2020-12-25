@@ -1,20 +1,26 @@
 package com.example.pkutoolman;
 
 import com.example.pkutoolman.baseclass.Data;
+import com.example.pkutoolman.baseclass.Order;
+import com.example.pkutoolman.baseclass.Post;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import android.app.Activity;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.JsonReader;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -23,7 +29,14 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class ChatActivity extends Activity {
+    int mCounter =0;
+    int mTime =1000;
+
     private ChatAdapter chatAdapter;
     /**
      * 声明ListView
@@ -41,6 +54,7 @@ public class ChatActivity extends Activity {
                     /**
                      * ListView条目控制在最后一行
                      */
+                    chatAdapter.notifyDataSetChanged();
                     lv_chat_dialog.setSelection(personChats.size());
                     break;
 
@@ -52,6 +66,51 @@ public class ChatActivity extends Activity {
 
     EditText et_chat_message;
 
+    Timer timer = new  Timer();   //定义全局变量
+    TimerTask task = new TimerTask() {
+        @Override
+        public void run() {
+            int orderID = Order.id;
+            System.out.println("time");
+            String request_chat_json = "{\"orderID\":"+ String.valueOf(1) + "}\"";
+            JSONObject result_json= Post.post("http://121.196.103.2:8080/chat/query", request_chat_json);
+            System.out.println(result_json.toString());
+            JSONArray chat = null;
+            try {
+                chat = (result_json.getJSONObject("data")).getJSONArray("chats");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            int length = chat.length();
+            System.out.println("length");
+            System.out.println(length);
+            for(int i = 0 ; i < length; i ++) {
+                try {
+                    JSONObject row = chat.getJSONObject(i);
+                    //System.out.println(row.get("senderId"));
+                    //System.out.println(row.get("sendTime"));
+                    //System.out.println(row.get("message"));
+                    int senderID = Integer.parseInt(row.getString("senderId").toString());
+                    int receiverID = Integer.parseInt(row.getString("receiverId").toString());
+                    String send_time = row.getString("sendTime").toString();
+                    String message = row.getString("message").toString();
+                    send_time = send_time.replace("T"," ");
+                    boolean isInSql = check_message_in_sql(orderID,senderID,receiverID,send_time,message);
+                    if (senderID != Data.getUserID()) {
+                        boolean my_send = false;
+                        ChatData personChat = new ChatData();
+                        personChat.setChatMessage(message);
+                        personChat.setMeSend(false);
+                        personChat.setTime(send_time);
+                        personChats.add(personChat);
+                        handler.sendEmptyMessage(1);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,10 +119,13 @@ public class ChatActivity extends Activity {
         /**
          * 虚拟4条发送方的消息
          */
+        long delay = 2000;
+        long intevalPeriod = 5000;
 
         SimpleDateFormat test_df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
         String test_send_time = test_df.format(new Date());
 
+        /*
         for (int i = 0; i <= 1; i++) {
             ChatData personChat = new ChatData();
             personChat.setChatMessage("我到了");
@@ -71,13 +133,12 @@ public class ChatActivity extends Activity {
             personChat.setTime(test_send_time);
             personChats.add(personChat);
         }
+         */
 
         //加载数据库中信息
         ChatDatabase_sqlite chat_content = new ChatDatabase_sqlite(ChatActivity.this);
         SQLiteDatabase db = chat_content.getWritableDatabase();
         Cursor cursor = db.rawQuery("select * from chat", null);
-
-        System.out.println("success1");
 
         while (cursor.moveToNext()){
             System.out.println("success2");
@@ -120,7 +181,6 @@ public class ChatActivity extends Activity {
         lv_chat_dialog = (ListView) findViewById(R.id.lv_chat_dialog);
         Button btn_chat_message_send = (Button) findViewById(R.id.button_message_send);
         et_chat_message = (EditText) findViewById(R.id.et_chat_message);
-
         et_chat_message.addTextChangedListener(new ChatActivity.JumpTextWatcher());
 
 
@@ -132,6 +192,8 @@ public class ChatActivity extends Activity {
         /**
          * 发送按钮的点击事件
          */
+        timer.scheduleAtFixedRate(task, delay,intevalPeriod);
+
         btn_chat_message_send.setOnClickListener(new OnClickListener() {
 
             @Override
@@ -170,8 +232,18 @@ public class ChatActivity extends Activity {
 
         personChats.add(personChat);//加入message集合
         et_chat_message.setText("");//清空输入框
-        chatAdapter.notifyDataSetChanged();//刷新ListView
         handler.sendEmptyMessage(1);
+    }
+
+    public boolean check_message_in_sql(int orderID,int senderID,int receiverID,String send_time,String message){
+        ChatDatabase_sqlite chat_content = new ChatDatabase_sqlite(ChatActivity.this);
+        SQLiteDatabase db = chat_content.getWritableDatabase();
+        Cursor cursor = db.rawQuery("select * from chat where " + "order_id=" + Integer.toString(orderID) + " and sender_id=" + Integer.toString(senderID)
+                + " and receiver_id=" + Integer.toString(senderID) + " and message_content=" + message + " and message_time=" + send_time,null);
+        while (cursor.moveToNext()){
+            return true;
+        }
+        return false;
     }
 
     private class JumpTextWatcher implements TextWatcher {
