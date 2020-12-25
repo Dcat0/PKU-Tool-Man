@@ -154,6 +154,7 @@ public class MyorderFragment extends Fragment {
 
     public void refresh(boolean get) {
 
+
         //刷新数据信息 如果get=true要从后端拉去
         //此处的数据信息要根据两个下拉框的内容来筛选
         if (get) {
@@ -161,6 +162,7 @@ public class MyorderFragment extends Fragment {
             receiveOrderList.clear();
             GetMyOrder.getMyOrder(Data.getUserID(), publishOrderList, receiveOrderList);
         }
+
         messageListPublish.clear();
         messageListReceive.clear();
         // 准备放到页面中
