@@ -54,6 +54,13 @@ public class MyorderFragment extends Fragment {
         System.out.println("onDestroyView");
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        System.out.println("myorder Resume");
+        refresh(true);
+    }
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         System.out.println("on create view");
