@@ -171,7 +171,7 @@ public class OrderinfoActivity extends AppCompatActivity {
         String endTime = order_data.getString("endtime");
 
         currOrder = new Order(id, publisherID, receiverID, place, destination, descripiton);
-        //***********待修改
+        //********获取开始、截止时间的接口是啥？************
         currState = state;
 
         //确定当前用户是接收方或发送方
@@ -242,10 +242,10 @@ public class OrderinfoActivity extends AppCompatActivity {
 
     private void setOrderInfo(){
         orderID.setText(String.valueOf(currOrder.id));
-        publishTime.setText("2020-12-12");              //待实现
+        publishTime.setText(currOrder.startTime);
+        endTime.setText(currOrder.endTime);
         destination.setText(currOrder.destination);
         description.setText(currOrder.description);
-        //endTime.setText()
         place.setText(currOrder.place);
     }
 
