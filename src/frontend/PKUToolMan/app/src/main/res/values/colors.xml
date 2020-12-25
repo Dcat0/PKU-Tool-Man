@@ -1,16 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="gray">#FFAAAAAA</color>
-    <color name="dark_gray">#FF666666</color>
     <color name="light_gray">#FFDDDDDD</color>
-    <color name="brown">#CC7351</color>
     <color name="light_blue">#E8ECF1</color>
     <color name="blue">#7393A7</color>
     <color name="dark_blue">#6C737E</color>
@@ -18,35 +12,11 @@
     <color name="hint_color">@color/gray</color>
 
     <!--theme1-->
-    <color name="background_1">#FFFFFF</color>
-    <color name="status_bar_bg_1">#222831</color>
-    <color name="status_bar_text_1">#FFFFFF</color>
-    <color name="title_bar_bg_1">#222831</color>
-    <color name="title_bar_text_1">#FFFFFF</color>
-    <color name="title_bar_icon_1">@color/brown</color>
-    <color name="nav_bar_bg_1">#222831</color>
-    <color name="self_nav_bar_bg_1">#222831</color>
-    <color name="self_nav_bar_icon_normal_1">#666666</color>
-    <color name="self_nav_bar_icon_selected_1">@color/brown</color>
-
-    <color name="icon_normal_1">#666666</color>
-    <color name="icon_colorful_1">@color/brown</color>
-
-    <color name="text_normal_1">#666666</color>
-    <color name="text_light_1">#999999</color>
-    <color name="text_emphasis_1">#000000</color>
-    <color name="text_colorful_1">#CC7351</color>
-
-    <color name="btn_normal_1">#999999</color>
-    <color name="btn_colorful_1">#CC7351</color>
 
     <!--theme2-->
-    <color name="background">#FFFFFF</color>
     <color name="status_bar_bg">@color/light_blue</color>
-    <color name="status_bar_text">@color/dark_blue</color>
     <color name="title_bar_bg">@color/white</color>
     <color name="title_bar_text">@color/dark_blue</color>
-    <color name="title_bar_icon">@color/blue</color>
     <color name="nav_bar_bg">@color/light_blue</color>
     <color name="self_nav_bar_bg">@color/white</color>
     <color name="self_nav_bar_icon_normal">@color/light_blue</color>

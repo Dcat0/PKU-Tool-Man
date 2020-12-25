@@ -28,7 +28,7 @@ public class GetMyOrder {
         System.out.printf("a=%d\n", a);
 
 
-        for (int i=0; i<a; ++i) {
+        for (int i=0; i<10; ++i) {
             publishList.add(new Order(123, 321, 123, "45乙", "45", "123"));
             receiveList.add(new Order(123, 321, 123, "45乙", "45", "123"));
         }*/
