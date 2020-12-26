@@ -3,6 +3,7 @@ package com.example.pkutoolman.ui.myorder;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,6 +36,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Timer;
+import java.util.TimerTask;
 
 public class MyorderFragment extends Fragment {
 
@@ -55,12 +57,40 @@ public class MyorderFragment extends Fragment {
     private ArrayAdapter sn2AdpRec;
     private FloatingActionButton freshButton;
 
-    //private Timer timer = new Timer();
-    //Handler handler = new Handler()
+    private Timer timer = new Timer();
+    private Handler handler = new Handler() {
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 5:
+                    refresh(false);
+                    break;
+            }
+            super.handleMessage(msg);
+        }
+    };
+    private TimerTask task = new TimerTask(){
+        public void run() {
+            ArrayList<Map<String, Object>> test;
+            boolean changed = false;
+            //查询所有当前显示的订单中是否有消息记录变化的
+            if (nowView == "publish") test = messageListPublish;else test=messageListReceive;
+            for (Map<String, Object> m : test) {
+                if (getNewMessage( (int)m.get("uid"), Data.getUserID())) {
+                    changed = true;
+                    break;
+                }
+            }
+            Message message = new Message();
+            if (changed) message.what = 5; else message.what = 4;
+            handler.sendMessage(message);
+        }
+    };
 
     @Override
     public void onDestroy() {
         super.onDestroy();
+        timer.cancel();
+        task.cancel();
         System.out.println("onDestroy");
     }
 
@@ -176,7 +206,7 @@ public class MyorderFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
+        timer.schedule(task, 5000, 30000);
         return root;
     }
 
