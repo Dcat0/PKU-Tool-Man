@@ -2,6 +2,8 @@ package com.example.pkutoolman.ui.myorder;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,7 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,12 +25,18 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.example.pkutoolman.R;
 import com.example.pkutoolman.baseclass.Data;
 import com.example.pkutoolman.baseclass.Order;
+import com.example.pkutoolman.baseclass.Post;
 import com.example.pkutoolman.ui.orderinfo.OrderinfoActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MyorderFragment extends Fragment {
 
@@ -48,10 +57,40 @@ public class MyorderFragment extends Fragment {
     private ArrayAdapter sn2AdpRec;
     private FloatingActionButton freshButton;
 
+    private Timer timer = new Timer();
+    private Handler handler = new Handler() {
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 5:
+                    refresh(false);
+                    break;
+            }
+            super.handleMessage(msg);
+        }
+    };
+    private TimerTask task = new TimerTask(){
+        public void run() {
+            ArrayList<Map<String, Object>> test;
+            boolean changed = false;
+            //查询所有当前显示的订单中是否有消息记录变化的
+            if (nowView == "publish") test = messageListPublish;else test=messageListReceive;
+            for (Map<String, Object> m : test) {
+                if (getNewMessage( (int)m.get("uid"), Data.getUserID())) {
+                    changed = true;
+                    break;
+                }
+            }
+            Message message = new Message();
+            if (changed) message.what = 5; else message.what = 4;
+            handler.sendMessage(message);
+        }
+    };
 
     @Override
     public void onDestroy() {
         super.onDestroy();
+        timer.cancel();
+        task.cancel();
         System.out.println("onDestroy");
     }
 
@@ -167,8 +206,43 @@ public class MyorderFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
+        timer.schedule(task, 5000, 30000);
         return root;
+    }
+
+    public boolean getNewMessage(int orderID, int userID) {
+        String jsonSend = "{\"orderID\":" + String.valueOf(orderID) + ",\"userID\":" + String.valueOf(userID) + "}";
+        System.out.println("queryNewMessage");
+        System.out.println(jsonSend);
+        JSONObject obj = Post.post("http://121.196.103.2:8080/chat/check", jsonSend);
+        System.out.println(obj);
+        if (obj == null) {
+            Toast.makeText(getContext(), "网络连接出错", Toast.LENGTH_SHORT);
+            return false;
+        }
+        try {
+            if (obj.getInt("code") != 200)
+                switch (obj.getInt("code")) {
+                    case 401:
+                        Toast.makeText(getContext(), "权限不足", Toast.LENGTH_SHORT).show();
+                        return false;
+                    case 500:
+                        Toast.makeText(getContext(), "服务端未响应", Toast.LENGTH_SHORT).show();
+                        return false;
+                    default:
+                        Toast.makeText(getContext(), "未知错误", Toast.LENGTH_SHORT).show();
+                        return false;
+                }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            boolean bool = obj.getJSONObject("data").getBoolean("checkresult");
+            return bool;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     public void refresh(boolean get) {
@@ -195,6 +269,8 @@ public class MyorderFragment extends Fragment {
                 m.put("class", "取快递");
                 m.put("start", o.place);
                 m.put("dest", o.destination);
+                if (getNewMessage(o.id, o.userID)) m.put("message", R.drawable.ic_chat_red);
+                    else m.put("message", null);
                 if (o.state == 0) { //未被接受
                     m.put("state", "未被接收");
                     m.put("img", R.drawable.baseline_update_black_24dp);
@@ -225,6 +301,8 @@ public class MyorderFragment extends Fragment {
                 m.put("name", o.userID);
                 m.put("start", o.place);
                 m.put("dest", o.destination);
+                if (getNewMessage(o.id, o.toolmanID)) m.put("message", R.drawable.ic_chat_red);
+                    else m.put("message", null);
                 if (o.state == 2) { //已完成
                     m.put("state", "已完成");
                     m.put("img", R.drawable.baseline_check_circle_green_700_24dp);
@@ -243,18 +321,18 @@ public class MyorderFragment extends Fragment {
             saPublish = new SimpleAdapter(getContext(),
                 messageListPublish,
                 R.layout.myorder_published,
-                new String[] {"uid", "img", "state", "ddtime", "class", "start", "dest"},
+                new String[] {"uid", "img", "state", "ddtime", "class", "start", "dest", "message"},
                 new int[] {R.id.publish_order_uid, R.id.publish_order_ztimg, R.id.publish_order_state,
-                        R.id.publish_order_ddtime, R.id.publish_order_class, R.id.publish_order_start, R.id.publish_order_dest}
+                        R.id.publish_order_ddtime, R.id.publish_order_class, R.id.publish_order_start, R.id.publish_order_dest, R.id.publish_order_message}
         );
 
         if (saReceive == null)
             saReceive = new SimpleAdapter(getContext(),
                 messageListReceive,
                 R.layout.myorder_received,
-                new String[] {"uid", "name", "img", "state", "ddtime", "class", "start", "dest"},
+                new String[] {"uid", "name", "img", "state", "ddtime", "class", "start", "dest", "message"},
                 new int[] {R.id.receive_order_uid, R.id.receive_order_name, R.id.receive_order_ztimg, R.id.receive_order_state,
-                        R.id.receive_order_ddtime, R.id.publish_order_class, R.id.receive_order_start, R.id.receive_order_dest}
+                        R.id.receive_order_ddtime, R.id.publish_order_class, R.id.receive_order_start, R.id.receive_order_dest, R.id.receive_order_message}
         );
 
         if (nowView == "receive") {
