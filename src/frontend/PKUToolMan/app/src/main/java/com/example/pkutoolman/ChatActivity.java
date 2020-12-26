@@ -324,6 +324,8 @@ public class ChatActivity extends Activity {
     }
 
     public void ChatBack(View v) {
+        timer.cancel();
+        task.cancel();
         finish();
     }
 
