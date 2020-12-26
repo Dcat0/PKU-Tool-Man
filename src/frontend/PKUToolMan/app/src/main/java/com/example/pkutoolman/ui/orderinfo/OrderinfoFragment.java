@@ -202,6 +202,12 @@ public class OrderinfoFragment extends Fragment {
             public void onClick(View v){
                 //跳转到聊天界面
                 //Navigation.……
+                if(myRole == 0){
+                    Order.toolmanID = receiver.getUserID();
+                }
+                if(myRole == 1){
+                    Order.toolmanID = publisher.getUserID();
+                }
                 Intent intent = new Intent();
                 intent.setClass(getContext(), ChatActivity.class);
                 startActivity(intent);
