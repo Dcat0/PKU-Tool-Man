@@ -21,10 +21,18 @@ public class ChatServiceImpl implements ChatService {
     }
 
     @Override
-    @Transactional(propagation = Propagation.SUPPORTS)
-    public List<Chat> queryChat(int orderid) {
+    public void updatestatus(Chat chat){
+        chatDAO.updatestatus(chat);
+    }
 
-        return chatDAO.queryChat(orderid);
+    @Override
+    public Boolean checkstatus(Chat chat){
+        return chatDAO.checkstatus(chat);
+    }
+    @Override
+    @Transactional(propagation = Propagation.SUPPORTS)
+    public List<Chat> queryChat(Chat chat) {
+        return chatDAO.queryChat(chat);
     }
 
 

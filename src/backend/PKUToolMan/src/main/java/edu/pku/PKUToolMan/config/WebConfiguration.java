@@ -43,6 +43,7 @@ public class WebConfiguration implements WebMvcConfigurer {
         excludePath.add("/order/orderlist");
         excludePath.add("/chat/update");
         excludePath.add("/chat/query");
+        excludePath.add("/chat/check");
         excludePath.add("/error");
         registry.addInterceptor(tokenInterceptor)
                 .addPathPatterns("/**")
