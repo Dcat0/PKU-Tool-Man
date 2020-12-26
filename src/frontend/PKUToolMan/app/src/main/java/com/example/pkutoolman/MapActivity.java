@@ -44,7 +44,6 @@ import com.baidu.mapapi.search.geocode.OnGetGeoCoderResultListener;
 import com.baidu.mapapi.search.geocode.ReverseGeoCodeOption;
 import com.baidu.mapapi.search.geocode.ReverseGeoCodeResult;
 import com.baidu.mapapi.search.route.PlanNode;
-import com.example.pkutoolman.ui.orderinfo.OrderinfoFragment;
 
 public class MapActivity extends AppCompatActivity {
 

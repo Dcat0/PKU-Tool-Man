@@ -3,7 +3,6 @@ package com.example.pkutoolman;
 import com.example.pkutoolman.baseclass.Data;
 import com.example.pkutoolman.baseclass.Order;
 import com.example.pkutoolman.baseclass.Post;
-import com.example.pkutoolman.ui.orderinfo.OrderinfoFragment;
 import com.example.pkutoolman.ui.orderinfo.OrderinfoViewModel;
 
 import java.text.ParseException;
@@ -28,6 +27,7 @@ import android.util.JsonReader;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
+import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -38,8 +38,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class ChatActivity extends Activity {
-    int mCounter =0;
-    int mTime =1000;
+    ChatDatabase_sqlite chat_content;
+    SQLiteDatabase db;
 
     private ChatAdapter chatAdapter;
     /**
@@ -74,9 +74,10 @@ public class ChatActivity extends Activity {
     TimerTask task = new TimerTask() {
         @Override
         public void run() {
-            int orderID = Order.id;
+            int orderID = Data.getOrderID();
             System.out.println("time");
-            String request_chat_json = "{\"orderID\":"+ String.valueOf(1) + "}\"";
+            String request_chat_json = "{\"orderID\":"+ String.valueOf(Data.getOrderID()) + "}\"";
+            System.out.println(request_chat_json);
             JSONObject result_json= Post.post("http://121.196.103.2:8080/chat/query", request_chat_json);
             System.out.println(result_json.toString());
             JSONArray chat = null;
@@ -107,19 +108,19 @@ public class ChatActivity extends Activity {
                     String send_time2 = sdf.format(date);
 
                     boolean isInSql = check_message_in_sql(orderID,senderID,receiverID,send_time,message);
-                    if (!isInSql && senderID != Data.getUserID()) {
+                    if (!isInSql && receiverID == Data.getUserID() && senderID == Data.getChatID()) {
                         boolean my_send = false;
                         ChatData personChat = new ChatData();
                         personChat.setChatMessage(message);
                         personChat.setMeSend(false);
                         personChat.setTime(send_time2);
                         personChats.add(personChat);
-                        handler.sendEmptyMessage(1);
                     }
                 } catch (JSONException | ParseException e) {
                     e.printStackTrace();
                 }
             }
+            handler.sendEmptyMessage(1);
         }};
 
     @Override
@@ -127,11 +128,20 @@ public class ChatActivity extends Activity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.fragment_chat);
-        /**
-         * 虚拟4条发送方的消息
-         */
-        long delay = 3000;
-        long intevalPeriod = 20000;
+
+        long delay = 1000;
+        long intevalPeriod = 2000;
+
+        int order_id = Data.getOrderID();
+        int my_id = Data.getUserID();
+        int other_id = Data.getChatID();
+
+        System.out.println("订单ID");
+        System.out.println(order_id);
+        System.out.println("我的ID");
+        System.out.println(my_id);
+        System.out.println("对方ID");
+        System.out.println(other_id);
 
         /*
         for (int i = 0; i <= 1; i++) {
@@ -144,9 +154,9 @@ public class ChatActivity extends Activity {
          */
 
         //加载数据库中信息
-        ChatDatabase_sqlite chat_content = new ChatDatabase_sqlite(ChatActivity.this);
-        SQLiteDatabase db = chat_content.getWritableDatabase();
-        Cursor cursor = db.rawQuery("select * from chat", null);
+        chat_content = new ChatDatabase_sqlite(ChatActivity.this);
+        db = chat_content.getWritableDatabase();
+        Cursor cursor = db.rawQuery("select * from chat where order_id =" + Integer.toString(order_id), null);
 
         while (cursor.moveToNext()){
             System.out.println("success2");
@@ -232,7 +242,7 @@ public class ChatActivity extends Activity {
             return;
         }
         int my_id = Data.getUserID();
-        int other_id = 1;
+        int other_id = Data.getChatID();
 
         ChatData personChat = new ChatData();
         //代表自己发送
@@ -246,11 +256,11 @@ public class ChatActivity extends Activity {
         String send_time2 = df2.format(new Date());
         System.out.println(send_time);// new Date()为获取当前系统时间
 
-        String request_chat_json = "{\"orderID\":"+ Integer.toString(1) + "," + "\"senderID\":" + Integer.toString(Data.getUserID())
-                + ",\"receiverID\":" + Integer.toString(other_id) + ",\"message\":" + "\"" + my_send_message + "\"" + "}\"";
+        String request_chat_json = "{\"orderID\":"+ Integer.toString(Data.getOrderID()) + "," + "\"senderID\":" + Integer.toString(Data.getUserID())
+                + ",\"receiverID\":" + Integer.toString(Data.getChatID()) + ",\"message\":" + "\"" + my_send_message + "\"" + "}\"";
         System.out.println("我发出请求");
         System.out.println(request_chat_json);
-        JSONObject result_json= Post.post("http://121.196.103.2:8080/chat/query", request_chat_json);
+        JSONObject result_json= Post.post("http://121.196.103.2:8080/chat/update", request_chat_json);
 
         if(result_json == null){
             Toast.makeText(this, "网络未连接", Toast.LENGTH_SHORT).show();
@@ -260,10 +270,8 @@ public class ChatActivity extends Activity {
             String code = (result_json.getString("code")).toString();
             if (code.equals("200")) {
                 //将自己的发送的消息加入数据库中
-                ChatDatabase_sqlite chat_content = new ChatDatabase_sqlite(ChatActivity.this);
-                SQLiteDatabase db = chat_content.getWritableDatabase();
-                db.execSQL("insert into chat values(" + Integer.toString(other_id) + "," + Integer.toString(my_id) +
-                        ",1,\"" + send_time + "\",\"" + my_send_message + "\")");
+                db.execSQL("insert into chat values(" + Integer.toString(Data.getOrderID()) + "," + Integer.toString(Data.getUserID()) +
+                        "," + Integer.toString(Data.getChatID()) + ",\"" + send_time + "\",\"" + my_send_message + "\")");
 
                 personChat.setChatMessage(my_send_message);
                 personChat.setTime(send_time2);
@@ -271,6 +279,8 @@ public class ChatActivity extends Activity {
                 personChats.add(personChat);//加入message集合
                 et_chat_message.setText("");//清空输入框
                 handler.sendEmptyMessage(1);
+                lv_chat_dialog.setTranscriptMode(AbsListView.TRANSCRIPT_MODE_ALWAYS_SCROLL);
+                lv_chat_dialog.setTranscriptMode(AbsListView.TRANSCRIPT_MODE_DISABLED);
             } else {
                 Toast.makeText(this, "出现错误，无法发送", Toast.LENGTH_SHORT).show();
                 et_chat_message.setText(my_send_message);
@@ -279,8 +289,6 @@ public class ChatActivity extends Activity {
     }
 
     public boolean check_message_in_sql(int orderID,int senderID,int receiverID,String send_time,String message){
-        ChatDatabase_sqlite chat_content = new ChatDatabase_sqlite(ChatActivity.this);
-        SQLiteDatabase db = chat_content.getWritableDatabase();
         Cursor cursor = db.rawQuery("select * from chat where " + "order_id=" + Integer.toString(orderID) + " and sender_id=" + Integer.toString(senderID)
                 + " and receiver_id=" + Integer.toString(receiverID) + " and message_content=\"" + message + "\" and message_time=\"" + send_time + "\"",null);
         while (cursor.moveToNext()){

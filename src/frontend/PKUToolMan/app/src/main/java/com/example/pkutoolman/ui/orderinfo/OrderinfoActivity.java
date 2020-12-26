@@ -320,6 +320,13 @@ public class OrderinfoActivity extends AppCompatActivity {
         btnChat.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
+                Data.setOrderID(currOrder.id);
+                if(myRole == 1) {
+                    Data.setChatID(currOrder.userID);
+                }
+                if(myRole == 0) {
+                    Data.setChatID(currOrder.toolmanID);
+                }
                 Intent intent = new Intent();
                 intent.setClass(OrderinfoActivity.this, ChatActivity.class);
                 startActivity(intent);
