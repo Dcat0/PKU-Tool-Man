@@ -24,8 +24,8 @@ public class OrderController {
     @Autowired
     private OrderServiceImpl orderService;
 
-    private static DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-    private static Set<Integer> curReceiveOrderSet = new HashSet<>();
+    private final static DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    private final static Set<Integer> curReceiveOrderSet = new HashSet<>();
 
     @PostMapping("/add")
     public Result createOrder(@RequestBody Map<String, Object> map) {
@@ -62,6 +62,20 @@ public class OrderController {
             e.printStackTrace();
             return Result.RESPONSE_ERROR().message("get myOrderList failed");
         }
+        boolean flag = false;
+        for(Order order : orderList) {
+            if (LocalDateTime.now().isAfter( order.getEndTime() ) &&
+                    order.getState() == OrderState.CREATED.ordinal()) {
+                order.setState(OrderState.CANCELLED.ordinal());
+                try{
+                    orderService.updateOrder(order);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    flag = true;
+                }
+            }
+        }
+        if (flag) return Result.RESPONSE_ERROR().message("update order error when getting my order list");
         return Result.SUCCESS().data("orders", orderList);
     }
 
@@ -85,6 +99,18 @@ public class OrderController {
             // waiting
         }
         curReceiveOrderSet.add(orderId);
+        if (LocalDateTime.now().isAfter( order.getEndTime() ) &&
+                order.getState() == OrderState.CREATED.ordinal()) {
+            curReceiveOrderSet.remove(new Integer(orderId));
+            order.setState(OrderState.CANCELLED.ordinal());
+            try{
+                orderService.updateOrder(order);
+            } catch (Exception e) {
+                e.printStackTrace();
+                return Result.RESPONSE_ERROR().message("update order error when receiving order");
+            }
+            return Result.AUTH_ERROR().message("overtime order");
+        }
         if (order.getToolManId() != -1 || order.getState() != OrderState.CREATED.ordinal()) {
             curReceiveOrderSet.remove(new Integer(orderId));
             return Result.AUTH_ERROR().message("duplicated receiving or finished/cancelled/deleted order");
@@ -183,6 +209,17 @@ public class OrderController {
             e.printStackTrace();
             return Result.RESPONSE_ERROR().message("query order failed when querying order");
         }
+
+        if (LocalDateTime.now().isAfter( order.getEndTime() ) &&
+                order.getState() == OrderState.CREATED.ordinal()) {
+            order.setState(OrderState.CANCELLED.ordinal());
+            try{
+                orderService.updateOrder(order);
+            } catch (Exception e) {
+                e.printStackTrace();
+                return Result.RESPONSE_ERROR().message("update order error when querying order");
+            }
+        }
         return Result.SUCCESS().data("order", order);
     }
 
@@ -194,6 +231,21 @@ public class OrderController {
         } catch (Exception e) {
             return Result.RESPONSE_ERROR().message("query order failed when getting all orderlist");
         }
+        boolean flag = false;
+        for(Order order : orders) {
+            if (LocalDateTime.now().isAfter( order.getEndTime() ) &&
+                    order.getState() == OrderState.CREATED.ordinal()) {
+                order.setState(OrderState.CANCELLED.ordinal());
+                try{
+                    orderService.updateOrder(order);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    flag = true;
+                }
+                orders.remove(order);
+            }
+        }
+        if (flag) return Result.RESPONSE_ERROR().message("update order error when getting orderlist");
         return Result.SUCCESS().data("orders", orders);
     }
 
