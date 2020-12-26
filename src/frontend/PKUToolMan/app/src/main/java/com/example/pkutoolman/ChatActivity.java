@@ -232,7 +232,7 @@ public class ChatActivity extends Activity {
             return;
         }
         int my_id = Data.getUserID();
-        int other_id = Order.toolmanID;
+        int other_id = 1;
 
         ChatData personChat = new ChatData();
         //代表自己发送

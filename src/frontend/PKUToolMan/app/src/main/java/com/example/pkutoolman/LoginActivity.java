@@ -33,6 +33,8 @@ public class LoginActivity extends AppCompatActivity {
         password = (EditText) findViewById(R.id.password);  //获取密码
         username.addTextChangedListener(new JumpTextWatcher_username()); //输入回车符号则跳至password文本框
         password.addTextChangedListener(new JumpTextWatcher_password()); //输入回车符号则视为登入
+
+
     }
 
     //override EditText的监听

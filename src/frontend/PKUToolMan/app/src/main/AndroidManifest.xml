@@ -28,7 +28,11 @@
 
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="EcDbRTU6TUY25iHRb9uGRNwXL4wpGlwj" />
+            android:value="y11Q488j3FEkQwsdoT8OjZ2XLTUrvLjs" />
+
+        <service android:name="com.baidu.location.f"
+            android:label="true"
+            android:process=":remote"></service>
     </application>
     <uses-permission android:name="android.permission.INTERNET" ></uses-permission>
 
@@ -36,6 +40,10 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <!-- 获取网络状态，根据网络状态切换进行数据请求网络转换 -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- 这个权限用于进行网络定位 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!-- 这个权限用于访问GPS定位 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <!-- 读取外置存储。如果开发者使用了so动态加载功能并且把so文件放在了外置存储区域，则需要申请该权限，否则不需要 -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
