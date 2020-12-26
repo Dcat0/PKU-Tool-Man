@@ -150,6 +150,8 @@ public class LoginActivity extends AppCompatActivity {
         String code = (result_json.getString("code")).toString();
         String message = (result_json.getString("message")).toString();
 
+        //code = "200";
+
         if (code.equals("200")) {
             //获得id和昵称
             JSONObject json_data = result_json.getJSONObject("data");

@@ -9,6 +9,7 @@ public class Data {
     private static int userID;
     private static String nickName;
     private static String token;
+    private static String baseURL = "http://121.196.103.2:8080";
     private static List<Order> myOrderInfo = new ArrayList<Order>();
 
     public static void setUserID(int _userID) {
@@ -28,6 +29,8 @@ public class Data {
     public static String getToken(){
         return token;
     }
+
+    public static String getBaseURL() { return baseURL; }
 
     public static void setMyOrderInfo(List<Order> a) {
         myOrderInfo = a;

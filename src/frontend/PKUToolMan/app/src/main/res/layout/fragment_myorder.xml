@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginBottom="80dp"
     android:orientation="vertical">
 
 
@@ -30,8 +29,7 @@
             android:layout_width="0.5dp"
             android:layout_height="25dp"
             android:layout_gravity="center"
-            android:background="@color/gray">
-        </View>
+            android:background="@color/gray"></View>
 
         <Button
             android:id="@+id/bt_myorder_receive"
@@ -47,19 +45,59 @@
             android:textStyle="bold" />
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="25dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="订单类型:">
+        </TextView>
 
+        <Spinner
+            android:id="@+id/order_type_selector"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+        </Spinner>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="订单状态">
+        </TextView>
+
+        <Spinner
+            android:id="@+id/order_status_selector"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+        </Spinner>
+    </LinearLayout>
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/myorder_swipeLayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/bt_myorder_publish">
+        android:id="@+id/myorder_swipeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/hint_no_order"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="还没有任何订单哦"
+                android:gravity="center"
+                android:visibility="gone"></TextView>
 
             <ListView
                 android:id="@+id/lv_myorder"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent" />
 
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+        </LinearLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </LinearLayout>

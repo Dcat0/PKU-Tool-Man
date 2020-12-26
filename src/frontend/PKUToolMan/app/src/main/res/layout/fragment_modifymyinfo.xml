@@ -20,6 +20,7 @@
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
         android:text="请修改个人信息"
+        android:textColor="@color/text_emphasis"
         android:textSize="24sp"
         android:textStyle="bold" />
 
@@ -51,8 +52,9 @@
                 <TextView
                     android:layout_width="80dp"
                     android:layout_height="wrap_content"
-                    android:text="昵称"
                     android:gravity="center"
+                    android:text="昵称"
+                    android:textColor="@color/text_normal"
                     android:textSize="20sp" />
 
                 <EditText
@@ -64,7 +66,8 @@
                     android:gravity="center"
                     android:hint="Wyxoi"
                     android:maxLines="1"
-                    android:textSize="23sp" />
+                    android:textColor="@color/text_light"
+                    android:textSize="20sp" />
 
             </LinearLayout>
 
@@ -78,8 +81,9 @@
                 <TextView
                     android:layout_width="80dp"
                     android:layout_height="wrap_content"
-                    android:text="邮箱"
                     android:gravity="center"
+                    android:text="邮箱"
+                    android:textColor="@color/text_normal"
                     android:textSize="20sp" />
 
                 <EditText
@@ -91,7 +95,8 @@
                     android:gravity="center"
                     android:hint="fyc@pku.edu.cn"
                     android:maxLines="1"
-                    android:textSize="23sp" />
+                    android:textColor="@color/text_light"
+                    android:textSize="20sp" />
 
             </LinearLayout>
 
@@ -105,8 +110,9 @@
                 <TextView
                     android:layout_width="80dp"
                     android:layout_height="wrap_content"
-                    android:text="手机"
                     android:gravity="center"
+                    android:text="手机"
+                    android:textColor="@color/text_normal"
                     android:textSize="20sp" />
 
                 <EditText
@@ -118,7 +124,7 @@
                     android:gravity="center"
                     android:hint="13857558347"
                     android:maxLines="1"
-                    android:textSize="23sp" />
+                    android:textSize="20sp" />
 
             </LinearLayout>
 
@@ -132,8 +138,9 @@
                 <TextView
                     android:layout_width="80dp"
                     android:layout_height="wrap_content"
-                    android:text="原密码"
                     android:gravity="center"
+                    android:text="原密码"
+                    android:textColor="@color/text_normal"
                     android:textSize="20sp" />
 
                 <EditText
@@ -146,7 +153,8 @@
                     android:hint="请输入原密码"
                     android:maxLines="1"
                     android:password="true"
-                    android:textSize="23sp" />
+                    android:textColor="@color/text_light"
+                    android:textSize="20sp" />
 
             </LinearLayout>
 
@@ -160,8 +168,9 @@
                 <TextView
                     android:layout_width="80dp"
                     android:layout_height="wrap_content"
-                    android:text="新密码"
                     android:gravity="center"
+                    android:text="新密码"
+                    android:textColor="@color/text_normal"
                     android:textSize="20sp" />
 
                 <EditText
@@ -174,7 +183,8 @@
                     android:hint="请输入新密码"
                     android:maxLines="1"
                     android:password="true"
-                    android:textSize="23sp" />
+                    android:textColor="@color/text_light"
+                    android:textSize="20sp" />
 
             </LinearLayout>
 
@@ -188,8 +198,9 @@
                 <TextView
                     android:layout_width="80dp"
                     android:layout_height="wrap_content"
-                    android:text="新密码"
                     android:gravity="center"
+                    android:text="新密码"
+                    android:textColor="@color/text_normal"
                     android:textSize="20sp" />
 
                 <EditText
@@ -202,7 +213,8 @@
                     android:hint="请重复新密码"
                     android:maxLines="1"
                     android:password="true"
-                    android:textSize="23sp" />
+                    android:textColor="@color/text_light"
+                    android:textSize="20sp" />
 
             </LinearLayout>
 
@@ -218,17 +230,17 @@
         android:background="@drawable/edge">
 
         <Button
+            android:id="@+id/modifyinfo_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:layout_gravity="center"
-            android:id="@+id/modifyinfo_button"
             android:background="@drawable/below_button"
+            android:gravity="center"
             android:paddingLeft="40dp"
             android:paddingRight="40dp"
-            android:textSize="25sp"
-            android:textColor="@color/purple_200"
-            android:text="确认修改" />
+            android:text="确认修改"
+            android:textColor="@color/btn_colorful"
+            android:textSize="25sp" />
 
     </LinearLayout>
 
@@ -241,17 +253,17 @@
         android:background="@drawable/edge">
 
         <Button
+            android:id="@+id/returnfrommodify_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:layout_gravity="center"
-            android:id="@+id/returnfrommodify_button"
             android:background="@drawable/below_button"
+            android:gravity="center"
             android:paddingLeft="40dp"
             android:paddingRight="40dp"
-            android:textSize="25sp"
-            android:textColor="@color/purple_200"
-            android:text="返回" />
+            android:text="返回"
+            android:textColor="@color/btn_colorful"
+            android:textSize="25sp" />
 
     </LinearLayout>
 
