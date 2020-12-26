@@ -3,17 +3,17 @@
     <!-- 创建新订单 -->
     <insert id="createOrder" parameterType="Order" useGeneratedKeys="true" keyProperty="orderId">
         insert into t_order
-        values (null,#{userId},-1,#{place},#{destination},#{startTime},#{endTime},#{description},#{state})
+        values (null,#{userId},-1,#{place},#{destination},#{startTime},#{endTime},#{description},#{state},#{type})
     </insert>
 
     <!--根据userId查找该用户发起的和接收的所有订单-->
     <select id="getMyOrderList" parameterType="int" resultType="Order">
-        select orderId,userId,toolManId,place,destination,startTime,endTime,description,state from t_order
+        select orderId,userId,toolManId,place,destination,startTime,endTime,description,state,type from t_order
         where userId=#{userId} or toolManId=#{userId}
     </select>
 
     <select id="queryOrder" parameterType="int" resultType="Order">
-        select orderId,userId,toolManId,place,destination,startTime,endTime,description,state from t_order
+        select orderId,userId,toolManId,place,destination,startTime,endTime,description,state,type from t_order
         where orderId=#{orderId}
     </select>
 
@@ -26,7 +26,7 @@
     </delete>
 
     <select id="getAllCreatedOrderList" resultType="Order">
-        select orderId,userId,toolManId,place,destination,startTime,endTime,description,state from t_order
+        select orderId,userId,toolManId,place,destination,startTime,endTime,description,state,type from t_order
         where state=0
     </select>
 

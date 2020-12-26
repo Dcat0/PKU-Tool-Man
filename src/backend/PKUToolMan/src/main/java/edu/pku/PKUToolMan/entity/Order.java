@@ -16,19 +16,21 @@ public class Order {
     private LocalDateTime endTime;
     private String description;
     private int state;
+    private String type;
 
     public Order() {
         this.toolManId = -1;  // 为了检验toolManId之前是否为空值，设定为-1
     }
 
     public Order(int userId, String place, String destination, LocalDateTime startTime, LocalDateTime endTime,
-                 String description) {
+                 String description, String type) {
         this.userId = userId;
         this.place = place;
         this.destination = destination;
         this.startTime = startTime;
         this.endTime = endTime;
         this.description = description;
+        this.type = type;
     }
 
     public Order(int userId, String place, String destination, String description) {  // startTime

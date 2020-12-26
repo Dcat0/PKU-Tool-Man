@@ -37,8 +37,9 @@ public class OrderController {
         DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime startTime = LocalDateTime.parse(map.get("startTime").toString(), df);
         LocalDateTime endTime = LocalDateTime.parse(map.get("endTime").toString(), df);
+        String type = map.get("type").toString();
 
-        Order order = new Order(userId, place, destination, startTime, endTime, description);
+        Order order = new Order(userId, place, destination, startTime, endTime, description, type);
         order.setState(OrderState.CREATED.ordinal());
 
         try {
