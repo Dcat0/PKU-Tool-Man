@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.text.TextUtils;
 import android.view.View;
+import android.view.Window;
 import android.widget.EditText;
 import android.widget.Toast;
 import android.text.TextWatcher;
@@ -25,12 +26,15 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_login);
-        //隐藏标题栏
-        getSupportActionBar().hide();
+        if (getSupportActionBar()!=null){
+            getSupportActionBar().hide();
+        }
         username = (EditText) findViewById(R.id.username);  //获取用户名
         password = (EditText) findViewById(R.id.password);  //获取密码
         username.addTextChangedListener(new JumpTextWatcher_username()); //输入回车符号则跳至password文本框
         password.addTextChangedListener(new JumpTextWatcher_password()); //输入回车符号则视为登入
+
+
     }
 
     //override EditText的监听
@@ -103,6 +107,12 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void LoginForget(View v){
+        Intent intent = new Intent();
+        intent.setClass(LoginActivity.this,ForgetActivity.class);
+        startActivity(intent);
+    }
+
     //验证username和password
     private void login_check(String user_in,String password_in) throws JSONException {
 
@@ -139,10 +149,6 @@ public class LoginActivity extends AppCompatActivity {
 
         String code = (result_json.getString("code")).toString();
         String message = (result_json.getString("message")).toString();
-
-
-
-
 
         //code = "200";
 

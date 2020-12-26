@@ -30,8 +30,9 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_register);
-        //隐藏标题栏
-        getSupportActionBar().hide();
+        if (getSupportActionBar()!=null){
+            getSupportActionBar().hide();
+        }
         username = (EditText) findViewById(R.id.username);  //获取用户名
         pass = (EditText) findViewById(R.id.password);  //获取密码
         pass_again = (EditText) findViewById(R.id.password_again);  //获取密码
@@ -108,13 +109,21 @@ public class RegisterActivity extends AppCompatActivity {
 
             System.out.println(result_json.getString("code"));
 
-            String result = (result_json.getString("code")).toString();
+            String code = (result_json.getString("code")).toString();
 
-            if(result.equals("200")){
+            String message = (result_json.get("message")).toString();
+
+            if(code.equals("200")){
                 Toast.makeText(this, "注册成功", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent();
                 intent.setClass(RegisterActivity.this,LoginActivity.class);
                 startActivity(intent);
+            }
+            else if(code.equals("500") && message.equals("email used!")){
+                Toast.makeText(this, "该邮箱已被注册", Toast.LENGTH_SHORT).show();
+            }
+            else if(code.equals("500") && message.equals("phoneNum used!")) {
+                Toast.makeText(this, "该手机已被注册", Toast.LENGTH_SHORT).show();
             }
             else{
                 Toast.makeText(this, "服务器错误，请重试", Toast.LENGTH_SHORT).show();
