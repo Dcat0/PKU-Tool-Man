@@ -19,20 +19,21 @@ public class ChatController {
 
     @Autowired
     private ChatServiceImpl chatService;
+
     @PostMapping("/update")
     public Result updatechat(@RequestBody Map<String, Object> map) {
 
         //System.out.print("TEST1!!!!!");
-        int orderId = (Integer)map.get("orderID");
+        int orderId = (Integer) map.get("orderID");
         //System.out.print("TEST2!!!!!");
-        int senderId = (Integer)map.get("senderID");
+        int senderId = (Integer) map.get("senderID");
         //System.out.print("TEST3!!!!!");
-        int receiverId = (Integer)map.get("receiverID");
+        int receiverId = (Integer) map.get("receiverID");
         //System.out.print("TEST4!!!!!");
         String message = map.get("message").toString();
         //LocalDateTime sendtime= (LocalDateTime)map.get("sendertime") ;
 
-        Chat chat = new Chat(orderId, senderId, receiverId ,message);
+        Chat chat = new Chat(orderId, senderId, receiverId, message);
         //System.out.println(orderId);
         //System.out.println(senderId);
         //System.out.println(receiverId);
@@ -50,15 +51,43 @@ public class ChatController {
 
     @PostMapping("/query")
     public Result getchat(@RequestBody Map<String, Object> map) {
-        int orderid = (Integer)map.get("orderID");
+        int orderId = (Integer) map.get("orderID");
+        int userId = (Integer) map.get("userID");
+        //System.out.println(orderId);
+        //System.out.println(userId);
+        //System.out.print("TEST1!!!!!");
         List<Chat> chats;
         try {
-            chats = chatService.queryChat(orderid);
+            //System.out.print("TEST2!!!!!");
+            Chat chat = new Chat(orderId, userId);
+            //System.out.print("TEST3!!!!!");
+            chats = chatService.queryChat(chat);
+            //System.out.print("TEST4!!!!!");
+            chatService.updatestatus(chat);
+            //System.out.print("TEST5!!!!!");
         } catch (Exception e) {
             return Result.RESPONSE_ERROR().message("query message failed when getting all orderlist");
         }
         return Result.SUCCESS().data("chats", chats);
     }
 
-
+    @PostMapping("/check")
+    public Result checkcheck(@RequestBody Map<String, Object> map) {
+        int orderId = (Integer) map.get("orderID");
+        int userId = (Integer) map.get("userID");
+        System.out.println(orderId);
+        System.out.println(userId);
+        System.out.print("TEST1!!!!!");
+        Boolean ok = false;
+        try {
+            System.out.print("TEST2!!!!!");
+            Chat chat = new Chat(orderId, userId);
+            System.out.print("TEST3!!!!!");
+            ok = chatService.checkstatus(chat);
+            System.out.print("TEST4!!!!!");
+        } catch (Exception e) {
+            return Result.RESPONSE_ERROR().message("check message failed when getting all orderlist");
+        }
+        return Result.SUCCESS().data("checkresult",ok);
+    }
 }

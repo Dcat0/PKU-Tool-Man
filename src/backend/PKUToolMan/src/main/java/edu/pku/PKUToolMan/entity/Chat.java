@@ -12,11 +12,16 @@ public class Chat {
     private int receiverId;
     private LocalDateTime sendTime;
     private String message = null;
+    private int status;
 
     public Chat(){
 
     }
-
+    public Chat(int orderId,int receiverId){
+        this.orderId = orderId;
+        this.receiverId=receiverId;
+        this.status=0;
+    }
     public Chat(int orderId, int senderId, int receiverId,
                  String message) {
         this.orderId = orderId;
@@ -25,6 +30,7 @@ public class Chat {
         LocalDateTime sendtime = LocalDateTime.now();
         this.sendTime=sendtime;
         this.message=message;
+        this.status=0;
     }
 
     public int getOrderId() {

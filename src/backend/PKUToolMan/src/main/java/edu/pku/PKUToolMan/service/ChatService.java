@@ -7,5 +7,7 @@ import java.util.List;
 public interface ChatService {
 
     void updateChat(Chat chat);
-    List<Chat> queryChat(int orderId);
+    List<Chat> queryChat(Chat chat);
+    void updatestatus(Chat chat);
+    Boolean checkstatus(Chat chat);
 }
