@@ -44,6 +44,7 @@ import com.baidu.mapapi.search.geocode.OnGetGeoCoderResultListener;
 import com.baidu.mapapi.search.geocode.ReverseGeoCodeOption;
 import com.baidu.mapapi.search.geocode.ReverseGeoCodeResult;
 import com.baidu.mapapi.search.route.PlanNode;
+import com.baidu.mapapi.utils.DistanceUtil;
 
 public class MapActivity extends AppCompatActivity {
 
@@ -73,8 +74,8 @@ public class MapActivity extends AppCompatActivity {
 
         setListener();
         drawStartAndDest(); // 绘制取货点和送货点
-        zoomToSpan();
-        //getLocation(); //绘制我的位置
+        //zoomToSpan();
+        getLocation(); //绘制我的位置
     }
 
     private void setListener() {
@@ -84,6 +85,8 @@ public class MapActivity extends AppCompatActivity {
                 if (null != geoCodeResult && null != geoCodeResult.getLocation()) {
                     if (geoCodeResult == null || geoCodeResult.error != SearchResult.ERRORNO.NO_ERROR) {
                         //没有检索到结果
+                        Toast.makeText(getApplicationContext(), "地图定位错误", Toast.LENGTH_LONG);
+                        System.out.println("地图定位错误");
                         finish(); // 如果有错直接返回
                         return;
                     } else {
@@ -109,11 +112,11 @@ public class MapActivity extends AppCompatActivity {
     }
     private void drawStartAndDest() {
         // 获得传入的起点和终点的内容
-        //Intent intent = getIntent();
-        //String start = intent.getStringExtra("start");
-        //String dest = intent.getStringExtra("dest");
-        start = "北京大学理科教学楼";
-        dest = "北京大学45乙";
+        Intent intent = getIntent();
+        start = intent.getStringExtra("start");
+        dest = intent.getStringExtra("dest");
+        System.out.println(start);
+        System.out.println(dest);
         mCoder.geocode(new GeoCodeOption().city("北京").address(start));
         //show(new LatLng(latitude, longitude));
         mCoder.geocode(new GeoCodeOption().city("北京").address(dest));
@@ -181,18 +184,25 @@ public class MapActivity extends AppCompatActivity {
         //在地图上添加Marker，并显示
         //mBaiduMap.clear();
         mBaiduMap.addOverlay(option);
+        if (startLL != null && destLL != null) zoomToSpan();
     }
 
     //进行比例尺的缩放
     private void zoomToSpan() {
-        /* LatLngBounds.Builder builder = new LatLngBounds.Builder();
-        builder.include(destLL);
-        builder.include(startLL);
-        mBaiduMap.setMapStatus(MapStatusUpdateFactory
-                .newLatLngBounds(builder.build())); */
         MapStatus.Builder builder = new MapStatus.Builder();
-        builder.target(new LatLng(39.998511,116.316494));
-        builder.zoom(17.0f);
+        builder.target(new LatLng((startLL.latitude + destLL.latitude)/2, (startLL.longitude + destLL.longitude)/2));
+        double maxdis= DistanceUtil.getDistance(startLL, destLL);
+        int [] zoomSize={10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 10000, 20000, 25000, 50000, 100000, 200000, 500000, 1000000, 2000000};
+        int [] zoomlevel={20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3};
+        double mapWidth = maxdis/9;
+        int dx=0;
+        for(int i=0;i<zoomSize.length;i++){
+            if(mapWidth < zoomSize[i]) {
+                dx = i;
+                break;
+            }
+        }
+        builder.zoom(zoomlevel[dx]);
         mBaiduMap.setMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
     }
 
@@ -211,7 +221,7 @@ public class MapActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        //mLocationClient.stop();
+        mLocationClient.stop();
         System.out.println("destroy map");
         mBaiduMap.setMyLocationEnabled(false);
         mMapView.onDestroy();
