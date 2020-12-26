@@ -132,6 +132,7 @@ public class OrderController {
     @PostMapping("/complete")
     public Result completeOrder(@RequestBody Map<String, Object> map) {
         int orderId = (Integer)map.get("orderID");
+        int userId = (Integer)map.get("userID");
         Order order = null;
         try {
             order = orderService.queryOrder(orderId);
@@ -141,6 +142,9 @@ public class OrderController {
         } catch (Exception e) {
             e.printStackTrace();
             return Result.RESPONSE_ERROR().message("query order failed when completing order");
+        }
+        if (userId != order.getUserId()) {
+            return Result.AUTH_ERROR().message("Permission denied when completing order");
         }
         if (order.getState() != OrderState.EXECUTING.ordinal()) {
             return Result.AUTH_ERROR().message("wrong order state");
@@ -161,6 +165,20 @@ public class OrderController {
         // TODO 权限检查
         Order order;
         int orderId = (Integer)map.get("orderID");
+        int userId = (Integer)map.get("userID");
+        try{
+            order = orderService.queryOrder(orderId);
+            if (order == null) {
+                return Result.RESPONSE_ERROR().message("No suitable order found.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Result.RESPONSE_ERROR().message("query order failed when completing order");
+        }
+        if (userId != order.getUserId()) {
+            return Result.AUTH_ERROR().message("Permission denied when deleting order");
+        }
+
         try{
             orderService.deleteOrder(orderId);
         } catch (Exception e) {
