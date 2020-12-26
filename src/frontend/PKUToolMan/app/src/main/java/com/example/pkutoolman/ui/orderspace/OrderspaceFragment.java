@@ -1,12 +1,15 @@
 package com.example.pkutoolman.ui.orderspace;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -19,6 +22,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.example.pkutoolman.R;
 import com.example.pkutoolman.baseclass.Data;
 import com.example.pkutoolman.baseclass.Order;
+import com.example.pkutoolman.ui.orderinfo.OrderinfoActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -75,6 +79,19 @@ public class OrderspaceFragment extends Fragment {
                 controller.navigate(R.id.navigation_ordercreate);
             }
         });
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            public void onItemClick(AdapterView<?> arg0, View view, int position,long id)
+            {
+                System.out.println(position);
+                // 每个Item跳转的时候需要用Navigate,并通过Buddle向orderInfo的Fragment中传递信息
+                Intent intent = new Intent();
+                intent.putExtra("orderID", Integer.valueOf( ((TextView)view.findViewById(R.id.order_uid)).getText().toString()) );
+                intent.setClass(getActivity(), OrderinfoActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
     private void refresh(){
         ArrayList<Order> publishOrderList = new ArrayList<>();
