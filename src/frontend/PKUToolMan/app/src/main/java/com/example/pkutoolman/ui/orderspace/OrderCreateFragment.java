@@ -151,16 +151,21 @@ public class OrderCreateFragment extends Fragment {
             return false;
         }
         LocalDateTime time = LocalDateTime.now();
+        LocalDateTime start_time = LocalDateTime.now();
         System.out.println(time.toString());
         time = time.plusDays(day).plusHours(hour).plusMinutes(minute);
+        String st_time = time.toString().replace('T',' ').substring(0,19);
+        String st_start_time = start_time.toString().replace('T',' ').substring(0,19);
         System.out.println(type+" "+day+" "+hour+" "+minute);
-        System.out.println(time.toString());
+        System.out.println(st_time);
+
 
         //创建请求json
         String request_create_json = "{" + "\"type\":"+"\"" + type + "\"" + ","
                 + "\"place\":" + "\"" + place1 + "\"" + "," + "\"destination\":"+"\"" + place2 + "\"" + ","
-                + "\"endtime\":"+"\"" + time + "\"" + "," + "\"description\":"+"\"" + description + "\"" + ","
-                + "\"userID\":"+"\"" + Data.getUserID() + "\"" + "}";
+                + "\"endTime\":"+"\"" + st_time + "\"" + "," + "\"startTime\":"+"\"" + st_start_time + "\"" + ","
+                + "\"description\":"+"\"" + description + "\"" + ","
+                + "\"userID\":" + Data.getUserID()  + "}";
 
         System.out.println(request_create_json);
 
@@ -179,6 +184,7 @@ public class OrderCreateFragment extends Fragment {
         String message = (result_json.getString("message")).toString();
 
         if(code.equals("200")){
+            Toast.makeText(getContext(), "发布成功", Toast.LENGTH_SHORT).show();
             return true;
         }
 

@@ -14,7 +14,7 @@ public class GetPublishedOrder {
     static public void getOrder(int userID, ArrayList<Order> publishList) {
 
 
-        JSONObject obj = Post.post(Data.getBaseURL() + "/order/myorderlist", "{\"userID\":" + String.valueOf(userID) + "}");
+        JSONObject obj = Post.post(Data.getBaseURL() + "/order/orderlist", "{\"userID\":" + String.valueOf(userID) + "}");
         System.out.println(obj);
         try {
             JSONArray data = obj.getJSONObject("data").getJSONArray("orders");
@@ -26,7 +26,7 @@ public class GetPublishedOrder {
                         o.getString("endTime"),
                         o.getInt("state")
                 );
-                if (order.userID == userID) publishList.add(order);
+                publishList.add(order);
             }
         } catch (Exception e) {
             e.printStackTrace();
