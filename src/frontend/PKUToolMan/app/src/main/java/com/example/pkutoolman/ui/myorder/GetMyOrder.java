@@ -1,7 +1,9 @@
 package com.example.pkutoolman.ui.myorder;
 
+import android.content.Context;
 import android.util.JsonReader;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.example.pkutoolman.baseclass.Order;
 import com.example.pkutoolman.baseclass.Post;
@@ -22,7 +24,7 @@ import java.util.ArrayList;
 
 public class GetMyOrder {
     static int a=0;
-    static public void getMyOrder(int userID, ArrayList<Order> publishList, ArrayList<Order> receiveList) {
+    static public void getMyOrder(Context context, int userID, ArrayList<Order> publishList, ArrayList<Order> receiveList) {
         // 测试内容
         /*a++;
         System.out.printf("a=%d\n", a);
@@ -37,6 +39,28 @@ public class GetMyOrder {
         //ArrayList<Order> orderList = new ArrayList<>();
         JSONObject obj = Post.post("http://121.196.103.2:8080/order/myorderlist", "{\"userID\":"+String.valueOf(userID)+"}");
         System.out.println(obj);
+        if (obj == null) {
+            Toast.makeText(context, "网络连接出错", Toast.LENGTH_SHORT);
+            return;
+        }
+
+        try {
+            if (obj.getInt("code") != 200)
+            switch (obj.getInt("code")) {
+                case 401:
+                    Toast.makeText(context, "权限不足", Toast.LENGTH_SHORT).show();
+                    return;
+                case 500:
+                    Toast.makeText(context, "服务端未响应", Toast.LENGTH_SHORT).show();
+                    return;
+                default:
+                    Toast.makeText(context, "未知错误", Toast.LENGTH_SHORT).show();
+                    return;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         try {
             JSONArray data = obj.getJSONObject("data").getJSONArray("orders");
             for (int i = 0; i < data.length(); ++i) {
@@ -44,7 +68,11 @@ public class GetMyOrder {
                 Order order = new Order(o.getInt("orderId"),
                         o.getInt("userId"),
                         o.getInt("toolManId"),
+                        o.getString("place"),
+                        o.getString("destination"),
+                        o.getString("startTime"),
                         o.getString("endTime"),
+                        o.getString("description"),
                         o.getInt("state")
                 );
                 if (order.toolmanID == userID) receiveList.add(order);
