@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:layout_centerHorizontal="false"
     android:orientation="vertical"
-    tools:context=".ui.orderinfo.OrderinfoFragment"
+    tools:context=".ui.orderinfo.OrderinfoActivity"
     android:gravity="center_horizontal"
     android:padding="20dp">
 
