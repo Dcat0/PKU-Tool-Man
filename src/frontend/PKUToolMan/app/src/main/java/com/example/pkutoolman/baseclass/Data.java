@@ -7,9 +7,14 @@ import java.util.List;
 
 public class Data {
     private static int userID;
+    private static int orderID;
+    private static int chatID;
     private static String nickName;
     private static String token;
     private static String baseURL = "http://121.196.103.2:8080";
+    private static String Email;
+    private static String PhoneNum;
+    private static String Credit;
     private static List<Order> myOrderInfo = new ArrayList<Order>();
 
     public static void setUserID(int _userID) {
@@ -19,9 +24,30 @@ public class Data {
         return userID;
     }
 
+    public static void setOrderID(int _orderID) {
+        orderID = _orderID;
+    }
+    public static int getOrderID() {
+        return orderID;
+    }
+    public static void setChatID(int _chatID) {
+        chatID = _chatID;
+    }
+    public static int getChatID() {
+        return chatID;
+    }
 
     public static void setNickName(String name) { nickName = name; }
     public static String getNickName() { return nickName; }
+
+    public static void setEmail(String email) {Email = email;}
+    public static String getEmail() {return Email;}
+
+    public static void setPhoneNum(String phone) {PhoneNum = phone;}
+    public static String getPhoneNum() {return PhoneNum;}
+
+    public static void setCredit(String crdt) {Credit = crdt;}
+    public static String getCredit() {return Credit;}
 
     public static void setToken(String _token){
         token = _token;

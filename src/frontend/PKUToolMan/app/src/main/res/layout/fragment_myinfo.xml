@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:layout_centerHorizontal="false"
     android:orientation="vertical"
-    tools:context=".ui.orderinfo.OrderinfoFragment">
+    tools:context=".ui.orderinfo.OrderinfoActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -72,6 +72,7 @@
                         </TextView>
 
                         <TextView
+                            android:id="@+id/nicknameifo"
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="1"
@@ -107,6 +108,7 @@
                     </TextView>
 
                     <TextView
+                        android:id="@+id/emailinfo"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:paddingTop="20dp"
@@ -138,6 +140,7 @@
                     </TextView>
 
                     <TextView
+                        android:id="@+id/phoneinfo"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:paddingTop="20dp"
@@ -201,9 +204,11 @@
                         android:layout_width="1dp"
                         android:layout_height="25dp"
                         android:layout_gravity="center"
-                        android:background="@color/icon_colorful"></View>
+                        android:background="@color/icon_colorful">
+                    </View>
 
                     <TextView
+                        android:id="@+id/creditinfo"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -295,6 +300,7 @@
                     android:background="@drawable/edge">
 
                     <Button
+                        android:id="@+id/logout"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/below_button"

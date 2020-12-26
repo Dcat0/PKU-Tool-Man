@@ -217,7 +217,7 @@ public class OrderinfoActivity extends AppCompatActivity {
             otherCredit = 0;
             return true;
         }
-        id = 4; // 测试
+        //id = 4; // 测试
         String request_user_json = "{" + "\"id\":"+ String.valueOf(id) + "}";
         System.out.println(request_user_json);
         JSONObject result_json = Post.post(Data.getBaseURL()+"/user/query", request_user_json, Data.getToken());
@@ -320,6 +320,13 @@ public class OrderinfoActivity extends AppCompatActivity {
         btnChat.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
+                Data.setOrderID(currOrder.id);
+                if(myRole == 1) {
+                    Data.setChatID(currOrder.userID);
+                }
+                if(myRole == 0) {
+                    Data.setChatID(currOrder.toolmanID);
+                }
                 Intent intent = new Intent();
                 intent.setClass(OrderinfoActivity.this, ChatActivity.class);
                 startActivity(intent);

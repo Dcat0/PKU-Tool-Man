@@ -11,7 +11,7 @@ public class ChatDatabase_sqlite extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table if not exists chat(order_id integer,sender_id integer,receiver_id integer,message_content text,message_time varchar(100))");
+        db.execSQL("create table if not exists chat(order_id integer,sender_id integer,receiver_id integer,message_time varchar(100),message_content text)");
     }
 
 
