@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.text.TextUtils;
 import android.view.View;
+import android.view.Window;
 import android.widget.EditText;
 import android.widget.Toast;
 import android.text.TextWatcher;
@@ -25,6 +26,9 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_login);
+        if (getSupportActionBar()!=null){
+            getSupportActionBar().hide();
+        }
         username = (EditText) findViewById(R.id.username);  //获取用户名
         password = (EditText) findViewById(R.id.password);  //获取密码
         username.addTextChangedListener(new JumpTextWatcher_username()); //输入回车符号则跳至password文本框
@@ -144,28 +148,24 @@ public class LoginActivity extends AppCompatActivity {
         String code = (result_json.getString("code")).toString();
         String message = (result_json.getString("message")).toString();
 
-        //获得id和昵称
-        JSONObject json_data = result_json.getJSONObject("data");
-        String token = json_data.getString("token").toString();
-
-        JSONObject user_data = json_data.getJSONObject("user");
-        String id = user_data.getString("id").toString();
-        String nickname = user_data.getString("nickname").toString();
-
-        Data.setUserID(Integer.parseInt(id));
-        Data.setNickName(nickname);
-        Data.setToken(token);
-
-        System.out.println(code);
-        System.out.println(code.length());
-        System.out.println(Data.getUserID());
-        System.out.println(Data.getNickName());
-
-
-
-        code = "200";
-
         if (code.equals("200")) {
+            //获得id和昵称
+            JSONObject json_data = result_json.getJSONObject("data");
+            String token = json_data.getString("token").toString();
+
+            JSONObject user_data = json_data.getJSONObject("user");
+            String id = user_data.getString("id").toString();
+            String nickname = user_data.getString("nickname").toString();
+
+            Data.setUserID(Integer.parseInt(id));
+            Data.setNickName(nickname);
+            Data.setToken(token);
+
+            System.out.println(code);
+            System.out.println(code.length());
+            System.out.println(Data.getUserID());
+            System.out.println(Data.getNickName());
+
             Toast.makeText(this, "欢迎登入", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent();
             intent.setClass(LoginActivity.this, MainActivity.class);

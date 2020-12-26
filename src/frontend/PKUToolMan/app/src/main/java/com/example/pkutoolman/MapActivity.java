@@ -8,6 +8,7 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.Window;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -37,7 +38,7 @@ import com.baidu.mapapi.search.geocode.ReverseGeoCodeResult;
 import com.example.pkutoolman.baseclass.Post;
 import com.example.pkutoolman.ui.orderinfo.OrderinfoFragment;
 
-public class Map extends AppCompatActivity {
+public class MapActivity extends AppCompatActivity {
     private MapView mMapView = null;
     public BaiduMap mBaiduMap;
     public double latitude;
@@ -46,6 +47,9 @@ public class Map extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_map);
+        if (getSupportActionBar()!=null){
+            getSupportActionBar().hide();
+        }
         //获取地图控件引用
         mMapView = (MapView) findViewById(R.id.bmapView);
         mBaiduMap = mMapView.getMap();
@@ -125,8 +129,6 @@ public class Map extends AppCompatActivity {
     }
 
     public void  MapBack(View v){
-        Intent intent = new Intent();
-        intent.setClass(Map.this, OrderinfoFragment.class);
-        startActivity(intent);
+        finish();
     }
 }

@@ -3,6 +3,8 @@ package com.example.pkutoolman;
 import com.example.pkutoolman.baseclass.Data;
 import com.example.pkutoolman.baseclass.Order;
 import com.example.pkutoolman.baseclass.Post;
+import com.example.pkutoolman.ui.orderinfo.OrderinfoFragment;
+import com.example.pkutoolman.ui.orderinfo.OrderinfoViewModel;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -13,6 +15,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -310,6 +313,10 @@ public class ChatActivity extends Activity {
             }
 
         }
+    }
+
+    public void ChatBack(View v) {
+        finish();
     }
 
 }

@@ -25,6 +25,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.pkutoolman.ChatActivity;
 import com.example.pkutoolman.LoginActivity;
 import com.example.pkutoolman.MainActivity;
+import com.example.pkutoolman.MapActivity;
 import com.example.pkutoolman.R;
 import com.example.pkutoolman.RegisterActivity;
 import com.example.pkutoolman.baseclass.Order;
@@ -223,6 +224,9 @@ public class OrderinfoFragment extends Fragment {
                 //跳转到地图界面
                 //Navigation.……
                 Toast.makeText(getContext(), "打开地图", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent();
+                intent.setClass(getContext(), MapActivity.class);
+                startActivity(intent);
             }
         });
 

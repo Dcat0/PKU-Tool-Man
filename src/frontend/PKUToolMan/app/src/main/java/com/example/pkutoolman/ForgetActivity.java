@@ -29,16 +29,19 @@ public class ForgetActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_forget);
+        if (getSupportActionBar()!=null){
+            getSupportActionBar().hide();
+        }
 
         email = (EditText) findViewById(R.id.forget_email);  //获取邮箱
-        phone = (EditText) findViewById(R.id.forget_email);  //获取手机号
+        phone = (EditText) findViewById(R.id.forget_phone);  //获取手机号
         pass = (EditText) findViewById(R.id.forget_password);  //获取密码
         pass_again = (EditText) findViewById(R.id.forget_password_again);  //获取密码
 
-        email.addTextChangedListener(new ForgetActivity.JumpTextWatcher_pass());
-        phone.addTextChangedListener(new ForgetActivity.JumpTextWatcher_pass_again());
-        pass.addTextChangedListener(new ForgetActivity.JumpTextWatcher_email());
-        pass_again.addTextChangedListener(new ForgetActivity.JumpTextWatcher_phone());//输入回车符号则视为点击注册操作
+        email.addTextChangedListener(new ForgetActivity.JumpTextWatcher_email());
+        phone.addTextChangedListener(new ForgetActivity.JumpTextWatcher_phone());
+        pass.addTextChangedListener(new ForgetActivity.JumpTextWatcher_pass());
+        pass_again.addTextChangedListener(new ForgetActivity.JumpTextWatcher_pass_again());//输入回车符号则视为点击注册操作
     }
 
     //
@@ -78,7 +81,10 @@ public class ForgetActivity extends AppCompatActivity {
 
         if(password_again_forget.equals(password_forget)){//判断两次数的密码是否相同
             //创建请求json
-            String request_forget_json = "";
+            String password_forget_md5 = MD5.encrypt(password_forget);
+
+            String request_forget_json = "{" + "\"email\":" + "\"" + email_forget + "\"," + "\"phoneNum\":"
+                    + "\"" + phone_forget + "\"," + "\"newPassword\":" + "\"" + password_forget_md5 + "\"" + "}";
 
             System.out.println(request_forget_json);
 
@@ -96,13 +102,20 @@ public class ForgetActivity extends AppCompatActivity {
 
             System.out.println(result_json.getString("code"));
 
-            String result = (result_json.getString("code")).toString();
+            String code = (result_json.getString("code")).toString();
+            String message = (result_json.getString("message")).toString();
 
-            if(result.equals("200")){
+            if(code.equals("200")){
                 Toast.makeText(this, "重置成功", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent();
                 intent.setClass(ForgetActivity.this,LoginActivity.class);
                 startActivity(intent);
+            }
+            else if(code.equals("500") && message.equals("email not exist")){
+                    Toast.makeText(this, "此邮箱未被注册", Toast.LENGTH_SHORT).show();
+            }
+            else if(code.equals("500") && message.equals("phoneNum wrong")){
+                Toast.makeText(this, "手机与邮箱不匹配", Toast.LENGTH_SHORT).show();
             }
             else{
                 Toast.makeText(this, "服务器错误，请重试", Toast.LENGTH_SHORT).show();

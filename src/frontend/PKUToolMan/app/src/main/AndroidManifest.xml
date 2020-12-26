@@ -23,8 +23,8 @@
         <activity android:name=".RegisterActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".ChatActivity" />
-        <activity android:name=".Map" />
         <activity android:name=".ForgetActivity" />
+        <activity android:name=".MapActivity" />
 
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"

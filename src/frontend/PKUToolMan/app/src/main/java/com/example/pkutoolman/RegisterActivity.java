@@ -30,6 +30,9 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_register);
+        if (getSupportActionBar()!=null){
+            getSupportActionBar().hide();
+        }
         username = (EditText) findViewById(R.id.username);  //获取用户名
         pass = (EditText) findViewById(R.id.password);  //获取密码
         pass_again = (EditText) findViewById(R.id.password_again);  //获取密码
