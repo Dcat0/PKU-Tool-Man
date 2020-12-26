@@ -1,116 +1,171 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="10dp">
-
-    <TextView
-        android:id="@+id/receive_order_bh"
-        android:layout_width="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingRight="10sp"
-        android:text="订单编号:"
-        android:textColor="@color/text_emphasis"
-        android:textSize="18sp" />
+        android:layout_gravity="center_horizontal"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="3dp"
+        app:cardPreventCornerOverlap="false"
+        app:contentPadding="10dp">
 
-    <TextView
-        android:id="@+id/receive_order_uid"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/receive_order_bh"
-        android:text="123049498"
-        android:textColor="@color/text_normal"
-        android:textSize="18sp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="10dp">
 
-    <TextView
-        android:id="@+id/receive_order_mz"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/receive_order_bh"
-        android:paddingRight="10sp"
-        android:text="发布者:"
-        android:textColor="@color/text_emphasis"
-        android:textSize="18sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
 
-    <TextView
-        android:id="@+id/receive_order_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/receive_order_uid"
-        android:layout_toRightOf="@id/receive_order_mz"
-        android:text="工具人"
-        android:textColor="@color/text_normal"
-        android:textSize="18sp" />
+                <TextView
+                    android:id="@+id/receive_order_bh"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="编号:"
+                    android:paddingRight="10sp"
+                    android:textColor="@color/text_emphasis"
+                    android:textSize="18sp" />
 
-    <TextView
-        android:id="@+id/receive_order_zt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/receive_order_mz"
-        android:paddingRight="10sp"
-        android:text="订单状态:"
-        android:textColor="@color/text_emphasis"
-        android:textSize="18sp" />
+                <TextView
+                    android:id="@+id/receive_order_uid"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    android:text="123049498"
+                    android:textColor="@color/text_normal"
+                    android:textSize="18sp" />
 
-    <ImageView
-        android:id="@+id/receive_order_ztimg"
-        android:layout_width="20dp"
-        android:layout_height="23dp"
-        android:layout_toRightOf="@id/receive_order_zt"
-        android:layout_below="@+id/receive_order_name"
-        android:src="@drawable/baseline_check_circle_green_700_24dp"
-        android:scaleType="centerCrop"
-        android:layout_marginRight="5dp"/>
 
-    <TextView
-        android:id="@+id/receive_order_state"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/receive_order_name"
-        android:layout_toRightOf="@id/receive_order_ztimg"
-        android:text="已完成"
-        android:textColor="@color/text_normal"
-        android:textSize="18sp" />
 
-    <TextView
-        android:id="@+id/receive_order_ddsj"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/receive_order_zt"
-        android:paddingRight="10sp"
-        android:text="订单截止时间:"
-        android:textColor="@color/text_emphasis"
-        android:textSize="18sp" />
+                <ImageView
+                    android:id="@+id/receive_order_ztimg"
+                    android:layout_width="20dp"
+                    android:layout_height="23dp"
+                    android:src="@drawable/baseline_history_green_a700_24dp"
+                    android:scaleType="centerCrop"
+                    android:layout_marginRight="5dp"/>
 
-    <TextView
-        android:id="@+id/receive_order_ddtime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/receive_order_state"
-        android:layout_toRightOf="@id/receive_order_ddsj"
-        android:text="2020-12-14"
-        android:textColor="@color/text_normal"
-        android:textSize="18sp" />
+                <TextView
+                    android:id="@+id/receive_order_state"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="被接受"
+                    android:textColor="@color/text_normal"
+                    android:textSize="18sp" />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="5dp"
+                android:background="@color/gray" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp">
+                <TextView
+                    android:id="@+id/receive_order_ddsj"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="截止时间:"
+                    android:textColor="@color/text_emphasis"
+                    android:textSize="18sp"
+                    android:paddingRight="10sp"/>
 
-    <TextView
-        android:id="@+id/receive_order_lx"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/receive_order_ddsj"
-        android:paddingRight="10sp"
-        android:text="订单类型:"
-        android:textColor="@color/text_emphasis"
-        android:textSize="18sp" />
+                <TextView
+                    android:id="@+id/receive_order_ddtime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="2020-12-14 11:11:11"
+                    android:textColor="@color/text_normal"
+                    android:textSize="18sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp">
+                <TextView
+                    android:id="@+id/receive_order_lx"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingRight="10sp"
+                    android:text="类型:"
+                    android:textColor="@color/text_emphasis"
+                    android:textSize="18sp" />
 
-    <TextView
-        android:id="@+id/receive_order_class"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/receive_order_ddtime"
-        android:layout_toRightOf="@id/receive_order_lx"
-        android:text="取快递"
-        android:textColor="@color/text_normal"
-        android:textSize="18sp" />
+                <TextView
+                    android:id="@+id/receive_order_class"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="取快递"
+                    android:textColorHint="@color/text_normal"
+                    android:textSize="18sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="接单者编号:"
+                    android:paddingRight="10sp"
+                    android:textColor="@color/text_emphasis"
+                    android:textSize="18sp"></TextView>
+                <TextView
+                    android:id="@+id/receive_order_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="1234"
+                    android:textSize="18sp">
+                </TextView>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp">
 
-</RelativeLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="取货地址:"
+                    android:paddingRight="10sp"
+                    android:textColor="@color/text_emphasis"
+                    android:textSize="18sp"></TextView>
+                <TextView
+                    android:id="@+id/receive_order_start"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="北京大学45乙"
+                    android:textSize="18sp">
+                </TextView>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="送货地址:"
+                    android:paddingRight="10sp"
+                    android:textColor="@color/text_emphasis"
+                    android:textSize="18sp"></TextView>
+                <TextView
+                    android:id="@+id/receive_order_dest"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="北京大学理科教学楼"
+                    android:textSize="18sp">
+                </TextView>
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</FrameLayout>

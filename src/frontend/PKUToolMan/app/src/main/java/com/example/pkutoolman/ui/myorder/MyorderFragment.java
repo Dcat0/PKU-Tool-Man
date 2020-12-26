@@ -23,6 +23,7 @@ import com.example.pkutoolman.R;
 import com.example.pkutoolman.baseclass.Data;
 import com.example.pkutoolman.baseclass.Order;
 import com.example.pkutoolman.ui.orderinfo.OrderinfoActivity;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,12 +37,17 @@ public class MyorderFragment extends Fragment {
     private Button bt1, bt2;
     private Spinner sn1, sn2;
     private SimpleAdapter saPublish, saReceive;
-    private SwipeRefreshLayout mSrl;
+    //private SwipeRefreshLayout mSrl;
     private ArrayList<Map<String, Object>> messageListPublish = new ArrayList<>(), messageListReceive = new ArrayList<>();
     private String nowView, selectType;
     private static String[] _selectType = {"全部", "取快递", "购物", "带饭"};
     private int selectStatus;
     private ArrayList<Order> publishOrderList = new ArrayList<>(), receiveOrderList = new ArrayList<>();
+    private ArrayAdapter sn1Adp;
+    private ArrayAdapter sn2AdpPub;
+    private ArrayAdapter sn2AdpRec;
+    private FloatingActionButton freshButton;
+
 
     @Override
     public void onDestroy() {
@@ -63,23 +69,30 @@ public class MyorderFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+
         System.out.println("on create view");
         myorderViewModel = new ViewModelProvider(this).get(MyorderViewModel.class);
         View root = inflater.inflate(R.layout.fragment_myorder, container, false);
         mLv = root.findViewById(R.id.lv_myorder);
         bt1 = root.findViewById(R.id.bt_myorder_publish);
         bt2 = root.findViewById(R.id.bt_myorder_receive);
-        mSrl = root.findViewById(R.id.myorder_swipeLayout);
+        //mSrl = root.findViewById(R.id.myorder_swipeLayout);
+        freshButton = root.findViewById(R.id.myorder_refresh_button);
         sn1 = root.findViewById(R.id.order_type_selector);
         sn2 = root.findViewById(R.id.order_status_selector);
         hint = root.findViewById(R.id.hint_no_order);
+
+        sn1Adp = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_dropdown_item, new String[]{"全部", "取快递", "购物", "带饭"});
+        sn2AdpPub = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_dropdown_item, new String[]{"全部", "未被接收", "已被接受", "已完成", "已取消"});
+        sn2AdpRec = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_dropdown_item, new String[]{"全部", "正在进行", "已完成"});
+
 
         nowView = "publish";
         refresh(true); //建立视图的时候刷新数据 true表示需要从后端拉取数据
 
         mLv.setAdapter(saPublish);
-        sn1.setAdapter(new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, new String[]{"全部", "取快递", "购物", "带饭"}));
-        sn2.setAdapter(new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, new String[]{"全部", "未被接收", "已被接受", "已完成", "已取消"}));
+        sn1.setAdapter(sn1Adp);
+        sn2.setAdapter(sn2AdpPub);
 
         sn1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -103,22 +116,28 @@ public class MyorderFragment extends Fragment {
             }
         });
 
-        mSrl.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        /*mSrl.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 refresh(true);
                 mSrl.setRefreshing(false);
             }
+        });*/
+        freshButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println("refresh");
+                refresh(true);
+            }
         });
-
         bt1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (nowView == "receive") {
                     nowView = "publish";
                     mLv.setAdapter(saPublish);
-                    sn1.setAdapter(new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, new String[]{"全部", "取快递", "购物", "带饭"}));
-                    sn2.setAdapter(new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, new String[]{"全部", "未被接收", "已被接受", "已完成", "已取消"}));
+                    sn1.setAdapter(sn1Adp);
+                    sn2.setAdapter(sn2AdpPub);
                 }
             }
         });
@@ -129,8 +148,8 @@ public class MyorderFragment extends Fragment {
                 if (nowView == "publish") {
                     nowView = "receive";
                     mLv.setAdapter(saReceive);
-                    sn1.setAdapter(new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, new String[]{"全部", "取快递", "购物", "带饭"}));
-                    sn2.setAdapter(new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, new String[]{"全部", "正在进行", "已完成"}));
+                    sn1.setAdapter(sn1Adp);
+                    sn2.setAdapter(sn2AdpRec);
                 }
             }
         });
@@ -160,7 +179,7 @@ public class MyorderFragment extends Fragment {
         if (get) {
             publishOrderList.clear();
             receiveOrderList.clear();
-            GetMyOrder.getMyOrder(Data.getUserID(), publishOrderList, receiveOrderList);
+            GetMyOrder.getMyOrder(getContext(), Data.getUserID(), publishOrderList, receiveOrderList);
         }
 
         messageListPublish.clear();
@@ -174,6 +193,8 @@ public class MyorderFragment extends Fragment {
                 m.put("uid", o.id);
                 m.put("ddtime", o.endTime);
                 m.put("class", "取快递");
+                m.put("start", o.place);
+                m.put("dest", o.destination);
                 if (o.state == 0) { //未被接受
                     m.put("state", "未被接收");
                     m.put("img", R.drawable.baseline_update_black_24dp);
@@ -202,6 +223,8 @@ public class MyorderFragment extends Fragment {
                 m.put("ddtime", o.endTime);
                 m.put("class", "取快递");
                 m.put("name", o.userID);
+                m.put("start", o.place);
+                m.put("dest", o.destination);
                 if (o.state == 2) { //已完成
                     m.put("state", "已完成");
                     m.put("img", R.drawable.baseline_check_circle_green_700_24dp);
@@ -220,18 +243,18 @@ public class MyorderFragment extends Fragment {
             saPublish = new SimpleAdapter(getContext(),
                 messageListPublish,
                 R.layout.myorder_published,
-                new String[] {"uid", "img", "state", "ddtime", "class"},
+                new String[] {"uid", "img", "state", "ddtime", "class", "start", "dest"},
                 new int[] {R.id.publish_order_uid, R.id.publish_order_ztimg, R.id.publish_order_state,
-                        R.id.publish_order_ddtime, R.id.publish_order_class}
+                        R.id.publish_order_ddtime, R.id.publish_order_class, R.id.publish_order_start, R.id.publish_order_dest}
         );
 
         if (saReceive == null)
             saReceive = new SimpleAdapter(getContext(),
                 messageListReceive,
                 R.layout.myorder_received,
-                new String[] {"uid", "name", "img", "state", "ddtime", "class"},
+                new String[] {"uid", "name", "img", "state", "ddtime", "class", "start", "dest"},
                 new int[] {R.id.receive_order_uid, R.id.receive_order_name, R.id.receive_order_ztimg, R.id.receive_order_state,
-                        R.id.receive_order_ddtime, R.id.publish_order_class}
+                        R.id.receive_order_ddtime, R.id.publish_order_class, R.id.receive_order_start, R.id.receive_order_dest}
         );
 
         if (nowView == "receive") {
