@@ -10,16 +10,18 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:layout_gravity="center"
+        android:layout_marginTop="20dp"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
-        android:textSize="20dp"
-        android:text="欢迎来到PKUToolMan" />
+        android:text="欢迎来到PKUToolMan"
+        android:textColor="@color/text_emphasis"
+        android:textSize="20dp" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingTop = "50dp"
         android:orientation="horizontal"
         android:layout_marginTop="30dp">
 
@@ -27,18 +29,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="邮箱"
+            android:textColor="@color/text_emphasis"
             android:textSize="28dp" />
 
         <EditText
+            android:id="@+id/forget_email"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:id="@+id/forget_email"
             android:layout_marginLeft="5dp"
-            android:maxLines="1"
-            android:textSize="28dp"
-            android:background="#DCDCDC"
+            android:background="@drawable/bg_edittext_select"
             android:hint="请输入注册邮箱"
-            />
+            android:maxLines="1"
+            android:textSize="28dp" />
 
     </LinearLayout>
 
@@ -52,18 +54,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="手机"
+            android:textColor="@color/text_emphasis"
             android:textSize="28dp" />
 
         <EditText
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
             android:id="@+id/forget_phone"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:maxLines="1"
-            android:textSize="28dp"
-            android:background="#DCDCDC"
+            android:background="@drawable/bg_edittext_select"
             android:hint="请输入注册手机号"
-            />
+            android:maxLines="1"
+            android:textSize="28dp" />
 
     </LinearLayout>
 
@@ -77,19 +79,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="密码"
+            android:textColor="@color/text_emphasis"
             android:textSize="28dp" />
 
         <EditText
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
             android:id="@+id/forget_password"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:maxLines="1"
-            android:textSize="28dp"
-            android:background="#DCDCDC"
+            android:background="@drawable/bg_edittext_select"
             android:hint="请输入密码"
+            android:maxLines="1"
             android:password="true"
-            />
+            android:textSize="28dp" />
 
     </LinearLayout>
 
@@ -103,19 +105,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="密码"
+            android:textColor="@color/text_emphasis"
             android:textSize="28dp" />
 
         <EditText
+            android:id="@+id/forget_password_again"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:id="@+id/forget_password_again"
             android:layout_marginLeft="5dp"
-            android:maxLines="1"
-            android:textSize="28dp"
-            android:background="#DCDCDC"
+            android:background="@drawable/bg_edittext_select"
             android:hint="请再次输入密码"
+            android:maxLines="1"
             android:password="true"
-            />
+            android:textSize="28dp" />
 
     </LinearLayout>
 
@@ -132,13 +134,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:background="@drawable/btn_shape_in_order"
+            android:background="@drawable/below_button"
             android:gravity="center"
             android:onClick="Forget"
             android:paddingLeft="40dp"
             android:paddingRight="40dp"
             android:text="重置"
-            android:textColor="@color/purple_200"
+            android:textColor="@color/icon_colorful"
             android:textSize="30dp" />
 
         <Button
@@ -147,13 +149,13 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="16dp"
-            android:background="@drawable/btn_shape_in_order_gray"
+            android:background="@drawable/below_button"
             android:gravity="center"
             android:onClick="ForgetBack"
             android:paddingLeft="40dp"
             android:paddingRight="40dp"
             android:text="返回"
-            android:textColor="@color/gray"
+            android:textColor="@color/icon_normal"
             android:textSize="30dp" />
 
     </LinearLayout>

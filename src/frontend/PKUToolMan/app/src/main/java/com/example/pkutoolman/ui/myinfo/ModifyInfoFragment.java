@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.pkutoolman.MD5;
@@ -37,7 +38,8 @@ import java.util.regex.Pattern;
 public class ModifyInfoFragment extends Fragment {
 
     ModifyInfoViewModel mViewModel;
-    Button btModify,btReturn;
+    ImageView btReturn;
+    Button btModify;
     EditText newemail,newnickname,newphone;
     EditText oldpass,newpass,repass;
 
