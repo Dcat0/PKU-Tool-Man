@@ -263,7 +263,7 @@ public class MyorderFragment extends Fragment {
         JSONObject obj = Post.post("http://121.196.103.2:8080/chat/check", jsonSend);
         System.out.println(obj);
         if (obj == null) {
-            Toast.makeText(getContext(), "网络连接出错", Toast.LENGTH_SHORT);
+            Toast.makeText(getContext(), "网络连接出错", Toast.LENGTH_SHORT).show();
             return false;
         }
         try {
