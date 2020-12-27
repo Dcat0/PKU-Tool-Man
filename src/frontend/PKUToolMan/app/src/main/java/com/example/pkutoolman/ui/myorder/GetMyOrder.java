@@ -73,7 +73,8 @@ public class GetMyOrder {
                         o.getString("startTime"),
                         o.getString("endTime"),
                         o.getString("description"),
-                        o.getInt("state")
+                        o.getInt("state"),
+                        o.getString("type")
                 );
                 if (order.toolmanID == userID) receiveList.add(order);
                 if (order.userID == userID) publishList.add(order);

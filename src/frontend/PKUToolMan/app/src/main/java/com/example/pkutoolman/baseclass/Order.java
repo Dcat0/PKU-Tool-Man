@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
 
 public class Order {
     public int id, userID, toolmanID, state;
-    public String place, destination, description, startTime, endTime;
+    public String place, destination, description, startTime, endTime, type;
 
     public Order (int _id, int _userID, int _toolmanID, String _place, String _destination, String _description) {
         id = _id;
@@ -27,7 +27,7 @@ public class Order {
     }
 
     public Order (int _id, int _userID, int _toolmanID, String _place, String _destination, String _startTime,
-                  String _endTime, String _description, int _state) {
+                  String _endTime, String _description, int _state, String _type) {
         id = _id;
         userID = _userID;
         toolmanID = _toolmanID;
@@ -37,6 +37,7 @@ public class Order {
         endTime = _endTime.replace('T',' ');
         description = _description;
         state = _state;
+        type = _type;
     }
 
 }

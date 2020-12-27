@@ -264,7 +264,7 @@ public class MyorderFragment extends Fragment {
                 Map<String, Object> m = new HashMap<>();
                 m.put("uid", o.id);
                 m.put("ddtime", o.endTime);
-                m.put("class", "取快递");
+                m.put("class", o.type);
                 m.put("start", o.place);
                 m.put("dest", o.destination);
                 if (getNewMessage(o.id, o.userID)) m.put("message", R.drawable.ic_chat_red);
@@ -295,7 +295,7 @@ public class MyorderFragment extends Fragment {
                 Map<String, Object> m = new HashMap<>();
                 m.put("uid", o.id);
                 m.put("ddtime", o.endTime);
-                m.put("class", "取快递");
+                m.put("class", o.type);
                 m.put("name", o.userID);
                 m.put("start", o.place);
                 m.put("dest", o.destination);
