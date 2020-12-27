@@ -49,67 +49,91 @@ public class MyorderFragment extends Fragment {
     private SimpleAdapter saPublish, saReceive;
     //private SwipeRefreshLayout mSrl;
     private CopyOnWriteArrayList<Map<String, Object>> messageListPublish = new CopyOnWriteArrayList<>(), messageListReceive = new CopyOnWriteArrayList<>();
-    private String nowView, selectType;
+    volatile private String nowView, selectType;
     private static String[] _selectType = {"全部", "取快递", "购物", "带饭"};
-    private int selectStatus;
+    volatile private int selectStatus;
     private ArrayList<Order> publishOrderList = new ArrayList<>(), receiveOrderList = new ArrayList<>();
     private ArrayAdapter sn1Adp;
     private ArrayAdapter sn2AdpPub;
     private ArrayAdapter sn2AdpRec;
     private FloatingActionButton freshButton;
+    private int jumpToOrderId = -1;
 
-    private Timer timer = new Timer();
+    private Timer timer = null;
+    private TimerTask task = null;
+
     private Handler handler = new Handler() {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 5:
-                    refresh(false);
+                    Bundle bundle = msg.getData();
+                    updateOrderMessage(bundle.getInt("id"), bundle.getBoolean("changed"));
                     break;
             }
             super.handleMessage(msg);
         }
     };
-    private TimerTask task = new TimerTask(){
-        public void run() {
-            CopyOnWriteArrayList<Map<String, Object>> test;
-            boolean changed = false;
-            //查询所有当前显示的订单中是否有消息记录变化的
-            if (nowView == "publish") test = messageListPublish;else test=messageListReceive;
-            for (Map<String, Object> m : test) {
-                /*
-                java.util.ConcurrentModificationException
-                at java.util.ArrayList$Itr.next(ArrayList.java:860)
-                at com.example.pkutoolman.ui.myorder.MyorderFragment$2.run(MyorderFragment.java:77) 报错
-                 */
-                if (getNewMessage( (int)m.get("uid"), Data.getUserID())) {
-                    changed = true;
-                    break;
+
+    private void startTask() {
+        task = new TimerTask() {
+            public void run() {
+                CopyOnWriteArrayList<Map<String, Object>> test;
+                boolean changed = false;
+                //查询所有当前显示的订单中是否有消息记录变化的
+                if (nowView == "publish") test = messageListPublish;
+                else test = messageListReceive;
+                for (Map<String, Object> m : test) {
+                    boolean bool = getNewMessage((int) m.get("uid"), Data.getUserID());
+                    if (bool != (m.get("message") == null ? false : true)) { //如果消息状态发生了变化
+                        Message message = new Message();
+                        message.what = 5;
+                        Bundle bundle = new Bundle();
+                        bundle.putInt("id", (int) m.get("uid"));
+                        bundle.putBoolean("changed", bool);
+                        message.setData(bundle);
+                        handler.sendMessage(message);
+                    }
                 }
             }
-            Message message = new Message();
-            if (changed) message.what = 5; else message.what = 4;
-            handler.sendMessage(message);
-        }
-    };
+        };
+    }
+    private void stopTask() {
+        task.cancel();
+    }
+    private void startTimer() {
+        timer = new Timer();
+    }
+    private void stopTimer() {
+        timer.cancel();
+    }
 
     @Override
     public void onDestroy() {
-        super.onDestroy();
-        timer.cancel();
-        task.cancel();
         System.out.println("onDestroy");
+        super.onDestroy();
+        stopTimer();
+        stopTask();
     }
 
     @Override
     public void onDestroyView() {
-        super.onDestroyView();
         System.out.println("onDestroyView");
+        super.onDestroyView();
     }
 
     @Override
     public void onResume() {
+        System.out.println("Resume");
         super.onResume();
-        refresh(true);
+        if (jumpToOrderId != -1) { //确保是从我的订单详情返回的
+            System.out.println("return from orderInfo");
+            // 返回之后看一下订单消息是否发生变化
+            refresh(true);
+            updateOrderMessage(jumpToOrderId, getNewMessage(jumpToOrderId, Data.getUserID()));
+            startTimer();
+            startTask();
+            timer.schedule(task, 30000, 30000);
+        }
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -204,15 +228,23 @@ public class MyorderFragment extends Fragment {
             public void onItemClick(AdapterView<?> arg0, View view, int position,long id)
             {
                 System.out.println(position);
+                //记录跳转的时候的Id
+                if (nowView == "publish")
+                    jumpToOrderId = Integer.valueOf( ((TextView)view.findViewById(R.id.publish_order_uid)).getText().toString());
+                    else jumpToOrderId = Integer.valueOf( ((TextView)view.findViewById(R.id.receive_order_uid)).getText().toString());
                 // 每个Item跳转的时候需要用Navigate,并通过Buddle向orderInfo的Fragment中传递信息
                 Intent intent = new Intent();
-                if (nowView == "publish") intent.putExtra("orderID", Integer.valueOf( ((TextView)view.findViewById(R.id.publish_order_uid)).getText().toString()) );
-                    else intent.putExtra("orderID", Integer.valueOf( ((TextView)view.findViewById(R.id.receive_order_uid)).getText().toString()));
+                intent.putExtra("orderID", jumpToOrderId);
                 intent.setClass(getActivity(), OrderinfoActivity.class);
+                System.out.println("tack cancel");
+                timer.cancel();
+                task.cancel();
                 startActivity(intent);
             }
         });
-        timer.schedule(task, 5000, 30000);
+        startTimer();
+        startTask();
+        timer.schedule(task, 10000, 30000);
         return root;
     }
 
@@ -272,11 +304,11 @@ public class MyorderFragment extends Fragment {
                 Map<String, Object> m = new HashMap<>();
                 m.put("uid", o.id);
                 m.put("ddtime", o.endTime);
-                m.put("class", "取快递");
+                m.put("class", o.type);
                 m.put("start", o.place);
                 m.put("dest", o.destination);
-                if (getNewMessage(o.id, o.userID)) m.put("message", R.drawable.ic_chat_red);
-                    else m.put("message", null);
+                //if (getNewMessage(o.id, o.userID)) m.put("message", R.drawable.ic_chat_red);
+                //    else m.put("message", null);
                 if (o.state == 0) { //未被接受
                     m.put("state", "未被接收");
                     m.put("img", R.drawable.baseline_update_black_24dp);
@@ -303,12 +335,14 @@ public class MyorderFragment extends Fragment {
                 Map<String, Object> m = new HashMap<>();
                 m.put("uid", o.id);
                 m.put("ddtime", o.endTime);
-                m.put("class", "取快递");
+                m.put("class", o.type);
+                System.out.println(o.id);
+                System.out.println(o.type);
                 m.put("name", o.userID);
                 m.put("start", o.place);
                 m.put("dest", o.destination);
-                if (getNewMessage(o.id, o.toolmanID)) m.put("message", R.drawable.ic_chat_red);
-                    else m.put("message", null);
+                //if (getNewMessage(o.id, o.toolmanID)) m.put("message", R.drawable.ic_chat_red);
+                //    else m.put("message", null);
                 if (o.state == 2) { //已完成
                     m.put("state", "已完成");
                     m.put("img", R.drawable.baseline_check_circle_green_700_24dp);
@@ -338,7 +372,7 @@ public class MyorderFragment extends Fragment {
                 R.layout.myorder_received,
                 new String[] {"uid", "name", "img", "state", "ddtime", "class", "start", "dest", "message"},
                 new int[] {R.id.receive_order_uid, R.id.receive_order_name, R.id.receive_order_ztimg, R.id.receive_order_state,
-                        R.id.receive_order_ddtime, R.id.publish_order_class, R.id.receive_order_start, R.id.receive_order_dest, R.id.receive_order_message}
+                        R.id.receive_order_ddtime, R.id.receive_order_class, R.id.receive_order_start, R.id.receive_order_dest, R.id.receive_order_message}
         );
 
         if (nowView == "receive") {
@@ -349,5 +383,12 @@ public class MyorderFragment extends Fragment {
 
     }
 
-
+    private void updateOrderMessage(int orderId, boolean newMessageStatus) {
+        CopyOnWriteArrayList<Map<String, Object>> test;
+        if (nowView == "publish") test = messageListPublish;else test=messageListReceive;
+        for (Map<String, Object> m : test)
+            if ((int)m.get("uid") == orderId)
+                m.put("message", newMessageStatus==false?null:R.drawable.ic_chat_red);
+        if (nowView == "publish") saPublish.notifyDataSetChanged(); else saReceive.notifyDataSetChanged();
+    }
 }
