@@ -27,6 +27,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.pkutoolman.ChatActivity;
 import com.example.pkutoolman.LoginActivity;
 import com.example.pkutoolman.MainActivity;
+import com.example.pkutoolman.MapActivity;
 import com.example.pkutoolman.R;
 import com.example.pkutoolman.RegisterActivity;
 import com.example.pkutoolman.baseclass.Order;
@@ -323,9 +324,11 @@ public class OrderinfoActivity extends AppCompatActivity {
                 Data.setOrderID(currOrder.id);
                 if(myRole == 1) {
                     Data.setChatID(currOrder.userID);
+                    Data.setToolmanID(currOrder.toolmanID);
                 }
                 if(myRole == 0) {
                     Data.setChatID(currOrder.toolmanID);
+                    Data.setToolmanID(currOrder.toolmanID);
                 }
                 Intent intent = new Intent();
                 intent.setClass(OrderinfoActivity.this, ChatActivity.class);
@@ -348,6 +351,11 @@ public class OrderinfoActivity extends AppCompatActivity {
             public void onClick(View v){
                 //跳转到地图界面
                 //Navigation.……
+                Intent intent = new Intent();
+                intent.setClass(OrderinfoActivity.this, MapActivity.class);
+                intent.putExtra("start", currOrder.place);
+                intent.putExtra("dest", currOrder.destination);
+                startActivity(intent);
                 Toast.makeText(getApplicationContext(), "打开地图", Toast.LENGTH_LONG).show();
             }
         });

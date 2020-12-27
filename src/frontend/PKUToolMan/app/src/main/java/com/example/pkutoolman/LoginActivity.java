@@ -158,11 +158,18 @@ public class LoginActivity extends AppCompatActivity {
             String token = json_data.getString("token").toString();
 
             JSONObject user_data = json_data.getJSONObject("user");
+            System.out.println(user_data);
             String id = user_data.getString("id").toString();
             String nickname = user_data.getString("nickname").toString();
+            String email = user_data.getString("email").toString();
+            String phone = user_data.getString("phoneNum").toString();
+//            String credit = user_data.getString("credit").toString();
 
             Data.setUserID(Integer.parseInt(id));
             Data.setNickName(nickname);
+            Data.setEmail(email);
+            Data.setPhoneNum(phone);
+//            Data.setCredit(credit);
             Data.setToken(token);
 
             System.out.println(code);
