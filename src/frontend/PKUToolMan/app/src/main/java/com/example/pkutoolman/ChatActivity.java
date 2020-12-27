@@ -71,51 +71,58 @@ public class ChatActivity extends Activity {
             String request_chat_json = "{\"orderID\":"+ String.valueOf(Data.getOrderID()) + ",\"userID\":" + String.valueOf(Data.getUserID()) +"}";
             System.out.println(request_chat_json);
             JSONObject result_json= Post.post("http://121.196.103.2:8080/chat/query", request_chat_json);
-            System.out.println(result_json.toString());
-            JSONArray chat = null;
-            try {
-                chat = (result_json.getJSONObject("data")).getJSONArray("chats");
-            } catch (JSONException e) {
-                e.printStackTrace();
+            if(result_json == null){
+                Toast.makeText(ChatActivity.this, "网络未连接", Toast.LENGTH_SHORT).show();
+                return;
             }
-            int length = chat.length();
-            System.out.println("length");
-            System.out.println(length);
-            for(int i = 0 ; i < length; i ++) {
+            else{
+                System.out.println(result_json.toString());
+                JSONArray chat = null;
                 try {
-                    JSONObject row = chat.getJSONObject(i);
-                    //System.out.println(row.get("senderId"));
-                    //System.out.println(row.get("sendTime"));
-                    //System.out.println(row.get("message"));
-                    int senderID = Integer.parseInt(row.getString("senderId").toString());
-                    int receiverID = Integer.parseInt(row.getString("receiverId").toString());
-                    String send_time = row.getString("sendTime").toString();
-                    String message = row.getString("message").toString();
-                    send_time = send_time.replace("T"," ");
-
-                    //显示用时
-                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                    Date date = simpleDateFormat.parse(send_time);
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-                    String send_time2 = sdf.format(date);
-
-                    boolean isInSql = check_message_in_sql(orderID,senderID,receiverID,send_time,message);
-                    if (!isInSql && receiverID == Data.getUserID() && senderID == Data.getChatID()) {
-                        boolean my_send = false;
-                        ChatData personChat = new ChatData();
-                        personChat.setChatMessage(message);
-                        personChat.setMeSend(false);
-                        personChat.setTime(send_time2);
-                        personChats.add(personChat);
-                    }
-                } catch (JSONException | ParseException e) {
+                    chat = (result_json.getJSONObject("data")).getJSONArray("chats");
+                } catch (JSONException e) {
                     e.printStackTrace();
                 }
+                int length = chat.length();
+                System.out.println("length");
+                System.out.println(length);
+                for(int i = 0 ; i < length; i ++) {
+                    try {
+                        JSONObject row = chat.getJSONObject(i);
+                        //System.out.println(row.get("senderId"));
+                        //System.out.println(row.get("sendTime"));
+                        //System.out.println(row.get("message"));
+                        int senderID = Integer.parseInt(row.getString("senderId").toString());
+                        int receiverID = Integer.parseInt(row.getString("receiverId").toString());
+                        String send_time = row.getString("sendTime").toString();
+                        String message = row.getString("message").toString();
+                        send_time = send_time.replace("T"," ");
+
+                        //显示用时
+                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                        Date date = simpleDateFormat.parse(send_time);
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                        String send_time2 = sdf.format(date);
+
+                        boolean isInSql = check_message_in_sql(orderID,senderID,receiverID,send_time,message);
+                        if (!isInSql && receiverID == Data.getUserID() && senderID == Data.getChatID()) {
+                            boolean my_send = false;
+                            ChatData personChat = new ChatData();
+                            personChat.setChatMessage(message);
+                            personChat.setMeSend(false);
+                            personChat.setTime(send_time2);
+                            personChats.add(personChat);
+                        }
+                    } catch (JSONException | ParseException e) {
+                        e.printStackTrace();
+                    }
+                }
+                if(length != 0) {
+                    handler.sendEmptyMessage(1);
+                }
             }
-            if(length != 0) {
-                handler.sendEmptyMessage(1);
-            }
-        }};
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -264,7 +271,7 @@ public class ChatActivity extends Activity {
 
         if(result_json == null){
             Toast.makeText(this, "网络未连接", Toast.LENGTH_SHORT).show();
-            et_chat_message.setText(my_send_message);//清空输入框
+            et_chat_message.setText(my_send_message);//复原输入框
         }
         else {
             String code = (result_json.getString("code")).toString();
