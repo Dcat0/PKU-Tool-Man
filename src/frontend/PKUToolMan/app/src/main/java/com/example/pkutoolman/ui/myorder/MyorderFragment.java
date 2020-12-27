@@ -268,10 +268,9 @@ public class MyorderFragment extends Fragment {
             Toast.makeText(getContext(), "网络连接出错", Toast.LENGTH_SHORT).show();
             Looper.loop();
             return false;
-        }
+        } else
         try {
             if (obj.getInt("code") != 200)
-                Looper.prepare();
                 switch (obj.getInt("code")) {
                     case 401:
                         Looper.prepare();

@@ -147,6 +147,9 @@ public class RegisterActivity extends AppCompatActivity {
             else if(code.equals("500") && message.equals("phoneNum used!")) {
                 Toast.makeText(this, "该手机已被注册", Toast.LENGTH_SHORT).show();
             }
+            else if(code.equals("500") && message.equals("nickname used!")){
+                Toast.makeText(this, "该昵称已被使用", Toast.LENGTH_SHORT).show();
+            }
             else{
                 Toast.makeText(this, "服务器错误，请重试", Toast.LENGTH_SHORT).show();
             }
