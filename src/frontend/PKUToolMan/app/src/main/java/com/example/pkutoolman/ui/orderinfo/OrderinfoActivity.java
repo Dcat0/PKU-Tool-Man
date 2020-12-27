@@ -302,9 +302,11 @@ public class OrderinfoActivity extends AppCompatActivity {
                 Data.setOrderID(currOrder.id);
                 if(myRole == 1) {
                     Data.setChatID(currOrder.userID);
+                    Data.setToolmanID(currOrder.toolmanID);
                 }
                 if(myRole == 0) {
                     Data.setChatID(currOrder.toolmanID);
+                    Data.setToolmanID(currOrder.toolmanID);
                 }
                 Intent intent = new Intent();
                 intent.setClass(OrderinfoActivity.this, ChatActivity.class);
