@@ -10,7 +10,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="8dp"
         android:layout_gravity="top"
-        android:src="@drawable/testpic" />
+        android:src="@drawable/ic_qishou" />
     <TextView
         android:id="@+id/other_message_time"
         android:layout_width="wrap_content"

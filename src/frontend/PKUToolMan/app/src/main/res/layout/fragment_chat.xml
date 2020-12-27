@@ -24,6 +24,7 @@
             app:backgroundTint="@null" />
 
         <TextView
+            android:id="@+id/to_whom"
             android:layout_marginLeft="0dp"
             android:layout_width="100dp"
             android:layout_height="50dp"
@@ -51,8 +52,8 @@
             android:divider="#0000"
             android:dividerHeight="8dp"
             android:background="#FFFFFF"
-            android:stackFromBottom="false"
-            android:transcriptMode="disabled">
+            android:stackFromBottom="true"
+            android:transcriptMode="normal">
         </ListView>
     </LinearLayout>
 

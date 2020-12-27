@@ -36,6 +36,6 @@
         android:layout_marginTop="8dp"
         android:layout_alignParentRight="true"
         android:layout_gravity="top"
-        android:src="@drawable/testpic" />
+        android:src="@drawable/ic_qishou" />
 
 </RelativeLayout>
