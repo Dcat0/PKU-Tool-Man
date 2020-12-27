@@ -39,5 +39,17 @@ public class Order {
         state = _state;
         type = _type;
     }
+    public Order (int _id, int _userID, int _toolmanID, String _place, String _destination, String _startTime,
+                  String _endTime, String _description, int _state) {
+        id = _id;
+        userID = _userID;
+        toolmanID = _toolmanID;
+        place = _place;
+        destination = _destination;
+        startTime = _startTime.replace('T',' ');
+        endTime = _endTime.replace('T',' ');
+        description = _description;
+        state = _state;
+    }
 
 }
