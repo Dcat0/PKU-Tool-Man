@@ -41,7 +41,7 @@ public class GetMyOrder {
         JSONObject obj = Post.post("http://121.196.103.2:8080/order/myorderlist", "{\"userID\":"+String.valueOf(userID)+"}");
         System.out.println(obj);
         if (obj == null) {
-            Toast.makeText(context, "网络连接出错", Toast.LENGTH_SHORT);
+            Toast.makeText(context, "网络连接出错", Toast.LENGTH_SHORT).show();
             return;
         }
 
