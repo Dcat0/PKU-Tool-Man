@@ -42,7 +42,7 @@ public class Order {
     }
 
     public Order(int orderId, int userId, int toolManId, String place, String destination, LocalDateTime startTime,
-                 LocalDateTime endTime, String description, int state) {
+                 LocalDateTime endTime, String description, int state, String type) {
         this.orderId = orderId;
         this.userId = userId;
         this.toolManId = toolManId;
@@ -52,6 +52,7 @@ public class Order {
         this.endTime = endTime;
         this.description = description;
         this.state = state;
+        this.type = type;
     }
 
     public int getOrderId() {
@@ -124,6 +125,14 @@ public class Order {
 
     public void setState(int state) {
         this.state = state;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     @Override
