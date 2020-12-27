@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
 
 public class Order {
     public int id, userID, toolmanID, state;
-    public String place, destination, description, startTime, endTime;
+    public String type, place, destination, description, startTime, endTime;
 
     public Order (int _id, int _userID, int _toolmanID, String _place, String _destination, String _description) {
         id = _id;
@@ -27,10 +27,37 @@ public class Order {
     }
 
     public Order (int _id, int _userID, int _toolmanID, String _place, String _destination, String _startTime,
+                  String _endTime, String _description, int _state, String _type) {
+        id = _id;
+        userID = _userID;
+        toolmanID = _toolmanID;
+        place = _place;
+        destination = _destination;
+        startTime = _startTime.replace('T',' ');
+        endTime = _endTime.replace('T',' ');
+        description = _description;
+        state = _state;
+        type = _type;
+    }
+    public Order (int _id, int _userID, int _toolmanID, String _place, String _destination, String _startTime,
                   String _endTime, String _description, int _state) {
         id = _id;
         userID = _userID;
         toolmanID = _toolmanID;
+        place = _place;
+        destination = _destination;
+        startTime = _startTime.replace('T',' ');
+        endTime = _endTime.replace('T',' ');
+        description = _description;
+        state = _state;
+    }
+
+    public Order (int _id, int _userID, int _toolmanID, String _type, String _place, String _destination, String _startTime,
+                  String _endTime, String _description, int _state) {
+        id = _id;
+        userID = _userID;
+        toolmanID = _toolmanID;
+        type = _type;
         place = _place;
         destination = _destination;
         startTime = _startTime.replace('T',' ');

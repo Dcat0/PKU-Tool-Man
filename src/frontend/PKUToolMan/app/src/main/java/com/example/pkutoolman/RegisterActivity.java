@@ -140,6 +140,7 @@ public class RegisterActivity extends AppCompatActivity {
                 Intent intent = new Intent();
                 intent.setClass(RegisterActivity.this,LoginActivity.class);
                 startActivity(intent);
+                finish();
             }
             else if(code.equals("500") && message.equals("email used!")){
                 Toast.makeText(this, "该邮箱已被注册", Toast.LENGTH_SHORT).show();

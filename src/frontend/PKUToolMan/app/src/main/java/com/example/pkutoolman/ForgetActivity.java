@@ -18,6 +18,8 @@ import org.json.JSONObject;
 
 import com.example.pkutoolman.baseclass.Post;
 
+import java.util.regex.Pattern;
+
 
 public class ForgetActivity extends AppCompatActivity {
     EditText pass;  //密码
@@ -49,6 +51,19 @@ public class ForgetActivity extends AppCompatActivity {
         forget_check();
     }
 
+    public boolean Check_email(String email){
+        String pattern = "^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$";
+        return Pattern.matches(pattern,email);
+    }
+    public boolean Check_phone(String phone){
+        String pattern = "^(13[0-9]|14[5|7]|15[0|1|2|3|4|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\\d{8}$";
+        return Pattern.matches(pattern,phone);
+    }
+    public boolean Check_pass(String pass){
+        String pattern = "\\w{4,17}$";
+        return Pattern.matches(pattern,pass);
+    }
+
     //注册验证
     public void forget_check() throws JSONException {
         String email_forget = email.getText().toString().trim();
@@ -74,10 +89,19 @@ public class ForgetActivity extends AppCompatActivity {
             return;
         }
 
-        if ((email.getText().toString()).indexOf("@") == -1){
+        if (!Check_email(email.getText().toString())){
             Toast.makeText(ForgetActivity.this, "请输入正确邮箱", Toast.LENGTH_SHORT).show();
             return;
         }
+        if (!Check_phone(phone.getText().toString())){
+            Toast.makeText(ForgetActivity.this, "请输入有效手机号", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (!Check_pass(pass.getText().toString())){
+            Toast.makeText(ForgetActivity.this, "请输入有效密码，长度6-18位\n仅包含数字、字母、下划线", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
 
         if(password_again_forget.equals(password_forget)){//判断两次数的密码是否相同
             //创建请求json
@@ -218,6 +242,7 @@ public class ForgetActivity extends AppCompatActivity {
         Intent intent = new Intent();
         intent.setClass(ForgetActivity.this,LoginActivity.class);
         startActivity(intent);
+        finish();
     }
 
 

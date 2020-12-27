@@ -13,7 +13,7 @@
             android:id="@+id/map_back"
             android:onClick="MapBack"
             style="?android:attr/buttonStyleSmall"
-            android:layout_width="30dp"
+            android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_gravity="center|right"
             android:layout_marginRight="4dp"

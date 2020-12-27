@@ -23,7 +23,12 @@ public class GetPublishedOrder {
                 Order order = new Order(o.getInt("orderId"),
                         o.getInt("userId"),
                         o.getInt("toolManId"),
+                        o.getString("type"),
+                        o.getString("place"),
+                        o.getString("destination"),
+                        o.getString("startTime"),
                         o.getString("endTime"),
+                        o.getString("description"),
                         o.getInt("state")
                 );
                 publishList.add(order);

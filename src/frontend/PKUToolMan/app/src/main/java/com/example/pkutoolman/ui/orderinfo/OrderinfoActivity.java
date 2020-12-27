@@ -1,48 +1,25 @@
 package com.example.pkutoolman.ui.orderinfo;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.Navigation;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.example.pkutoolman.ChatActivity;
-import com.example.pkutoolman.LoginActivity;
-import com.example.pkutoolman.MainActivity;
 import com.example.pkutoolman.MapActivity;
 import com.example.pkutoolman.R;
-import com.example.pkutoolman.RegisterActivity;
 import com.example.pkutoolman.baseclass.Order;
 import com.example.pkutoolman.baseclass.Data;
 import com.example.pkutoolman.baseclass.Post;
-import com.example.pkutoolman.ui.myorder.MyorderViewModel;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class OrderinfoActivity extends AppCompatActivity {
 
@@ -54,7 +31,7 @@ public class OrderinfoActivity extends AppCompatActivity {
     private Button btnOp;
     //信息显示组件
     private TextView userName, orderState;
-    private TextView orderID, publishTime, endTime, place, destination, description;
+    private TextView orderID, orderType, publishTime, endTime, place, destination, description;
 
     //信息
     private Order currOrder;
@@ -78,14 +55,15 @@ public class OrderinfoActivity extends AppCompatActivity {
         //隐藏标题栏
         getSupportActionBar().hide();
         //获得组件
-        btnBack = findViewById(R.id.btn_back);
+        btnBack = findViewById(R.id.returnfrommodify_button);
         btnChat = findViewById(R.id.btn_chat);
         btnReport = findViewById(R.id.btn_report);
         btnMap = findViewById(R.id.btn_map);
-        btnOp = findViewById(R.id.btn_order_op);
+        btnOp = findViewById(R.id.modifyinfo_button);
         userName = findViewById(R.id.user_name);
         orderState = findViewById(R.id.order_state_info);
         orderID = findViewById(R.id.order_id);
+        orderType = findViewById(R.id.type);
         publishTime = findViewById(R.id.publish_time);
         endTime = findViewById(R.id.end_time);
         place = findViewById(R.id.place);
@@ -119,6 +97,7 @@ public class OrderinfoActivity extends AppCompatActivity {
             toast.show();
             //退出界面
             finish();
+            return;
         }
         //当前用户为接收方，且订单不是未被接收的状态，但用户不是订单的接收者
         else if ((myRole == 1) && (currState != 0) && (Data.getUserID() != receiverID)){
@@ -127,6 +106,7 @@ public class OrderinfoActivity extends AppCompatActivity {
             toast.show();
             //退出界面
             finish();
+            return;
         }
 
         //……
@@ -178,18 +158,15 @@ public class OrderinfoActivity extends AppCompatActivity {
 
         publisherID = order_data.getInt("userId");
         receiverID = order_data.getInt("toolManId");
+        String type = order_data.getString("type");
         String place = order_data.getString("place");
         String destination = order_data.getString("destination");
         String description = order_data.getString("description");
         int state = order_data.getInt("state");
-        //返回的是String吗？
-        /*DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        String startTime = df.format((LocalDateTime)order_data.get("startTime"));
-        String endTime = df.format((LocalDateTime)order_data.get("endTime"));*/
         String startTime = order_data.getString("startTime");
         String endTime = order_data.getString("endTime");
 
-        currOrder = new Order(id, publisherID, receiverID, place,
+        currOrder = new Order(id, publisherID, receiverID, type, place,
                 destination, startTime, endTime, description, state);
         currState = state;
 
@@ -272,6 +249,7 @@ public class OrderinfoActivity extends AppCompatActivity {
 
     private void setOrderInfo(){
         orderID.setText(String.valueOf(currOrder.id));
+        orderType.setText(currOrder.type);
         publishTime.setText(currOrder.startTime);
         endTime.setText(currOrder.endTime);
         destination.setText(currOrder.destination);

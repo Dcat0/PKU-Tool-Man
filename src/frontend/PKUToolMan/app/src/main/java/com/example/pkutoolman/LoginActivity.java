@@ -181,6 +181,7 @@ public class LoginActivity extends AppCompatActivity {
             Intent intent = new Intent();
             intent.setClass(LoginActivity.this, MainActivity.class);
             startActivity(intent);
+            finish();
         }
         else if(code.equals("500") && message.equals("password wrong!")){
             Toast.makeText(this, "密码错误", Toast.LENGTH_SHORT).show();

@@ -8,49 +8,60 @@
     android:gravity="center_horizontal"
     tools:context=".ui.orderspace.OrderspaceFragment">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:gravity="center_vertical"
-        android:text="订单广场"
-        android:textColor="@color/text_emphasis"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        android:layout_marginTop="20dp"/>
-
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:layout_marginTop="5dp"
         android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/btn_publish"
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="3dp"
-            android:layout_marginEnd="10dp"
-            android:background="@drawable/edge"
-            android:text="@string/OrderspaceButton"
-            android:textColor="@color/btn_colorful" />
+            android:layout_centerInParent="true"
+            android:gravity="center_vertical"
+            android:text="订单广场"
+            android:textColor="@color/text_emphasis"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"/>
+
+        <Button
+            android:id="@+id/modifyinfo_button"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/below_button"
+            android:foreground="@drawable/ic_add"
+            android:gravity="right|center_vertical"
+            android:textColor="@color/text_colorful"
+            android:textSize="18sp" />
     </RelativeLayout>
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/orderspace_swipeLayout"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="50dp">
+        android:layout_height="match_parent">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/orderspace_refresh_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_margin="16dp"
+            app:backgroundTint="#00BCD4"
+            app:fabSize="normal"
+            app:rippleColor="#3F51B5"
+            app:srcCompat="@drawable/ic_baseline_autorenew_24" />
 
         <ListView
             android:id="@+id/orderspace_lv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="5dp"/>
+            android:layout_marginTop="5dp"
+            android:footerDividersEnabled="false"/>
 
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 
 </LinearLayout>
