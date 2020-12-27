@@ -76,7 +76,7 @@ public class ChatActivity extends Activity {
         public void run() {
             int orderID = Data.getOrderID();
             System.out.println("time");
-            String request_chat_json = "{\"orderID\":"+ String.valueOf(Data.getOrderID()) + "}\"";
+            String request_chat_json = "{\"orderID\":"+ String.valueOf(Data.getOrderID()) + ",\"userID\":" + String.valueOf(Data.getUserID()) +"}";
             System.out.println(request_chat_json);
             JSONObject result_json= Post.post("http://121.196.103.2:8080/chat/query", request_chat_json);
             System.out.println(result_json.toString());
@@ -120,7 +120,9 @@ public class ChatActivity extends Activity {
                     e.printStackTrace();
                 }
             }
-            handler.sendEmptyMessage(1);
+            if(length != 0) {
+                handler.sendEmptyMessage(1);
+            }
         }};
 
     @Override
@@ -205,6 +207,8 @@ public class ChatActivity extends Activity {
             //加入集合
             personChats.add(personChat);
         }
+        cursor.close();
+        handler.sendEmptyMessage(1);
         
         lv_chat_dialog = (ListView) findViewById(R.id.lv_chat_dialog);
         Button btn_chat_message_send = (Button) findViewById(R.id.button_message_send);
@@ -292,10 +296,12 @@ public class ChatActivity extends Activity {
         Cursor cursor = db.rawQuery("select * from chat where " + "order_id=" + Integer.toString(orderID) + " and sender_id=" + Integer.toString(senderID)
                 + " and receiver_id=" + Integer.toString(receiverID) + " and message_content=\"" + message + "\" and message_time=\"" + send_time + "\"",null);
         while (cursor.moveToNext()){
+            cursor.close();
             return true;
         }
         db.execSQL("insert into chat values(" + Integer.toString(orderID) + "," + Integer.toString(senderID)
                 + ","+ Integer.toString(receiverID) + ",\"" + send_time + "\",\"" + message + "\")");
+        cursor.close();
         return false;
     }
 
