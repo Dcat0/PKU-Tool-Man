@@ -20,7 +20,7 @@
     <color name="self_nav_bar_bg">@color/white</color>
     <color name="self_nav_bar_icon_normal">@color/light_blue</color>
     <color name="self_nav_bar_icon_selected">@color/blue</color>
-    <color name="login_main_color">#87c0cd</color>
+    <color name="login_main_color">#9CC6EC</color>
 
     <color name="icon_normal">@color/gray</color>
     <color name="icon_colorful">@color/blue</color>
