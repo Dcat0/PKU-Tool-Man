@@ -3,6 +3,7 @@ package com.example.pkutoolman.ui.myorder;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -263,20 +264,29 @@ public class MyorderFragment extends Fragment {
         JSONObject obj = Post.post("http://121.196.103.2:8080/chat/check", jsonSend);
         System.out.println(obj);
         if (obj == null) {
+            Looper.prepare();
             Toast.makeText(getContext(), "网络连接出错", Toast.LENGTH_SHORT).show();
+            Looper.loop();
             return false;
         }
         try {
             if (obj.getInt("code") != 200)
+                Looper.prepare();
                 switch (obj.getInt("code")) {
                     case 401:
+                        Looper.prepare();
                         Toast.makeText(getContext(), "权限不足", Toast.LENGTH_SHORT).show();
+                        Looper.loop();
                         return false;
                     case 500:
+                        Looper.prepare();
                         Toast.makeText(getContext(), "服务端未响应", Toast.LENGTH_SHORT).show();
+                        Looper.loop();
                         return false;
                     default:
+                        Looper.prepare();
                         Toast.makeText(getContext(), "未知错误", Toast.LENGTH_SHORT).show();
+                        Looper.loop();
                         return false;
                 }
         } catch (Exception e) {
