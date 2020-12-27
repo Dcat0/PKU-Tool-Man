@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.text.TextUtils;
 import android.view.View;
+import android.view.Window;
 import android.widget.EditText;
 import android.widget.Toast;
 import android.text.TextWatcher;
@@ -25,12 +26,15 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_login);
-        //隐藏标题栏
-        getSupportActionBar().hide();
+        if (getSupportActionBar()!=null){
+            getSupportActionBar().hide();
+        }
         username = (EditText) findViewById(R.id.username);  //获取用户名
         password = (EditText) findViewById(R.id.password);  //获取密码
         username.addTextChangedListener(new JumpTextWatcher_username()); //输入回车符号则跳至password文本框
         password.addTextChangedListener(new JumpTextWatcher_password()); //输入回车符号则视为登入
+
+
     }
 
     //override EditText的监听
@@ -103,6 +107,12 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void LoginForget(View v){
+        Intent intent = new Intent();
+        intent.setClass(LoginActivity.this,ForgetActivity.class);
+        startActivity(intent);
+    }
+
     //验证username和password
     private void login_check(String user_in,String password_in) throws JSONException {
 
@@ -140,28 +150,33 @@ public class LoginActivity extends AppCompatActivity {
         String code = (result_json.getString("code")).toString();
         String message = (result_json.getString("message")).toString();
 
-        //获得id和昵称
-        JSONObject json_data = result_json.getJSONObject("data");
-        String token = json_data.getString("token").toString();
-
-        JSONObject user_data = json_data.getJSONObject("user");
-        String id = user_data.getString("id").toString();
-        String nickname = user_data.getString("nickname").toString();
-
-        Data.setUserID(Integer.parseInt(id));
-        Data.setNickName(nickname);
-        Data.setToken(token);
-
-        System.out.println(code);
-        System.out.println(code.length());
-        System.out.println(Data.getUserID());
-        System.out.println(Data.getNickName());
-
-
-
-        code = "200";
+        //code = "200";
 
         if (code.equals("200")) {
+            //获得id和昵称
+            JSONObject json_data = result_json.getJSONObject("data");
+            String token = json_data.getString("token").toString();
+
+            JSONObject user_data = json_data.getJSONObject("user");
+            System.out.println(user_data);
+            String id = user_data.getString("id").toString();
+            String nickname = user_data.getString("nickname").toString();
+            String email = user_data.getString("email").toString();
+            String phone = user_data.getString("phoneNum").toString();
+//            String credit = user_data.getString("credit").toString();
+
+            Data.setUserID(Integer.parseInt(id));
+            Data.setNickName(nickname);
+            Data.setEmail(email);
+            Data.setPhoneNum(phone);
+//            Data.setCredit(credit);
+            Data.setToken(token);
+
+            System.out.println(code);
+            System.out.println(code.length());
+            System.out.println(Data.getUserID());
+            System.out.println(Data.getNickName());
+
             Toast.makeText(this, "欢迎登入", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent();
             intent.setClass(LoginActivity.this, MainActivity.class);

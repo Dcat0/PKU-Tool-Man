@@ -21,6 +21,7 @@ import java.net.URLClassLoader;
 import java.net.URLConnection;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class GetMyOrder {
     static int a=0;
@@ -82,6 +83,19 @@ public class GetMyOrder {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        publishList.sort(new Comparator<Order>() {
+            @Override
+            public int compare(Order o1, Order o2) {
+                return o1.id < o2.id ? 1:-1;
+            }
+        });
+        receiveList.sort(new Comparator<Order>() {
+            @Override
+            public int compare(Order o1, Order o2) {
+                return o1.id < o2.id ? 1:-1;
+            }
+        });
 
     }
 

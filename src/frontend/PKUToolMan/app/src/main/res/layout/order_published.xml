@@ -6,12 +6,30 @@
     android:padding="10dp">
 
     <TextView
+        android:id="@+id/order_uid_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingRight="10sp"
+        android:text="订单编号:"
+        android:textColor="@color/text_emphasis"
+        android:textSize="18sp" />
+
+    <TextView
         android:id="@+id/order_uid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="0dp"
-        android:text="订单编号"
-        android:textAlignment="textStart"
+        android:layout_toRightOf="@id/order_uid_txt"
+        android:text="123049498"
+        android:textColor="@color/text_normal"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/order_publisher_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/order_uid_txt"
+        android:paddingRight="10sp"
+        android:text="发布者:"
         android:textColor="@color/text_emphasis"
         android:textSize="18sp" />
 
@@ -19,17 +37,21 @@
         android:id="@+id/order_publisher"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/order_uid"
-        android:text="发布者"
-        android:textColor="@color/text_emphasis"
+        android:layout_below="@id/order_uid_txt"
+        android:layout_toRightOf="@id/order_publisher_txt"
+        android:text="工具人"
+        android:textColor="@color/text_normal"
         android:textSize="18sp" />
 
+
+
     <TextView
-        android:id="@+id/order_state"
+        android:id="@+id/order_time_txt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/order_publisher"
-        android:text="订单状态"
+        android:layout_below="@id/order_publisher_txt"
+        android:paddingRight="10sp"
+        android:text="截止时间:"
         android:textColor="@color/text_emphasis"
         android:textSize="18sp" />
 
@@ -37,8 +59,19 @@
         android:id="@+id/order_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/order_state"
-        android:text="订单截止时间"
+        android:layout_below="@+id/order_publisher"
+        android:layout_toRightOf="@id/order_time_txt"
+        android:text="2020-12-14"
+        android:textColor="@color/text_normal"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/order_class_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/order_time_txt"
+        android:paddingRight="10sp"
+        android:text="订单类型:"
         android:textColor="@color/text_emphasis"
         android:textSize="18sp" />
 
@@ -46,9 +79,10 @@
         android:id="@+id/order_class"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/order_time"
-        android:text="订单类型"
-        android:textColor="@color/text_emphasis"
+        android:layout_below="@+id/order_time_txt"
+        android:layout_toRightOf="@id/order_class_txt"
+        android:text="取快递"
+        android:textColor="@color/text_normal"
         android:textSize="18sp" />
 
 </RelativeLayout>

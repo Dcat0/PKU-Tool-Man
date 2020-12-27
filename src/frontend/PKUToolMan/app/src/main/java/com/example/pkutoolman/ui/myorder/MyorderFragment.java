@@ -37,6 +37,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class MyorderFragment extends Fragment {
 
@@ -47,7 +48,7 @@ public class MyorderFragment extends Fragment {
     private Spinner sn1, sn2;
     private SimpleAdapter saPublish, saReceive;
     //private SwipeRefreshLayout mSrl;
-    private ArrayList<Map<String, Object>> messageListPublish = new ArrayList<>(), messageListReceive = new ArrayList<>();
+    private CopyOnWriteArrayList<Map<String, Object>> messageListPublish = new CopyOnWriteArrayList<>(), messageListReceive = new CopyOnWriteArrayList<>();
     private String nowView, selectType;
     private static String[] _selectType = {"全部", "取快递", "购物", "带饭"};
     private int selectStatus;
@@ -70,11 +71,16 @@ public class MyorderFragment extends Fragment {
     };
     private TimerTask task = new TimerTask(){
         public void run() {
-            ArrayList<Map<String, Object>> test;
+            CopyOnWriteArrayList<Map<String, Object>> test;
             boolean changed = false;
             //查询所有当前显示的订单中是否有消息记录变化的
             if (nowView == "publish") test = messageListPublish;else test=messageListReceive;
             for (Map<String, Object> m : test) {
+                /*
+                java.util.ConcurrentModificationException
+                at java.util.ArrayList$Itr.next(ArrayList.java:860)
+                at com.example.pkutoolman.ui.myorder.MyorderFragment$2.run(MyorderFragment.java:77) 报错
+                 */
                 if (getNewMessage( (int)m.get("uid"), Data.getUserID())) {
                     changed = true;
                     break;
@@ -247,6 +253,7 @@ public class MyorderFragment extends Fragment {
 
     public void refresh(boolean get) {
 
+
         //刷新数据信息 如果get=true要从后端拉去
         //此处的数据信息要根据两个下拉框的内容来筛选
         if (get) {
@@ -254,6 +261,7 @@ public class MyorderFragment extends Fragment {
             receiveOrderList.clear();
             GetMyOrder.getMyOrder(getContext(), Data.getUserID(), publishOrderList, receiveOrderList);
         }
+
         messageListPublish.clear();
         messageListReceive.clear();
         // 准备放到页面中

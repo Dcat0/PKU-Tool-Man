@@ -18,6 +18,8 @@ import org.json.JSONObject;
 
 import com.example.pkutoolman.baseclass.Post;
 
+import java.util.regex.Pattern;
+
 
 public class RegisterActivity extends AppCompatActivity {
     EditText username;  //用户名
@@ -30,8 +32,9 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_register);
-        //隐藏标题栏
-        getSupportActionBar().hide();
+        if (getSupportActionBar()!=null){
+            getSupportActionBar().hide();
+        }
         username = (EditText) findViewById(R.id.username);  //获取用户名
         pass = (EditText) findViewById(R.id.password);  //获取密码
         pass_again = (EditText) findViewById(R.id.password_again);  //获取密码
@@ -48,6 +51,19 @@ public class RegisterActivity extends AppCompatActivity {
     //注册
     public void  Register(View v) throws JSONException {
         register_check();
+    }
+
+    public boolean Check_email(String email){
+        String pattern = "^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$";
+        return Pattern.matches(pattern,email);
+    }
+    public boolean Check_phone(String phone){
+        String pattern = "^(13[0-9]|14[5|7]|15[0|1|2|3|4|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\\d{8}$";
+        return Pattern.matches(pattern,phone);
+    }
+    public boolean Check_pass(String pass){
+        String pattern = "\\w{4,17}$";
+        return Pattern.matches(pattern,pass);
     }
 
     //注册验证
@@ -78,9 +94,16 @@ public class RegisterActivity extends AppCompatActivity {
             Toast.makeText(RegisterActivity.this, "手机号不能为空", Toast.LENGTH_SHORT).show();
             return;
         }
-
-        if ((email.getText().toString()).indexOf("@") == -1){
+        if (!Check_email(email.getText().toString())){
             Toast.makeText(RegisterActivity.this, "请输入正确邮箱", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (!Check_phone(phone.getText().toString())){
+            Toast.makeText(RegisterActivity.this, "请输入正确手机号", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (!Check_pass(pass.getText().toString())){
+            Toast.makeText(RegisterActivity.this, "请输入有效密码，长度6-18位\n仅包含数字、字母、下划线", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -108,13 +131,21 @@ public class RegisterActivity extends AppCompatActivity {
 
             System.out.println(result_json.getString("code"));
 
-            String result = (result_json.getString("code")).toString();
+            String code = (result_json.getString("code")).toString();
 
-            if(result.equals("200")){
+            String message = (result_json.get("message")).toString();
+
+            if(code.equals("200")){
                 Toast.makeText(this, "注册成功", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent();
                 intent.setClass(RegisterActivity.this,LoginActivity.class);
                 startActivity(intent);
+            }
+            else if(code.equals("500") && message.equals("email used!")){
+                Toast.makeText(this, "该邮箱已被注册", Toast.LENGTH_SHORT).show();
+            }
+            else if(code.equals("500") && message.equals("phoneNum used!")) {
+                Toast.makeText(this, "该手机已被注册", Toast.LENGTH_SHORT).show();
             }
             else{
                 Toast.makeText(this, "服务器错误，请重试", Toast.LENGTH_SHORT).show();
