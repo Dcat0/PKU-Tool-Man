@@ -31,6 +31,7 @@ import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -42,24 +43,15 @@ public class ChatActivity extends Activity {
     SQLiteDatabase db;
 
     private ChatAdapter chatAdapter;
-    /**
-     * 声明ListView
-     */
     private ListView lv_chat_dialog;
-    /**
-     * 集合
-     */
     private List<ChatData> personChats = new ArrayList<ChatData>();
     private Handler handler = new Handler() {
         public void handleMessage(android.os.Message msg) {
             int what = msg.what;
             switch (what) {
                 case 1:
-                    /**
-                     * ListView条目控制在最后一行
-                     */
                     chatAdapter.notifyDataSetChanged();
-                    lv_chat_dialog.setSelection(personChats.size());
+                    lv_chat_dialog.setSelection(personChats.size()-1);
                     break;
 
                 default:
@@ -130,6 +122,10 @@ public class ChatActivity extends Activity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.fragment_chat);
+
+        TextView text;
+        text = (TextView) findViewById(R.id.to_whom);
+        text.setText(Data.getOtherName());//显示聊天对象
 
         long delay = 1000;
         long intevalPeriod = 2000;

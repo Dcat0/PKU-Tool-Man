@@ -300,11 +300,14 @@ public class OrderinfoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 Data.setOrderID(currOrder.id);
+                Data.setOtherName(otherName);
                 if(myRole == 1) {
                     Data.setChatID(currOrder.userID);
+                    Data.setToolmanID(currOrder.toolmanID);
                 }
                 if(myRole == 0) {
                     Data.setChatID(currOrder.toolmanID);
+                    Data.setToolmanID(currOrder.toolmanID);
                 }
                 Intent intent = new Intent();
                 intent.setClass(OrderinfoActivity.this, ChatActivity.class);

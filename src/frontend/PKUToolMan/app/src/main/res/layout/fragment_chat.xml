@@ -24,6 +24,7 @@
             app:backgroundTint="@null" />
 
         <TextView
+            android:id="@+id/to_whom"
             android:layout_marginLeft="0dp"
             android:layout_width="100dp"
             android:layout_height="50dp"
@@ -51,17 +52,18 @@
             android:divider="#0000"
             android:dividerHeight="8dp"
             android:background="#FFFFFF"
-            android:stackFromBottom="false"
-            android:transcriptMode="disabled">
+            android:stackFromBottom="true"
+            android:transcriptMode="normal">
         </ListView>
     </LinearLayout>
 
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="32dp"
+        android:layout_height="35dp"
         android:layout_marginTop="8dp"
-        android:layout_marginLeft="8dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginBottom="8dp"
         android:orientation="horizontal" >
 
         <EditText
@@ -79,10 +81,11 @@
             style="?android:attr/buttonStyleSmall"
             android:layout_width="64dp"
             android:layout_marginLeft="8dp"
-            android:layout_height="30dp"
+            android:layout_height="35dp"
             android:layout_gravity="center|right"
             android:layout_marginRight="4dp"
-            android:background="#66FF00"
+            android:background="@drawable/btn_chat_send"
+            android:textSize="13dp"
             android:text="发送"
             app:backgroundTint="@null"/>
     </LinearLayout>

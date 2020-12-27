@@ -2,6 +2,8 @@ package com.example.pkutoolman.ui.orderspace;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +25,7 @@ import com.example.pkutoolman.R;
 import com.example.pkutoolman.baseclass.Data;
 import com.example.pkutoolman.baseclass.Order;
 import com.example.pkutoolman.ui.orderinfo.OrderinfoActivity;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,7 +37,8 @@ public class OrderspaceFragment extends Fragment {
     private ListView lv;
     private Button bt_create;
     private SimpleAdapter saPublish;
-    private SwipeRefreshLayout mSrl;
+    //private SwipeRefreshLayout mSrl;
+    private FloatingActionButton freshButton;
     private ArrayList<Map<String, Object>> messageList = new ArrayList<>();
 
 
@@ -45,8 +49,7 @@ public class OrderspaceFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_orderspace, container, false);
         lv = root.findViewById(R.id.orderspace_lv);
         bt_create = root.findViewById(R.id.modifyinfo_button);
-        mSrl = root.findViewById(R.id.orderspace_swipeLayout);
-
+        freshButton = root.findViewById(R.id.orderspace_refresh_button);
         /*
         final TextView textView = root.findViewById(R.id.text_orderspace);
         orderspaceViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
@@ -63,11 +66,12 @@ public class OrderspaceFragment extends Fragment {
         return root;
     }
     private void InitListener(){
-        mSrl.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+
+        freshButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onRefresh() {
+            public void onClick(View v) {
+                System.out.println("refresh");
                 refresh();
-                mSrl.setRefreshing(false);
             }
         });
 
@@ -102,19 +106,20 @@ public class OrderspaceFragment extends Fragment {
             Map<String, Object> m = new HashMap<>();
             m.put("uid", o.id);
             m.put("ddtime", o.endTime);
-            m.put("class", "拿快递");
+            m.put("class", o.type);
             m.put("name", o.userID);
+            m.put("place1", o.place);
+            m.put("place2", o.destination);
             //if (o.state != 0) continue;
-
             messageList.add(m);
         }
         if (saPublish == null)
             saPublish = new SimpleAdapter(getContext(),
                     messageList,
                     R.layout.order_published,
-                    new String[] {"uid", "name", "ddtime", "class"},
+                    new String[] {"uid", "name", "ddtime", "class", "place1", "place2"},
                     new int[] {R.id.order_uid,R.id.order_publisher,
-                            R.id.order_time, R.id.order_class}
+                            R.id.order_time, R.id.order_class, R.id.order_place1, R.id.order_place2}
             );
         saPublish.notifyDataSetChanged();
     }

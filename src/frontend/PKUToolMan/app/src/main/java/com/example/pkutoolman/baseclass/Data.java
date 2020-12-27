@@ -9,6 +9,8 @@ public class Data {
     private static int userID;
     private static int orderID;
     private static int chatID;
+    private static int toolmanID;
+    private static String otherName;
     private static String nickName;
     private static String token;
     private static String baseURL = "http://121.196.103.2:8080";
@@ -30,12 +32,23 @@ public class Data {
     public static int getOrderID() {
         return orderID;
     }
+
     public static void setChatID(int _chatID) {
         chatID = _chatID;
     }
     public static int getChatID() {
         return chatID;
     }
+
+    public static void setToolmanID(int _toolmanID) {
+        toolmanID = _toolmanID;
+    }
+    public static int getToolmanID() {
+        return toolmanID;
+    }
+
+    public static void setOtherName(String name) { otherName = name; }
+    public static String getOtherName() { return otherName; }
 
     public static void setNickName(String name) { nickName = name; }
     public static String getNickName() { return nickName; }
