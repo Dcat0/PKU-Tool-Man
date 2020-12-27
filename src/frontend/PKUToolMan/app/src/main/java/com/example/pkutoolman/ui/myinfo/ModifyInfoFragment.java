@@ -1,9 +1,5 @@
 package com.example.pkutoolman.ui.myinfo;
 
-import androidx.lifecycle.ViewModelProvider;
-
-import android.content.ContentProviderClient;
-import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -24,14 +20,12 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.pkutoolman.MD5;
-import com.example.pkutoolman.MainActivity;
 import com.example.pkutoolman.R;
 import com.example.pkutoolman.baseclass.Data;
 import com.example.pkutoolman.baseclass.Post;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.util.regex.Pattern;
 
@@ -71,7 +65,7 @@ public class ModifyInfoFragment extends Fragment {
         repass.addTextChangedListener(new JumpTextWatcher_repass());
 
         btModify = root.findViewById(R.id.modifyinfo_button);
-        btReturn = root.findViewById(R.id.returnfrommodify_button);
+        btReturn = root.findViewById(R.id.forget_back_button);
         Fragment ptThis = this;
         btModify.setOnClickListener(new View.OnClickListener() {
             @Override

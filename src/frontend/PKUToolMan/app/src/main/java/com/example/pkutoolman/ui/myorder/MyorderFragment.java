@@ -178,6 +178,10 @@ public class MyorderFragment extends Fragment {
         bt1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                bt1.setTextColor(0xff7393A7);
+                bt1.setBackgroundResource(R.drawable.btn_bg);
+                bt2.setTextColor(0xff999999);
+                bt2.setBackgroundColor(0x00000000);
                 if (nowView == "receive") {
                     nowView = "publish";
                     mLv.setAdapter(saPublish);
@@ -190,6 +194,10 @@ public class MyorderFragment extends Fragment {
         bt2.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+                bt2.setTextColor(0xff7393A7);
+                bt2.setBackgroundResource(R.drawable.btn_bg);
+                bt1.setTextColor(0xff999999);
+                bt1.setBackgroundColor(0x00000000);
                 if (nowView == "publish") {
                     nowView = "receive";
                     mLv.setAdapter(saReceive);
