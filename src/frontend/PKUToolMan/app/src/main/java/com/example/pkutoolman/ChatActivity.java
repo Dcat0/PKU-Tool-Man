@@ -19,6 +19,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -72,8 +73,9 @@ public class ChatActivity extends Activity {
             System.out.println(request_chat_json);
             JSONObject result_json= Post.post("http://121.196.103.2:8080/chat/query", request_chat_json);
             if(result_json == null){
+                Looper.prepare();
                 Toast.makeText(ChatActivity.this, "网络未连接", Toast.LENGTH_SHORT).show();
-                return;
+                Looper.loop();
             }
             else{
                 System.out.println(result_json.toString());
