@@ -1,6 +1,7 @@
 package com.example.pkutoolman;
 
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -43,7 +44,16 @@ import com.baidu.mapapi.search.geocode.GeoCoder;
 import com.baidu.mapapi.search.geocode.OnGetGeoCoderResultListener;
 import com.baidu.mapapi.search.geocode.ReverseGeoCodeOption;
 import com.baidu.mapapi.search.geocode.ReverseGeoCodeResult;
+import com.baidu.mapapi.search.route.BikingRouteResult;
+import com.baidu.mapapi.search.route.DrivingRouteResult;
+import com.baidu.mapapi.search.route.IndoorRouteResult;
+import com.baidu.mapapi.search.route.MassTransitRouteResult;
+import com.baidu.mapapi.search.route.OnGetRoutePlanResultListener;
 import com.baidu.mapapi.search.route.PlanNode;
+import com.baidu.mapapi.search.route.RoutePlanSearch;
+import com.baidu.mapapi.search.route.TransitRouteResult;
+import com.baidu.mapapi.search.route.WalkingRoutePlanOption;
+import com.baidu.mapapi.search.route.WalkingRouteResult;
 import com.baidu.mapapi.utils.DistanceUtil;
 
 public class MapActivity extends AppCompatActivity {
@@ -57,9 +67,11 @@ public class MapActivity extends AppCompatActivity {
     private LocationClient mLocationClient;
     private String start, dest;
     public LatLng startLL=null, destLL=null;
+    private RoutePlanSearch mSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_map);
         if (getSupportActionBar()!=null){
@@ -71,6 +83,7 @@ public class MapActivity extends AppCompatActivity {
         mBaiduMap = mMapView.getMap();
         mBaiduMap.setMyLocationEnabled(true); //开启地图的定位图层
         mCoder = GeoCoder.newInstance(); //用于位置信息和经纬度的转换
+        mSearch = RoutePlanSearch.newInstance(); //用于路线规划
 
         setListener();
         drawStartAndDest(); // 绘制取货点和送货点
@@ -85,7 +98,7 @@ public class MapActivity extends AppCompatActivity {
                 if (null != geoCodeResult && null != geoCodeResult.getLocation()) {
                     if (geoCodeResult == null || geoCodeResult.error != SearchResult.ERRORNO.NO_ERROR) {
                         //没有检索到结果
-                        Toast.makeText(getApplicationContext(), "地图定位错误", Toast.LENGTH_LONG);
+                        Toast.makeText(getApplicationContext(), "地图定位错误", Toast.LENGTH_LONG).show();
                         System.out.println("地图定位错误");
                         finish(); // 如果有错直接返回
                         return;
@@ -108,7 +121,51 @@ public class MapActivity extends AppCompatActivity {
                 }
             }
         });
+        mSearch.setOnGetRoutePlanResultListener(new OnGetRoutePlanResultListener() {
+            @Override
+            public void onGetWalkingRouteResult(WalkingRouteResult walkingRouteResult) {
+                //创建WalkingRouteOverlay实例
+                if (walkingRouteResult == null || walkingRouteResult.error != SearchResult.ERRORNO.NO_ERROR) {
+                    //没有检索到结果
+                    System.out.println("路线规划失败");
+                    Toast.makeText(getApplicationContext(), "地图路线规划失败", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                WalkingRouteOverlay overlay = new WalkingRouteOverlay(mBaiduMap);
+                if (walkingRouteResult.getRouteLines().size() > 0) {
+                    //获取路径规划数据,(以返回的第一条数据为例)
+                    //为WalkingRouteOverlay实例设置路径数据
+                    overlay.setData(walkingRouteResult.getRouteLines().get(0));
+                    //在地图上绘制WalkingRouteOverlay
+                    overlay.addToMap();
+                }
+            }
 
+            @Override
+            public void onGetTransitRouteResult(TransitRouteResult transitRouteResult) {
+
+            }
+
+            @Override
+            public void onGetMassTransitRouteResult(MassTransitRouteResult massTransitRouteResult) {
+
+            }
+
+            @Override
+            public void onGetDrivingRouteResult(DrivingRouteResult drivingRouteResult) {
+
+            }
+
+            @Override
+            public void onGetIndoorRouteResult(IndoorRouteResult indoorRouteResult) {
+
+            }
+
+            @Override
+            public void onGetBikingRouteResult(BikingRouteResult bikingRouteResult) {
+
+            }
+        });
     }
     private void drawStartAndDest() {
         // 获得传入的起点和终点的内容
@@ -184,7 +241,14 @@ public class MapActivity extends AppCompatActivity {
         //在地图上添加Marker，并显示
         //mBaiduMap.clear();
         mBaiduMap.addOverlay(option);
-        if (startLL != null && destLL != null) zoomToSpan();
+        if (startLL != null && destLL != null) {
+            zoomToSpan(); //缩放地图比例
+            System.out.println("开始路线规划");
+            mSearch.walkingSearch((new WalkingRoutePlanOption())
+                    .from(PlanNode.withLocation(startLL))
+                    .to(PlanNode.withLocation(destLL))); //进行路线规划
+        }
+
     }
 
     //进行比例尺的缩放
@@ -226,6 +290,7 @@ public class MapActivity extends AppCompatActivity {
         mBaiduMap.setMyLocationEnabled(false);
         mMapView.onDestroy();
         mCoder.destroy();
+        mSearch.destroy();
         //在activity执行onDestroy时执行mMapView.onDestroy()，实现地图生命周期管理
         super.onDestroy();
     }

@@ -288,8 +288,13 @@ public class ModifyInfoFragment extends Fragment {
             Data.setEmail(newemail_s);
             Data.setPhoneNum(newphone_s);
         }
+        else if (result.equals("500")){
+            Toast.makeText(getContext(),"密码错误",Toast.LENGTH_SHORT).show();
+            return;
+        }
         else {
             Toast.makeText(getContext(),"服务器错误，请重试",Toast.LENGTH_SHORT).show();
+            return;
         }
     }
 
