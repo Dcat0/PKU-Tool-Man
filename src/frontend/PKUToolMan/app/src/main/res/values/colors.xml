@@ -8,21 +8,21 @@
     <color name="light_blue">#E8ECF1</color>
     <color name="blue">#7393A7</color>
     <color name="dark_blue">#6C737E</color>
-
-    <color name="hint_color">@color/gray</color>
-
+    <color name="red">#ee8572</color>
+    <color name="green">#347474</color>
     <!--theme1-->
 
     <!--theme2-->
-    <color name="status_bar_bg">@color/light_blue</color>
+    <color name="status_bar_bg">@color/white</color>
     <color name="title_bar_bg">@color/white</color>
     <color name="title_bar_text">@color/dark_blue</color>
-    <color name="nav_bar_bg">@color/light_blue</color>
+    <color name="nav_bar_bg">@color/white</color>
     <color name="self_nav_bar_bg">@color/white</color>
     <color name="self_nav_bar_icon_normal">@color/light_blue</color>
     <color name="self_nav_bar_icon_selected">@color/blue</color>
+    <color name="login_main_color">#b9d7ea</color>
 
-    <color name="icon_normal">@color/light_blue</color>
+    <color name="icon_normal">@color/gray</color>
     <color name="icon_colorful">@color/blue</color>
 
     <color name="text_normal">#666666</color>
@@ -32,4 +32,8 @@
 
     <color name="btn_normal">#999999</color>
     <color name="btn_colorful">@color/blue</color>
+    <color name="btn_red">@color/red</color>
+    <color name="btn_green">@color/green</color>
+
+    <color name="hint_color">@color/gray</color>
 </resources>

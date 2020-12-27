@@ -15,6 +15,19 @@
         android:layout_marginTop="5dp"
         android:orientation="horizontal">
 
+        <Button
+            android:id="@+id/create_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/below_button"
+            android:gravity="right|center_vertical"
+            android:text="发布"
+            android:textColor="@color/text_colorful"
+            android:textSize="24sp" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -31,6 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
+            android:clickable="true"
             android:src="@drawable/ic_back" />
     </RelativeLayout>
 
@@ -279,21 +293,6 @@
         android:layout_marginTop="20dp"
         android:orientation="horizontal"
         android:gravity="center"
-        android:background="@drawable/edge">
-
-        <Button
-            android:id="@+id/create_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@drawable/below_button"
-            android:gravity="center"
-            android:paddingLeft="40dp"
-            android:paddingRight="40dp"
-            android:text="发 布"
-            android:textColor="@color/btn_colorful"
-            android:textSize="24sp" />
-
-    </LinearLayout>
+        android:background="@drawable/edge"/>
 
 </LinearLayout>

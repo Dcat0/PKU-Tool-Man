@@ -62,7 +62,7 @@
         android:id="@+id/publish_time_hint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/order_id_hint"
+        android:layout_below="@id/type_hint"
         android:layout_marginVertical="4dp"
         android:text="发布时间"
         android:textColor="@color/text_normal" />
@@ -71,7 +71,7 @@
         android:id="@+id/publish_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/order_id"
+        android:layout_below="@id/type"
         android:layout_alignParentRight="true"
         android:layout_marginVertical="4dp"
         android:textColor="@color/text_emphasis" />
@@ -110,5 +110,23 @@
         android:layout_below="@id/destination_hint"
         android:layout_marginVertical="4dp"
         android:text="订单描述"
+        android:textColor="@color/text_normal" />
+
+    <TextView
+        android:id="@+id/type_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/order_id_hint"
+        android:layout_marginVertical="4dp"
+        android:text="订单类型"
+        android:textColor="@color/text_normal" />
+
+    <TextView
+        android:id="@+id/type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/order_id"
+        android:layout_marginVertical="4dp"
+        android:layout_alignParentRight="true"
         android:textColor="@color/text_normal" />
 </RelativeLayout>
