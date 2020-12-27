@@ -27,7 +27,7 @@
             android:textStyle="bold" />
 
         <ImageView
-            android:id="@+id/btn_back"
+            android:id="@+id/returnfrommodify_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -35,7 +35,7 @@
             android:src="@drawable/ic_back" />
 
         <Button
-            android:id="@+id/btn_order_op"
+            android:id="@+id/modifyinfo_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"

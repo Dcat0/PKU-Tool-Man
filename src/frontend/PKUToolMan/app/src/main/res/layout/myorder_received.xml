@@ -7,6 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:layout_marginVertical="10dp"
         app:cardCornerRadius="20dp"
         app:cardElevation="3dp"
         app:cardPreventCornerOverlap="false"
@@ -124,7 +125,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="接单者编号:"
+                            android:text="发单者编号:"
                             android:paddingRight="10sp"
                             android:textColor="@color/text_emphasis"
                             android:textSize="18sp"></TextView>

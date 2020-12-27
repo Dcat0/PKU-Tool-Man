@@ -140,7 +140,7 @@
                     android:layout_gravity="center"
                     android:background="@drawable/below_button"
                     android:gravity="center"
-                    android:onClick="LoginForget"
+                    android:onClick="Register"
                     android:text="忘记密码"
                     android:textColor="@color/login_main_color"
                     android:textSize="20dp" />

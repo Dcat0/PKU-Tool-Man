@@ -15,10 +15,12 @@
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowActionBar">false</item>
         <!-- Status bar color. -->
-        <!--顶部状态栏背景色-->
+        <!--顶部状态栏颜色设置-->
         <item name="android:statusBarColor" tools:targetApi="l">@color/status_bar_bg</item>
-        <!--底部导航栏背景色-->
+        <item name="android:windowLightStatusBar">true</item>
+        <!--底部导航栏颜色设置-->
         <item name="android:navigationBarColor">@color/nav_bar_bg</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="27">true</item>
         <!-- Customize your theme here. -->
         <item name="android:textColorHint">@color/hint_color</item>
     </style>

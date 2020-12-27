@@ -44,7 +44,7 @@ public class OrderspaceFragment extends Fragment {
                 new ViewModelProvider(this).get(OrderspaceViewModel.class);
         View root = inflater.inflate(R.layout.fragment_orderspace, container, false);
         lv = root.findViewById(R.id.orderspace_lv);
-        bt_create = root.findViewById(R.id.btn_publish);
+        bt_create = root.findViewById(R.id.modifyinfo_button);
         mSrl = root.findViewById(R.id.orderspace_swipeLayout);
 
         /*

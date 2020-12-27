@@ -48,7 +48,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="25dp">
+        android:paddingHorizontal="25dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -101,7 +101,8 @@
         <ListView
             android:id="@+id/lv_myorder"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:footerDividersEnabled="false"/>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 

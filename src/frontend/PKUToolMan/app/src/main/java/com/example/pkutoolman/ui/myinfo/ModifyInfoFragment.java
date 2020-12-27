@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.pkutoolman.MD5;
@@ -37,7 +38,8 @@ import java.util.regex.Pattern;
 public class ModifyInfoFragment extends Fragment {
 
     ModifyInfoViewModel mViewModel;
-    Button btModify,btReturn;
+    ImageView btReturn;
+    Button btModify;
     EditText newemail,newnickname,newphone;
     EditText oldpass,newpass,repass;
 
@@ -286,8 +288,13 @@ public class ModifyInfoFragment extends Fragment {
             Data.setEmail(newemail_s);
             Data.setPhoneNum(newphone_s);
         }
+        else if (result.equals("500")){
+            Toast.makeText(getContext(),"密码错误",Toast.LENGTH_SHORT).show();
+            return;
+        }
         else {
             Toast.makeText(getContext(),"服务器错误，请重试",Toast.LENGTH_SHORT).show();
+            return;
         }
     }
 
