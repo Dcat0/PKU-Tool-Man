@@ -316,7 +316,7 @@ public class MyorderFragment extends Fragment {
         // 准备放到页面中
         if (nowView == "publish") {
             for (Order o : publishOrderList)
-            if (("取快递" == selectType || selectType == "全部") && (selectStatus == -1 || selectStatus == o.state))
+            if ((o.type.equals(selectType) || selectType == "全部") && (selectStatus == -1 || selectStatus == o.state))
             {
                 Map<String, Object> m = new HashMap<>();
                 m.put("uid", o.id);
@@ -347,7 +347,7 @@ public class MyorderFragment extends Fragment {
         }
         if (nowView == "receive") {
             for (Order o : receiveOrderList)
-            if (("取快递" == selectType || selectType == "全部") && (selectStatus == 0 || selectStatus == o.state))
+            if ((o.type.equals(selectType) || selectType == "全部") && (selectStatus == 0 || selectStatus == o.state))
             {
                 Map<String, Object> m = new HashMap<>();
                 m.put("uid", o.id);
