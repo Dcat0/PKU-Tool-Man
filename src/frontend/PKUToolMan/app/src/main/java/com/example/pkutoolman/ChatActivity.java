@@ -42,6 +42,7 @@ import org.json.JSONObject;
 public class ChatActivity extends Activity {
     ChatDatabase_sqlite chat_content;
     SQLiteDatabase db;
+    String databaseName;
 
     private ChatAdapter chatAdapter;
     private ListView lv_chat_dialog;
@@ -150,6 +151,8 @@ public class ChatActivity extends Activity {
         System.out.println("对方ID");
         System.out.println(other_id);
 
+        databaseName = "chat" + Integer.toString(Data.getUserID());
+
         /*
         for (int i = 0; i <= 1; i++) {
             ChatData personChat = new ChatData();
@@ -163,7 +166,7 @@ public class ChatActivity extends Activity {
         //加载数据库中信息
         chat_content = new ChatDatabase_sqlite(ChatActivity.this);
         db = chat_content.getWritableDatabase();
-        Cursor cursor = db.rawQuery("select * from chat where order_id =" + Integer.toString(order_id), null);
+        Cursor cursor = db.rawQuery("select * from " + databaseName + " where order_id =" + Integer.toString(order_id), null);
 
         while (cursor.moveToNext()){
             System.out.println("success2");
@@ -279,7 +282,7 @@ public class ChatActivity extends Activity {
             String code = (result_json.getString("code")).toString();
             if (code.equals("200")) {
                 //将自己的发送的消息加入数据库中
-                db.execSQL("insert into chat values(" + Integer.toString(Data.getOrderID()) + "," + Integer.toString(Data.getUserID()) +
+                db.execSQL("insert into " + databaseName + " values(" + Integer.toString(Data.getOrderID()) + "," + Integer.toString(Data.getUserID()) +
                         "," + Integer.toString(Data.getChatID()) + ",\"" + send_time + "\",\"" + my_send_message + "\")");
 
                 personChat.setChatMessage(my_send_message);
@@ -298,13 +301,13 @@ public class ChatActivity extends Activity {
     }
 
     public boolean checkMessageInSql(int orderID,int senderID,int receiverID,String send_time,String message){
-        Cursor cursor = db.rawQuery("select * from chat where " + "order_id=" + Integer.toString(orderID) + " and sender_id=" + Integer.toString(senderID)
+        Cursor cursor = db.rawQuery("select * from " + databaseName +  " where " + "order_id=" + Integer.toString(orderID) + " and sender_id=" + Integer.toString(senderID)
                 + " and receiver_id=" + Integer.toString(receiverID) + " and message_time=\"" + send_time + "\"" + " and message_content=\"" + message + "\"" ,null);
         while (cursor.moveToNext()){
             cursor.close();
             return true;
         }
-        db.execSQL("insert into chat values(" + Integer.toString(orderID) + "," + Integer.toString(senderID)
+        db.execSQL("insert into " + databaseName + " values(" + Integer.toString(orderID) + "," + Integer.toString(senderID)
                 + ","+ Integer.toString(receiverID) + ",\"" + send_time + "\",\"" + message + "\")");
         cursor.close();
         return false;
