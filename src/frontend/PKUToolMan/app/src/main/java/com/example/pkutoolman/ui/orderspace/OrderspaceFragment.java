@@ -8,9 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +26,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.example.pkutoolman.R;
 import com.example.pkutoolman.baseclass.Data;
 import com.example.pkutoolman.baseclass.Order;
+import com.example.pkutoolman.ui.myorder.GetMyOrder;
 import com.example.pkutoolman.ui.orderinfo.OrderinfoActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -40,7 +43,12 @@ public class OrderspaceFragment extends Fragment {
     //private SwipeRefreshLayout mSrl;
     private FloatingActionButton freshButton;
     private ArrayList<Map<String, Object>> messageList = new ArrayList<>();
-
+    private static String[] _selectType = {"全部", "取快递", "购物", "带饭"};
+    volatile private String selectType;
+    private Spinner sn;
+    private ArrayAdapter snAdp;
+    private TextView hint;
+    ArrayList<Order> publishOrderList = new ArrayList<>();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -50,6 +58,10 @@ public class OrderspaceFragment extends Fragment {
         lv = root.findViewById(R.id.orderspace_lv);
         bt_create = root.findViewById(R.id.modifyinfo_button);
         freshButton = root.findViewById(R.id.orderspace_refresh_button);
+        sn = root.findViewById(R.id.orderspace_type_selector);
+        hint = root.findViewById(R.id.orderspace_no_order);
+        snAdp = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_dropdown_item, new String[]{"全部", "取快递", "购物", "带饭"});
+
         /*
         final TextView textView = root.findViewById(R.id.text_orderspace);
         orderspaceViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
@@ -59,19 +71,32 @@ public class OrderspaceFragment extends Fragment {
             }
         });
          */
-        refresh();
+        refresh(true);
         lv.setAdapter(saPublish);
+        sn.setAdapter(snAdp);
+
         InitListener();
 
         return root;
     }
     private void InitListener(){
 
+        sn.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectType = _selectType[position];
+                refresh(false);
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
         freshButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 System.out.println("refresh");
-                refresh();
+                refresh(true);
             }
         });
 
@@ -97,22 +122,29 @@ public class OrderspaceFragment extends Fragment {
         });
 
     }
-    private void refresh(){
-        ArrayList<Order> publishOrderList = new ArrayList<>();
-        GetPublishedOrder.getOrder(Data.getUserID(), publishOrderList);
+    private void refresh(boolean flag){
+
+        if (flag) {
+            publishOrderList.clear();
+            GetPublishedOrder.getOrder(getContext(), Data.getUserID(), publishOrderList);
+        }
         messageList.clear();
         // 准备放到页面中
-        for (Order o : publishOrderList) {
-            Map<String, Object> m = new HashMap<>();
-            m.put("uid", o.id);
-            m.put("ddtime", o.endTime);
-            m.put("class", o.type);
-            m.put("name", o.userID);
-            m.put("place1", o.place);
-            m.put("place2", o.destination);
-            //if (o.state != 0) continue;
-            messageList.add(m);
-        }
+        for (Order o : publishOrderList)
+            if(o.type.equals(selectType) || selectType == "全部"){
+                Map<String, Object> m = new HashMap<>();
+                m.put("uid", o.id);
+                m.put("ddtime", o.endTime);
+                m.put("class", o.type);
+                m.put("name", o.userID);
+                m.put("place1", o.place);
+                m.put("place2", o.destination);
+                //if (o.state != 0) continue;
+                messageList.add(m);
+            }
+        if (messageList.size() == 0) hint.setVisibility(View.VISIBLE);
+            else hint.setVisibility(View.GONE);
+
         if (saPublish == null)
             saPublish = new SimpleAdapter(getContext(),
                     messageList,
