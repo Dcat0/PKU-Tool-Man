@@ -27,6 +27,8 @@ public class ForgetActivity extends AppCompatActivity {
     EditText email;  //邮箱
     EditText phone;  //手机号
 
+    static int flag;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +50,7 @@ public class ForgetActivity extends AppCompatActivity {
 
     //
     public void Forget(View v) throws JSONException {
-        forget_check();
+        forgetCheck();
     }
 
     public boolean Check_email(String email){
@@ -65,7 +67,7 @@ public class ForgetActivity extends AppCompatActivity {
     }
 
     //注册验证
-    public void forget_check() throws JSONException {
+    public void forgetCheck() throws JSONException {
         String email_forget = email.getText().toString().trim();
         String phone_forget = phone.getText().toString().trim();
         String password_forget = pass.getText().toString().trim();
@@ -229,7 +231,7 @@ public class ForgetActivity extends AppCompatActivity {
             if (str.indexOf("\r") >= 0 || str.indexOf("\n") >= 0) {//发现输入回车符或换行符
                 pass_again.setText(str.replace("\r", "").replace("\n", ""));//去掉回车符和换行符
                 try {
-                    forget_check();
+                    forgetCheck();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -244,6 +246,4 @@ public class ForgetActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
-
-
 }

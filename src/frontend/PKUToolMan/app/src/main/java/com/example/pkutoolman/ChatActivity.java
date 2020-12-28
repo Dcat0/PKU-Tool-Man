@@ -106,7 +106,7 @@ public class ChatActivity extends Activity {
                         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
                         String send_time2 = sdf.format(date);
 
-                        boolean isInSql = check_message_in_sql(orderID,senderID,receiverID,send_time,message);
+                        boolean isInSql = checkMessageInSql(orderID,senderID,receiverID,send_time,message);
                         if (!isInSql && receiverID == Data.getUserID() && senderID == Data.getChatID()) {
                             boolean my_send = false;
                             ChatData personChat = new ChatData();
@@ -297,9 +297,9 @@ public class ChatActivity extends Activity {
         }
     }
 
-    public boolean check_message_in_sql(int orderID,int senderID,int receiverID,String send_time,String message){
+    public boolean checkMessageInSql(int orderID,int senderID,int receiverID,String send_time,String message){
         Cursor cursor = db.rawQuery("select * from chat where " + "order_id=" + Integer.toString(orderID) + " and sender_id=" + Integer.toString(senderID)
-                + " and receiver_id=" + Integer.toString(receiverID) + " and message_content=\"" + message + "\" and message_time=\"" + send_time + "\"",null);
+                + " and receiver_id=" + Integer.toString(receiverID) + " and message_time=\"" + send_time + "\"" + " and message_content=\"" + message + "\"" ,null);
         while (cursor.moveToNext()){
             cursor.close();
             return true;
