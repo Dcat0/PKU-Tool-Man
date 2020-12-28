@@ -44,6 +44,8 @@ public class ChatActivity extends Activity {
     SQLiteDatabase db;
     String databaseName;
 
+    int flag = 0;//断网提示
+
     private ChatAdapter chatAdapter;
     private ListView lv_chat_dialog;
     private List<ChatData> personChats = new ArrayList<ChatData>();
@@ -54,8 +56,13 @@ public class ChatActivity extends Activity {
                 case 1:
                     chatAdapter.notifyDataSetChanged();
                     lv_chat_dialog.setSelection(personChats.size()-1);
+                    flag = 0;
                     break;
-
+                case 2:
+                    if(flag <= 2){
+                        Toast.makeText(ChatActivity.this, "网络未连接", Toast.LENGTH_SHORT).show();
+                        flag = flag + 1;
+                    }
                 default:
                     break;
             }
@@ -74,9 +81,7 @@ public class ChatActivity extends Activity {
             System.out.println(request_chat_json);
             JSONObject result_json= Post.post("http://121.196.103.2:8080/chat/query", request_chat_json);
             if(result_json == null){
-                Looper.prepare();
-                Toast.makeText(ChatActivity.this, "网络未连接", Toast.LENGTH_SHORT).show();
-                Looper.loop();
+                handler.sendEmptyMessage(2);
             }
             else{
                 System.out.println(result_json.toString());
