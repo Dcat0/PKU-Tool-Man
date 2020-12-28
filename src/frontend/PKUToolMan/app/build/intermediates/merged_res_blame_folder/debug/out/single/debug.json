@@ -1,0 +1,366 @@
+[
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/menu_bottom_nav_menu.xml.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/menu/bottom_nav_menu.xml"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/drawable-v24_ic_launcher_foreground.xml.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/drawable-v24/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/drawable_ic_map.xml.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/drawable/ic_map.xml"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/drawable_btn_bg.xml.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/drawable/btn_bg.xml"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/mipmap-xxhdpi_ic_launcher_round.png.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/layout_fragment_register.xml.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/layout/fragment_register.xml"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/drawable_tool_man.png.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/drawable/tool_man.png"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/drawable_ic_home_black_24dp.xml.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/drawable/ic_home_black_24dp.xml"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/drawable_ic_notifications_black_24dp.xml.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/drawable/ic_notifications_black_24dp.xml"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/mipmap-xxhdpi_ic_launcher_foreground.png.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/mipmap-xxhdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/drawable_bg_edittext_select.xml.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/drawable/bg_edittext_select.xml"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/drawable_chat_other_edit.xml.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/drawable/chat_other_edit.xml"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/drawable_ic_baseline_person_24.xml.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/drawable/ic_baseline_person_24.xml"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/drawable_ic_checkbox_select.xml.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/drawable/ic_checkbox_select.xml"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/drawable_ic_modify.xml.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/drawable/ic_modify.xml"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/drawable_baseline_https_red_700_24dp.xml.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/drawable/baseline_https_red_700_24dp.xml"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/mipmap-hdpi_bg.jpg.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/mipmap-hdpi/bg.jpg"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/layout_activity_main.xml.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/layout/activity_main.xml"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/mipmap-hdpi_ic_launcher.png.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/mipmap-hdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/drawable_ic_baseline_autorenew_24.xml.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/drawable/ic_baseline_autorenew_24.xml"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/mipmap-hdpi_ic_launcher_foreground.png.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/mipmap-hdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/mipmap-xhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/mipmap-mdpi_ic_launcher_round.png.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/mipmap-mdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/layout_order_published.xml.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/layout/order_published.xml"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/layout_destpoint.xml.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/layout/destpoint.xml"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/drawable_ic_back.xml.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/drawable/ic_back.xml"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/layout_chat_other_publisher.xml.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/layout/chat_other_publisher.xml"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/mipmap-mdpi_ic_launcher_foreground.png.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/mipmap-mdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/drawable_ic_checkbox.xml.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/drawable/ic_checkbox.xml"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/drawable_receive_message_background.xml.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/drawable/receive_message_background.xml"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/drawable-v24_edge.xml.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/drawable-v24/edge.xml"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/mipmap-xxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/drawable_ic_dashboard_black_24dp.xml.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/drawable/ic_dashboard_black_24dp.xml"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/layout_fragment_orderspace.xml.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/layout/fragment_orderspace.xml"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/mipmap-xxxhdpi_ic_launcher_round.png.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/drawable_password.jpg.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/drawable/password.jpg"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/drawable_btn_chat_send.xml.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/drawable/btn_chat_send.xml"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/drawable_btn_shape_in_order_gray.xml.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/drawable/btn_shape_in_order_gray.xml"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/drawable_ic_report.xml.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/drawable/ic_report.xml"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/drawable_chat_sender_edit.xml.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/drawable/chat_sender_edit.xml"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/drawable_ic_chat_red.xml.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/drawable/ic_chat_red.xml"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/drawable_baseline_check_circle_green_700_24dp.xml.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/drawable/baseline_check_circle_green_700_24dp.xml"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/drawable_divider.xml.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/drawable/divider.xml"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/navigation_mobile_navigation.xml.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/navigation/mobile_navigation.xml"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/layout_orderinfo_list.xml.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/layout/orderinfo_list.xml"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/drawable_ic_checkbox_normal.xml.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/drawable/ic_checkbox_normal.xml"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/drawable_testpic.PNG.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/drawable/testpic.PNG"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/drawable_ic_qishou.xml.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/drawable/ic_qishou.xml"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/drawable_btn_shape_in_order.xml.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/drawable/btn_shape_in_order.xml"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/mipmap-hdpi_icon.png.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/mipmap-hdpi/icon.png"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/mipmap-xhdpi_ic_launcher_round.png.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/layout_startpoint.xml.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/layout/startpoint.xml"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/drawable_ic_chat.xml.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/drawable/ic_chat.xml"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/drawable_baseline_history_green_a700_24dp.xml.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/drawable/baseline_history_green_a700_24dp.xml"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/layout_fragment_login.xml.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/layout/fragment_login.xml"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/layout_fragment_chat.xml.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/layout/fragment_chat.xml"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/layout_fragment_forget.xml.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/layout/fragment_forget.xml"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/drawable_ic_add.xml.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/drawable/ic_add.xml"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/drawable_below_button.xml.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/drawable/below_button.xml"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/layout_myorder_published.xml.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/layout/myorder_published.xml"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/layout_fragment_modifymyinfo.xml.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/layout/fragment_modifymyinfo.xml"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/color_color_bottom_navigation_item.xml.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/color/color_bottom_navigation_item.xml"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/drawable_send_message_background.xml.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/drawable/send_message_background.xml"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/layout_fragment_orderinfo.xml.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/layout/fragment_orderinfo.xml"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/drawable_username.jpg.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/drawable/username.jpg"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/drawable_ic_launcher_background.xml.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/drawable/ic_launcher_background.xml"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/layout_fragment_myinfo.xml.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/layout/fragment_myinfo.xml"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/color_color_text_select.xml.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/color/color_text_select.xml"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/drawable_chat_edittext.xml.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/drawable/chat_edittext.xml"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/mipmap-hdpi_title_bg.png.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/mipmap-hdpi/title_bg.png"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/layout_fragment_map.xml.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/layout/fragment_map.xml"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/layout_login.xml.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/layout/login.xml"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/layout_chat_sender_publisher.xml.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/layout/chat_sender_publisher.xml"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/mipmap-mdpi_ic_launcher.png.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/mipmap-mdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/drawable_edge_gray.xml.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/drawable/edge_gray.xml"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/drawable_icon_marka.png.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/drawable/icon_marka.png"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/layout_fragment_myorder.xml.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/layout/fragment_myorder.xml"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/drawable_ic_laoban.xml.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/drawable/ic_laoban.xml"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/mipmap-xxxhdpi_ic_launcher_foreground.png.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/mipmap-xxxhdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/layout_fragment_order_create.xml.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/layout/fragment_order_create.xml"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/layout_chat_other_toolman.xml.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/layout/chat_other_toolman.xml"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/layout_hint_dialog.xml.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/layout/hint_dialog.xml"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/layout_chat_sender_toolman.xml.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/layout/chat_sender_toolman.xml"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/drawable_baseline_update_black_24dp.xml.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/drawable/baseline_update_black_24dp.xml"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/mipmap-hdpi_ic_launcher_round.png.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/mipmap-hdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/drawable_ic_user.xml.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/drawable/ic_user.xml"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/mipmap-xhdpi_ic_launcher_foreground.png.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/mipmap-xhdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/build/intermediates/res/merged/debug/layout_myorder_received.xml.flat",
+        "source": "/Users/dcat/PKU-Tool-Man/src/frontend/PKUToolMan/app/src/main/res/layout/myorder_received.xml"
+    }
+]
