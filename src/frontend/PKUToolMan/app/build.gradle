@@ -57,6 +57,7 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     implementation files('libs/BaiduLBS_Android.jar')
+
     testImplementation'junit:junit:4.12'
     testImplementation"org.mockito:mockito-core:1.9.5"
     testCompile files('libs/json.jar')

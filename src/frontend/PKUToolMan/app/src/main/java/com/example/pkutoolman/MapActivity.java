@@ -170,8 +170,8 @@ public class MapActivity extends AppCompatActivity {
     private void drawStartAndDest() {
         // 获得传入的起点和终点的内容
         Intent intent = getIntent();
-        start = intent.getStringExtra("start");
-        dest = intent.getStringExtra("dest");
+        start = "北京大学" + intent.getStringExtra("start");
+        dest = "北京大学" + intent.getStringExtra("dest");
         System.out.println(start);
         System.out.println(dest);
         mCoder.geocode(new GeoCodeOption().city("北京").address(start));
