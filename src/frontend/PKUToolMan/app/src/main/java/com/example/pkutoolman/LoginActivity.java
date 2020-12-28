@@ -22,6 +22,8 @@ import org.json.JSONObject;
 public class LoginActivity extends AppCompatActivity {
     EditText username;  //用户名
     EditText password;  //密码
+
+    public static int flag;//单元测试使用
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,7 +80,7 @@ public class LoginActivity extends AppCompatActivity {
                 String password_in = password.getText().toString().trim();
                 String password_md5 = MD5.encrypt(password_in);
                 try {
-                    login_check(user_in,password_md5);
+                    loginCheck(user_in,password_md5);
                 } catch (JSONException e) {
                     e.printStackTrace();
                     return;
@@ -97,7 +99,7 @@ public class LoginActivity extends AppCompatActivity {
         String user = username.getText().toString().trim();
         String password = pass.getText().toString().trim();
         String password_md5 = MD5.encrypt(password);
-        login_check(user,password_md5);
+        loginCheck(user,password_md5);
     }
 
     //跳转到注册界面
@@ -114,20 +116,20 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     //验证username和password
-    private void login_check(String user_in,String password_in) throws JSONException {
+    public void loginCheck(String user_in,String password_in) throws JSONException {
 
         if (TextUtils.isEmpty(username.getText().toString())) {
+            flag = 1;
             Toast.makeText(LoginActivity.this, "用户名不能为空", Toast.LENGTH_SHORT).show();
             return;
         }
 
         if (TextUtils.isEmpty(password.getText().toString())) {
+            flag = 2;
             Toast.makeText(LoginActivity.this, "密码不能为空", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        String default_name = "hello";
-        String default_pass = "1234";
 
         //创建请求json
         String request_login_json = "{" + "\"username\":"+"\"" + user_in + "\"" + ","
@@ -141,19 +143,20 @@ public class LoginActivity extends AppCompatActivity {
 
         //断网情况下，会返回null
         if(result_json == null){
+            flag = 3;
             Toast.makeText(this, "无网络连接，请重试", Toast.LENGTH_SHORT).show();
             return;
         }
+
 
         System.out.println(result_json.toString());
 
         String code = (result_json.getString("code")).toString();
         String message = (result_json.getString("message")).toString();
 
-        //code = "200";
-
         if (code.equals("200")) {
             //获得id和昵称
+            flag = 4;
             JSONObject json_data = result_json.getJSONObject("data");
             String token = json_data.getString("token").toString();
 
@@ -184,17 +187,30 @@ public class LoginActivity extends AppCompatActivity {
             finish();
         }
         else if(code.equals("500") && message.equals("password wrong!")){
+            flag = 5;
             Toast.makeText(this, "密码错误", Toast.LENGTH_SHORT).show();
             return;
         }
         else if(code.equals("500") && message.equals("user not exist")){
+            flag = 6;
             Toast.makeText(this, "该用户不存在", Toast.LENGTH_SHORT).show();
             return;
         }
         else{
+            flag = 7;
             Toast.makeText(this, "服务器错误，请重试", Toast.LENGTH_SHORT).show();
             return;
         }
+    }
+
+    //loginCheck单元测试使用
+    public static int loginCheckTest(String user_in, String password_in) {
+        try {
+            new LoginActivity().loginCheck(user_in,password_in);
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
+        return flag;
     }
 }
 

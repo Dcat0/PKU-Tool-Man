@@ -50,7 +50,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     //注册
     public void  Register(View v) throws JSONException {
-        register_check();
+        registerCheck();
     }
 
     public boolean Check_email(String email){
@@ -67,7 +67,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     //注册验证
-    public void register_check() throws JSONException {
+    public void registerCheck() throws JSONException {
         String username_register = username.getText().toString().trim();
         String password_register = pass.getText().toString().trim();
         String password_again_register = pass_again.getText().toString().trim();
@@ -260,7 +260,7 @@ public class RegisterActivity extends AppCompatActivity {
             if (str.indexOf("\r") >= 0 || str.indexOf("\n") >= 0) {//发现输入回车符或换行符
                 phone.setText(str.replace("\r", "").replace("\n", ""));//去掉回车符和换行符
                 try {
-                    register_check();
+                    registerCheck();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
