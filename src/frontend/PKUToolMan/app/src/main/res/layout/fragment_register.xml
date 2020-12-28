@@ -24,7 +24,7 @@
             android:textStyle="bold" />
 
         <ImageView
-            android:id="@+id/forget_back_button"
+            android:id="@+id/register_back_button"
             android:layout_width="60dp"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -60,7 +60,7 @@
                     android:gravity="center"
                     android:text="昵称"
                     android:textColor="@color/text_emphasis"
-                    android:textSize="20dp" />
+                    android:textSize="20dp"/>
 
                 <EditText
                     android:id="@+id/username"
@@ -69,6 +69,7 @@
                     android:layout_marginLeft="10dp"
                     android:background="@drawable/bg_edittext_select"
                     android:hint="请输入昵称"
+                    android:inputType="text"
                     android:maxLines="1"
                     android:textSize="20sp" />
 
@@ -89,12 +90,13 @@
                     android:textSize="20dp" />
 
                 <EditText
-                    android:id="@+id/forget_password"
+                    android:id="@+id/register_password"
                     android:layout_width="250dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:background="@drawable/bg_edittext_select"
                     android:hint="请输入密码"
+                    android:inputType="text"
                     android:maxLines="1"
                     android:password="true"
                     android:textSize="20sp" />
@@ -116,12 +118,13 @@
                     android:textSize="20dp" />
 
                 <EditText
-                    android:id="@+id/forget_password_again"
+                    android:id="@+id/register_password_again"
                     android:layout_width="250dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:background="@drawable/bg_edittext_select"
                     android:hint="请再次输入密码"
+                    android:inputType="text"
                     android:maxLines="1"
                     android:password="true"
                     android:textSize="20sp" />
@@ -143,12 +146,13 @@
                     android:textSize="20dp" />
 
                 <EditText
-                    android:id="@+id/forget_email"
+                    android:id="@+id/register_email"
                     android:layout_width="250dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:background="@drawable/bg_edittext_select"
                     android:hint="请输入邮箱"
+                    android:inputType="text"
                     android:maxLines="1"
                     android:textSize="20sp" />
 
@@ -169,12 +173,13 @@
                     android:textSize="20dp" />
 
                 <EditText
-                    android:id="@+id/forget_phone"
+                    android:id="@+id/register_phone"
                     android:layout_width="250dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:background="@drawable/bg_edittext_select"
                     android:hint="请输入手机号码"
+                    android:inputType="text"
                     android:maxLines="1"
                     android:textSize="20sp" />
 
@@ -192,7 +197,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/forget_button"
+            android:id="@+id/register_button"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

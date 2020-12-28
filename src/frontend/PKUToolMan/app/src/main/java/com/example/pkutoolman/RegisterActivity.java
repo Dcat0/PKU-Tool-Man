@@ -35,10 +35,10 @@ public class RegisterActivity extends AppCompatActivity {
             getSupportActionBar().hide();
         }
         username = (EditText) findViewById(R.id.username);  //获取用户名
-        pass = (EditText) findViewById(R.id.forget_password);  //获取密码
-        pass_again = (EditText) findViewById(R.id.forget_password_again);  //获取密码
-        email = (EditText) findViewById(R.id.forget_email);  //获取邮箱
-        phone = (EditText) findViewById(R.id.forget_phone);  //获取用户名
+        pass = (EditText) findViewById(R.id.register_password);  //获取密码
+        pass_again = (EditText) findViewById(R.id.register_password_again);  //获取密码
+        email = (EditText) findViewById(R.id.register_email);  //获取邮箱
+        phone = (EditText) findViewById(R.id.register_phone);  //获取用户名
 
         username.addTextChangedListener(new RegisterActivity.JumpTextWatcher_username()); //输入回车符号则跳至password文本框
         pass.addTextChangedListener(new RegisterActivity.JumpTextWatcher_pass());

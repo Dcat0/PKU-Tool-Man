@@ -70,6 +70,7 @@
                     android:layout_marginLeft="10dp"
                     android:background="@drawable/bg_edittext_select"
                     android:hint="请输入注册邮箱"
+                    android:inputType="text"
                     android:maxLines="1"
                     android:textSize="20sp" />
 
@@ -96,6 +97,7 @@
                     android:layout_marginLeft="10dp"
                     android:background="@drawable/bg_edittext_select"
                     android:hint="请输入注册手机号码"
+                    android:inputType="text"
                     android:maxLines="1"
                     android:textSize="20sp" />
 
@@ -122,6 +124,7 @@
                     android:layout_marginLeft="10dp"
                     android:background="@drawable/bg_edittext_select"
                     android:hint="请输入密码"
+                    android:inputType="text"
                     android:maxLines="1"
                     android:password="true"
                     android:textSize="20sp" />
@@ -149,6 +152,7 @@
                     android:layout_marginLeft="10dp"
                     android:background="@drawable/bg_edittext_select"
                     android:hint="请再次输入密码"
+                    android:inputType="text"
                     android:maxLines="1"
                     android:password="true"
                     android:textSize="20sp" />
