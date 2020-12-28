@@ -55,7 +55,7 @@ public class OrderinfoActivity extends AppCompatActivity {
         //隐藏标题栏
         getSupportActionBar().hide();
         //获得组件
-        btnBack = findViewById(R.id.returnfrommodify_button);
+        btnBack = findViewById(R.id.forget_back_button);
         btnChat = findViewById(R.id.btn_chat);
         btnReport = findViewById(R.id.btn_report);
         btnMap = findViewById(R.id.btn_map);

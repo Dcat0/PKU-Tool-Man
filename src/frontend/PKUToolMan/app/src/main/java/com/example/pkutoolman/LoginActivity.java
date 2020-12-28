@@ -3,13 +3,14 @@ package com.example.pkutoolman;
 import com.example.pkutoolman.baseclass.Post;
 import com.example.pkutoolman.baseclass.Data;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.text.TextUtils;
 import android.view.View;
-import android.view.Window;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.text.TextWatcher;
 import android.text.Editable;
@@ -18,12 +19,14 @@ import android.content.Intent;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 public class LoginActivity extends AppCompatActivity {
     EditText username;  //用户名
     EditText password;  //密码
 
     public static int flag;//单元测试使用
+    TextView appTitle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,10 +35,13 @@ public class LoginActivity extends AppCompatActivity {
             getSupportActionBar().hide();
         }
         username = (EditText) findViewById(R.id.username);  //获取用户名
-        password = (EditText) findViewById(R.id.password);  //获取密码
+        password = (EditText) findViewById(R.id.forget_password);  //获取密码
+        appTitle = (TextView)findViewById(R.id.app_title);
         username.addTextChangedListener(new JumpTextWatcher_username()); //输入回车符号则跳至password文本框
         password.addTextChangedListener(new JumpTextWatcher_password()); //输入回车符号则视为登入
 
+        Typeface typeFace = Typeface.createFromAsset(getAssets(), "myFont.ttf");
+        appTitle.setTypeface(typeFace);
 
     }
 
@@ -95,7 +101,7 @@ public class LoginActivity extends AppCompatActivity {
         EditText username;  //用户名
         EditText pass;  //密码
         username = (EditText) findViewById(R.id.username);  //获取用户名
-        pass = (EditText) findViewById(R.id.password);  //获取密码
+        pass = (EditText) findViewById(R.id.forget_password);  //获取密码
         String user = username.getText().toString().trim();
         String password = pass.getText().toString().trim();
         String password_md5 = MD5.encrypt(password);

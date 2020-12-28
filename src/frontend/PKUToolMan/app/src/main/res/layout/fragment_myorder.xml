@@ -18,18 +18,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="#00FFFFFF"
-            android:foreground="?selectableItemBackground"
+            android:background="@drawable/btn_bg"
             android:text="我发布的订单"
-            android:textColor="@color/color_text_select"
+            android:textColor="@color/btn_colorful"
             android:textSize="20sp"
             android:textStyle="bold" />
-
-        <View
-            android:layout_width="0.5dp"
-            android:layout_height="25dp"
-            android:layout_gravity="center"
-            android:background="@color/gray"></View>
 
         <Button
             android:id="@+id/bt_myorder_receive"
@@ -38,7 +31,6 @@
             android:layout_toRightOf="@id/bt_myorder_publish"
             android:layout_weight="1"
             android:background="#00FFFFFF"
-            android:foreground="?selectableItemBackground"
             android:text="我接收的订单"
             android:textColor="@color/color_text_select"
             android:textSize="20sp"
@@ -93,7 +85,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"
             android:layout_margin="16dp"
-            app:backgroundTint="#00BCD4"
+            app:backgroundTint="@color/btn_colorful"
             app:fabSize="normal"
             app:rippleColor="#3F51B5"
             app:srcCompat="@drawable/ic_baseline_autorenew_24" />

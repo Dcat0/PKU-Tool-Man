@@ -9,16 +9,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:background="@color/login_main_color">
+        android:background="@mipmap/title_bg">
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/app_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="false"
             android:layout_alignParentBottom="false"
             android:layout_centerInParent="true"
-            android:text="PKU TOOL MAN"
             android:textColor="@color/white"
             android:textSize="48sp"
             android:textStyle="normal" />
@@ -62,7 +61,7 @@
                 android:orientation="horizontal">
 
                 <EditText
-                    android:id="@+id/password"
+                    android:id="@+id/forget_password"
                     android:layout_width="250dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
@@ -113,7 +112,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/register_button"
+                    android:id="@+id/forget_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -131,10 +130,10 @@
                     android:paddingLeft="16dp"
                     android:paddingRight="16dp"
                     android:text="|"
+                    android:textColor="@color/text_light"
                     android:textSize="20dp" />
 
                 <Button
-                    android:id="@+id/forget_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
