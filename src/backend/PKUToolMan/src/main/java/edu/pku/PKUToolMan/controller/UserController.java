@@ -26,8 +26,6 @@ public class UserController {
         String password = map.get("password").toString();
         String email = map.get("email").toString();
         String phoneNum = map.get("phoneNum").toString();
-//            String nickname, String password,
-//                           String email, String phoneNum) {
         System.out.println("nickname="+nickname+"\n"
                 +"password="+password+"\n"
                 +"email="+email+"\n"
@@ -131,7 +129,7 @@ public class UserController {
         String email = map.get("email").toString();
         String phoneNum = map.get("phoneNum").toString();
         String newPassword = map.get("newPassword").toString();
-
+        // find user via email in database
         User user = null;
         try {
             user = userService.queryByEmail(email);
@@ -142,10 +140,11 @@ public class UserController {
         if(user == null) {
             return Result.RESPONSE_ERROR().message("email not exist");
         }
+        // check by phoneNum
         if(!user.getPhoneNum().equals(phoneNum)) {
             return Result.RESPONSE_ERROR().message("phoneNum wrong");
         }
-
+        // renew password
         user.setPassword(newPassword);
         try {
             userService.modifyWith(user);
@@ -173,7 +172,10 @@ public class UserController {
         if(user == null) {
             return Result.RESPONSE_ERROR().message("user not found");
         }
-        // found
+        // found, disable private information
+        user.setPassword(null);
+        user.setEmail(null);
+        user.setPhoneNum(null);
         return Result.SUCCESS().data("user", user);
     }
 
