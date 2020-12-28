@@ -88,7 +88,7 @@ public class MapActivity extends AppCompatActivity {
         setListener();
         drawStartAndDest(); // 绘制取货点和送货点
         //zoomToSpan();
-        //getLocation(); //绘制我的位置
+        getLocation(); //绘制我的位置
     }
 
     private void setListener() {
@@ -285,7 +285,7 @@ public class MapActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        //mLocationClient.stop();
+        mLocationClient.stop();
         System.out.println("destroy map");
         mBaiduMap.setMyLocationEnabled(false);
         mMapView.onDestroy();
