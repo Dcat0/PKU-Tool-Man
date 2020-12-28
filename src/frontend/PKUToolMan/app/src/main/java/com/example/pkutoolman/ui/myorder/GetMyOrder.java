@@ -42,9 +42,7 @@ public class GetMyOrder {
         JSONObject obj = Post.post("http://121.196.103.2:8080/order/myorderlist", "{\"userID\":"+String.valueOf(userID)+"}");
         System.out.println(obj);
         if (obj == null) {
-            Looper.prepare();
             Toast.makeText(context, "网络连接出错", Toast.LENGTH_SHORT).show();
-            Looper.loop();
             return;
         }
 
@@ -52,19 +50,13 @@ public class GetMyOrder {
             if (obj.getInt("code") != 200)
             switch (obj.getInt("code")) {
                 case 401:
-                    Looper.prepare();
                     Toast.makeText(context, "权限不足", Toast.LENGTH_SHORT).show();
-                    Looper.loop();
                     return;
                 case 500:
-                    Looper.prepare();
                     Toast.makeText(context, "服务端未响应", Toast.LENGTH_SHORT).show();
-                    Looper.loop();
                     return;
                 default:
-                    Looper.prepare();
                     Toast.makeText(context, "未知错误", Toast.LENGTH_SHORT).show();
-                    Looper.loop();
                     return;
             }
         } catch (Exception e) {

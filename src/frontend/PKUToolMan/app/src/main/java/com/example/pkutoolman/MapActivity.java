@@ -88,7 +88,7 @@ public class MapActivity extends AppCompatActivity {
         setListener();
         drawStartAndDest(); // 绘制取货点和送货点
         //zoomToSpan();
-        getLocation(); //绘制我的位置
+        //getLocation(); //绘制我的位置
     }
 
     private void setListener() {
@@ -170,8 +170,8 @@ public class MapActivity extends AppCompatActivity {
     private void drawStartAndDest() {
         // 获得传入的起点和终点的内容
         Intent intent = getIntent();
-        start = intent.getStringExtra("start");
-        dest = intent.getStringExtra("dest");
+        start = "北京大学" + intent.getStringExtra("start");
+        dest = "北京大学" + intent.getStringExtra("dest");
         System.out.println(start);
         System.out.println(dest);
         mCoder.geocode(new GeoCodeOption().city("北京").address(start));
@@ -285,7 +285,7 @@ public class MapActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        mLocationClient.stop();
+        //mLocationClient.stop();
         System.out.println("destroy map");
         mBaiduMap.setMyLocationEnabled(false);
         mMapView.onDestroy();
