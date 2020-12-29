@@ -1,6 +1,5 @@
 package com.example.pkutoolman.ui.myorder;
 
-import android.app.Application;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -79,7 +78,6 @@ public class MyorderFragment extends Fragment {
     private void startTask() {
         task = new TimerTask() {
             public void run() {
-                if (Looper.myLooper() == null) Looper.prepare();
                 CopyOnWriteArrayList<Map<String, Object>> test;
                 boolean changed = false;
                 //查询所有当前显示的订单中是否有消息记录变化的
@@ -114,13 +112,13 @@ public class MyorderFragment extends Fragment {
     public void onDestroy() {
         System.out.println("onDestroy");
         super.onDestroy();
+        stopTimer();
+        stopTask();
     }
 
     @Override
     public void onDestroyView() {
         System.out.println("onDestroyView");
-        stopTimer();
-        stopTask();
         super.onDestroyView();
     }
 
@@ -135,7 +133,7 @@ public class MyorderFragment extends Fragment {
             updateOrderMessage(jumpToOrderId, getNewMessage(jumpToOrderId, Data.getUserID()));
             startTimer();
             startTask();
-            timer.schedule(task, 5000, 10000);
+            timer.schedule(task, 30000, 30000);
         }
     }
 
@@ -143,7 +141,6 @@ public class MyorderFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
 
         System.out.println("on create view");
-        System.out.println(Thread.currentThread().getId());
         myorderViewModel = new ViewModelProvider(this).get(MyorderViewModel.class);
         View root = inflater.inflate(R.layout.fragment_myorder, container, false);
         mLv = root.findViewById(R.id.lv_myorder);
@@ -200,13 +197,7 @@ public class MyorderFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 System.out.println("refresh");
-                stopTimer();
-                stopTask();
                 refresh(true);
-                // 断网后 task会自动停止 按刷新时重启task
-                startTimer();
-                startTask();
-                timer.schedule(task, 5000, 10000);
             }
         });
         bt1.setOnClickListener(new View.OnClickListener() {
@@ -262,7 +253,7 @@ public class MyorderFragment extends Fragment {
         });
         startTimer();
         startTask();
-        timer.schedule(task, 5000, 10000);
+        timer.schedule(task, 10000, 30000);
         return root;
     }
 
@@ -270,34 +261,35 @@ public class MyorderFragment extends Fragment {
         String jsonSend = "{\"orderID\":" + String.valueOf(orderID) + ",\"userID\":" + String.valueOf(userID) + "}";
         System.out.println("queryNewMessage");
         System.out.println(jsonSend);
-        System.out.println(Thread.currentThread().getId());
-        JSONObject obj;
-
-        obj = Post.post("http://121.196.103.2:8080/chat/check", jsonSend);
-
+        JSONObject obj = Post.post("http://121.196.103.2:8080/chat/check", jsonSend);
         System.out.println(obj);
+        if (obj == null) {
+            Looper.prepare();
+            Toast.makeText(getContext(), "网络连接出错", Toast.LENGTH_SHORT).show();
+            Looper.loop();
+            return false;
+        } else
         try {
-            if (obj == null) {
-                Toast.makeText(getContext(), "网络连接出错", Toast.LENGTH_SHORT).show();
-                Looper.loop();
-            } else
             if (obj.getInt("code") != 200)
                 switch (obj.getInt("code")) {
                     case 401:
+                        Looper.prepare();
                         Toast.makeText(getContext(), "权限不足", Toast.LENGTH_SHORT).show();
                         Looper.loop();
-                        break;
+                        return false;
                     case 500:
+                        Looper.prepare();
                         Toast.makeText(getContext(), "服务端未响应", Toast.LENGTH_SHORT).show();
                         Looper.loop();
-                        break;
+                        return false;
                     default:
+                        Looper.prepare();
                         Toast.makeText(getContext(), "未知错误", Toast.LENGTH_SHORT).show();
                         Looper.loop();
+                        return false;
                 }
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
         }
         try {
             boolean bool = obj.getJSONObject("data").getBoolean("checkresult");

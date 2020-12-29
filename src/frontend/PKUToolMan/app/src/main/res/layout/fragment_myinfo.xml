@@ -47,7 +47,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:baselineAligned="false" android:orientation="horizontal">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -92,8 +92,6 @@
                             android:paddingEnd="0dp"
                             android:paddingBottom="10dp"
                             android:text="Wyxoi"
-                            android:maxLines="1"
-                            android:inputType="text"
                             android:textColor="@color/text_emphasis"
                             android:textSize="20sp">
 
@@ -129,8 +127,6 @@
                         android:paddingEnd="0dp"
                         android:paddingBottom="0dp"
                         android:text="fyc@pku.edu.cn"
-                        android:maxLines="1"
-                        android:inputType="text"
                         android:textColor="@color/text_normal"
                         android:textSize="20sp">
 
@@ -163,8 +159,6 @@
                         android:paddingEnd="0dp"
                         android:paddingBottom="0dp"
                         android:text="13857558347"
-                        android:maxLines="1"
-                        android:inputType="text"
                         android:textColor="@color/text_normal"
                         android:textSize="20sp">
 
@@ -304,7 +298,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:orientation="horizontal">
+            android:baselineAligned="false" android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="0dp"

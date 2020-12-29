@@ -39,38 +39,9 @@
             android:textSize="18sp" />
     </RelativeLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="right"
-        android:paddingHorizontal="25dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="订单类型:">
-        </TextView>
-
-        <Spinner
-            android:id="@+id/orderspace_type_selector"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:spinnerMode="dialog">
-        </Spinner>
-
-    </LinearLayout>
-
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <TextView
-            android:id="@+id/orderspace_no_order"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="目前还没有发布的订单"
-            android:visibility="visible"></TextView>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/orderspace_refresh_button"
@@ -78,7 +49,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"
             android:layout_margin="16dp"
-            app:backgroundTint="@color/btn_colorful"
+            app:backgroundTint="#00BCD4"
             app:fabSize="normal"
             app:rippleColor="#3F51B5"
             app:srcCompat="@drawable/ic_baseline_autorenew_24" />

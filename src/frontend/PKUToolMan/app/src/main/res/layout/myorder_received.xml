@@ -67,7 +67,7 @@
                 android:layout_marginTop="5dp"
                 android:background="@color/gray" />
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="match_parent" android:baselineAligned="false" 
                 android:layout_height="wrap_content">
 
                 <LinearLayout

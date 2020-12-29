@@ -90,7 +90,6 @@
                     android:gravity="center"
                     android:hint="Wyxoi"
                     android:maxLines="1"
-                    android:inputType="text"
                     android:textColor="@color/text_light"
                     android:textSize="20sp" />
 
@@ -120,7 +119,6 @@
                     android:gravity="center"
                     android:hint="fyc@pku.edu.cn"
                     android:maxLines="1"
-                    android:inputType="text"
                     android:textColor="@color/text_light"
                     android:textSize="20sp" />
 
@@ -150,7 +148,6 @@
                     android:gravity="center"
                     android:hint="13857558347"
                     android:maxLines="1"
-                    android:inputType="text"
                     android:textSize="20sp" />
 
             </LinearLayout>
@@ -179,7 +176,6 @@
                     android:gravity="center"
                     android:hint="请输入原密码"
                     android:maxLines="1"
-                    android:inputType="text"
                     android:password="true"
                     android:textColor="@color/text_light"
                     android:textSize="20sp" />
@@ -210,7 +206,6 @@
                     android:gravity="center"
                     android:hint="请输入新密码"
                     android:maxLines="1"
-                    android:inputType="text"
                     android:password="true"
                     android:textColor="@color/text_light"
                     android:textSize="20sp" />
@@ -241,7 +236,6 @@
                     android:gravity="center"
                     android:hint="请重复新密码"
                     android:maxLines="1"
-                    android:inputType="text"
                     android:password="true"
                     android:textColor="@color/text_light"
                     android:textSize="20sp" />
