@@ -123,7 +123,7 @@ public class OrderCreateFragment extends Fragment {
             }
         });
     }
-    private boolean create_check(String type, String place1, String place2, String st_day, String st_hour, String st_minute, String description) throws JSONException {
+    public boolean create_check(String type, String place1, String place2, String st_day, String st_hour, String st_minute, String description) throws JSONException {
         if (TextUtils.isEmpty(type)||TextUtils.isEmpty(place1)||TextUtils.isEmpty(place2)
                 ||TextUtils.isEmpty(st_day)||TextUtils.isEmpty(st_hour)||TextUtils.isEmpty(st_minute)
                 ||TextUtils.isEmpty(description)) {
@@ -131,9 +131,9 @@ public class OrderCreateFragment extends Fragment {
             return false;
         }
 
-        int day = Integer.parseInt(txt_day.getText().toString().trim());
-        int hour = Integer.parseInt(txt_hour.getText().toString().trim());
-        int minute = Integer.parseInt(txt_minute.getText().toString().trim());
+        int day = Integer.parseInt(st_day);
+        int hour = Integer.parseInt(st_hour);
+        int minute = Integer.parseInt(st_minute);
         if (day>9||day<0) {
             Toast.makeText(getContext(), "天数范围为0~9", Toast.LENGTH_SHORT).show();
             return false;
