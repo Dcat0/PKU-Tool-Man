@@ -1,0 +1,25 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.pku.PKUToolMan.dao.ChatDAO">
+
+
+    <insert id="updateChat" parameterType="Chat">
+        insert into t_chat
+        values (#{orderId},#{senderId},#{receiverId},#{sendTime},#{message},#{status})
+    </insert>
+
+    <select id="queryChat" parameterType="Chat" resultType="Chat">
+        select orderid,senderid,receiverid,sendtime,message,status from t_chat
+        where orderid=#{orderId} and receiverid=#{receiverId} and status=#{status}
+    </select>
+
+    <update id="updatestatus" parameterType="Chat">
+        update t_chat set status=1
+        where orderid=#{orderId} and receiverid=#{receiverId}
+    </update>
+
+    <select id="checkstatus" parameterType="Chat" resultType="Boolean">
+        <![CDATA[ select count(1) from t_chat
+        where orderid=#{orderId} and receiverid=#{receiverId} and status=0 ]]>
+    </select>
+
+</mapper>
