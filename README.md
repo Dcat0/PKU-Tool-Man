@@ -66,7 +66,7 @@
 
 #### 项目代码成果（截止12月29日）（后续又添加了测试相关代码）：
 
-![image-20210101154004356](/Users/dcat/Library/Application Support/typora-user-images/image-20210101154004356.png)
+![image-20210101154004356](https://github.com/Dcat0/PKU-Tool-Man/blob/main/image/image-20210101154004356.png)
 
 
 
@@ -95,9 +95,9 @@
 
 ### 分支列表：
 
-<img src="/Users/dcat/Library/Application Support/typora-user-images/image-20210101160158042.png" alt="image-20210101160158042" style="zoom:50%;" />
+<img src="https://github.com/Dcat0/PKU-Tool-Man/blob/main/image/image-20210101160158042.png" alt="image-20210101160158042" style="zoom:50%;" />
 
-<img src="/Users/dcat/Library/Application Support/typora-user-images/image-20210101160720440.png" alt="image-20210101160720440" style="zoom:50%;" />
+<img src="https://github.com/Dcat0/PKU-Tool-Man/blob/main/image/image-20210101160720440.png" alt="image-20210101160720440" style="zoom:50%;" />
 
 ​	开发过程中，前端分支为 `main` ，后端分支为 `backEnd` 
 
@@ -122,4 +122,4 @@
 
 #### 前端java文件：
 
-<img src="/Users/dcat/Library/Application Support/typora-user-images/image-20210101172039596.png" alt="image-20210101172039596" style="zoom:50%;" />
+<img src="https://github.com/Dcat0/PKU-Tool-Man/blob/main/image/image-20210101172039596.png" alt="image-20210101172039596" style="zoom:50%;" />
