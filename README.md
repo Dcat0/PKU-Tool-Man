@@ -89,7 +89,7 @@
 
 *下图是本地绑定邮箱前的commit（
 
-<img src="/Users/dcat/Library/Application Support/typora-user-images/image-20210101155759852.png" alt="image-20210101155759852" style="zoom:45%;" />
+<img src="https://github.com/Dcat0/PKU-Tool-Man/blob/main/image/image-20210101155759852.png" alt="image-20210101155759852" style="zoom:45%;" />
 
 
 
