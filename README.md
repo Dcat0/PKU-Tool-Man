@@ -140,16 +140,21 @@
 
 #### 后端java文件：
 
-（这里是还没传的图片）
-
+<img src="https://github.com/Dcat0/PKU-Tool-Man/blob/main/image/backEndStructure-dark.png" alt="backEndStructure-dark" width="275" />
 
 ##### 代码说明：
 
-​ src目录下有两个文件夹：`main`和`test`
+​ 后端`src`目录下有两个文件夹：`main`和`test`
 
 ​ `test`存放了后端的单元测试；
 
-​ `main`中有`java`和`resources`
+​ `main`中有`java`和`resources`：
+
+​   `java/edu/pku/PKUToolMan`保存了大部分源代码。其中，`config`配置了后端拦截token的方案，`controller`是各个端口的控制器，`dao`是后端与数据库的接口，`entity`定义了后端需要的数据类型，`interceptor`实现了token的验证，`service`包装了Spring Boot框架下注入在控制器中的数据库服务，`utils`定义了后端返回的通用数据类和token类。PKUToolManApplication是后端的启动点；
+
+​ 文件命名以**用户**`user`、**订单**`order`、**聊天**`chat`开头表明了在后端的模块；
+
+​ `resources`包括了DAO访问数据库使用的mapper和后端的application.properties.
 
 #### 
 
