@@ -89,22 +89,25 @@
 
                     <RadioButton
                         android:id="@+id/orderType_rbt1"
-                        android:layout_width="90dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:text="取快递"
                         android:textColor="@color/text_emphasis" />
 
                     <RadioButton
                         android:id="@+id/orderType_rbt2"
-                        android:layout_width="75dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:text="购物"
                         android:textColor="@color/text_emphasis" />
 
                     <RadioButton
                         android:id="@+id/orderType_rbt3"
-                        android:layout_width="70dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:text="带饭"
                         android:textColor="@color/text_emphasis" />
 
@@ -188,18 +191,19 @@
 
                 <EditText
                     android:id="@+id/text_create_day"
-                    android:layout_width="50dp"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
                     android:gravity="center"
                     android:background="@drawable/bg_edittext_select"
                     android:ems="2"
                     android:hint="0~9"
-                    android:textSize="18sp"
+                    android:textSize="17sp"
                     android:inputType="number" />
 
                 <TextView
-                    android:layout_width="25dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:paddingTop="3dp"
@@ -209,18 +213,19 @@
 
                 <EditText
                     android:id="@+id/text_create_hour"
-                    android:layout_width="50dp"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
                     android:gravity="center"
                     android:background="@drawable/bg_edittext_select"
                     android:ems="2"
                     android:hint="0~23"
-                    android:textSize="18sp"
+                    android:textSize="17sp"
                     android:inputType="number" />
 
                 <TextView
-                    android:layout_width="25dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:paddingTop="3dp"
@@ -230,18 +235,19 @@
 
                 <EditText
                     android:id="@+id/text_create_minute"
-                    android:layout_width="50dp"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
                     android:gravity="center"
                     android:background="@drawable/bg_edittext_select"
                     android:ems="2"
                     android:hint="0~59"
-                    android:textSize="18sp"
+                    android:textSize="17sp"
                     android:inputType="number" />
 
                 <TextView
-                    android:layout_width="25dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:paddingTop="3dp"
