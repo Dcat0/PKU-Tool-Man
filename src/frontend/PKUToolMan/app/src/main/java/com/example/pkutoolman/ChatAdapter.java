@@ -19,12 +19,6 @@ public class ChatAdapter extends BaseAdapter {
         this.lists = lists;
     }
 
-    /**
-     * 是否是自己发送的消息
-     *
-     * @author cyf
-     *
-     */
     public static interface IMsgViewType {
         int IMVT_COM_MSG = 0;// 收到对方的消息
         int IMVT_TO_MSG = 1;// 自己发送出去的消息
@@ -32,25 +26,19 @@ public class ChatAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        // TODO Auto-generated method stub
         return lists.size();
     }
 
     @Override
     public Object getItem(int arg0) {
-        // TODO Auto-generated method stub
         return lists.get(arg0);
     }
 
     @Override
     public long getItemId(int arg0) {
-        // TODO Auto-generated method stub
         return arg0;
     }
 
-    /**
-     * 得到Item的类型，是对方发过来的消息，还是自己发送出去的
-     */
     public int getItemViewType(int position) {
         ChatData entity = lists.get(position);
 
