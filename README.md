@@ -89,15 +89,15 @@
 
 *下图是本地绑定邮箱前的commit（
 
-<img src="https://github.com/Dcat0/PKU-Tool-Man/blob/main/image/image-20210101155759852.png" alt="image-20210101155759852" style="zoom:45%;" />
+<img src="https://github.com/Dcat0/PKU-Tool-Man/blob/main/image/image-20210101155759852.png" alt="image-20210101155759852" width="225" />
 
 
 
 ### 分支列表：
 
-<img src="https://github.com/Dcat0/PKU-Tool-Man/blob/main/image/image-20210101160158042.png" alt="image-20210101160158042" style="zoom:50%;" />
+<img src="https://github.com/Dcat0/PKU-Tool-Man/blob/main/image/image-20210101160158042.png" alt="image-20210101160158042" width="275" />
 
-<img src="https://github.com/Dcat0/PKU-Tool-Man/blob/main/image/image-20210101160720440.png" alt="image-20210101160720440" style="zoom:50%;" />
+<img src="https://github.com/Dcat0/PKU-Tool-Man/blob/main/image/image-20210101160720440.png" alt="image-20210101160720440" width="275" />
 
 ​	开发过程中，前端分支为 `main` ，后端分支为 `backEnd` 
 
@@ -110,7 +110,7 @@
 | 成员姓名 | 主要工作                                                     |
 | -------- | ------------------------------------------------------------ |
 | 陈官厅   | 后端“Chat”相关数据库及接口及测试                             |
-| 董晨     | `orderspace`相关class及ui，API文档，杂活担当                 |
+| 董晨     | `orderspace`相关class及ui，API文档，杂活主力                 |
 | 吴裕铖   | `baseclass` 代码，`myorder`相关class、地图及ui，前端主力副手       |
 | 张可鸣   | 登录注册、地图、聊天相关class及ui，前端主力                  |
 | 刘韫辉   | 服务器环境搭建、后端“User”相关数据库及接口及测试，后端主力   |
@@ -122,7 +122,7 @@
 
 #### 前端java文件：
 
-<img src="https://github.com/Dcat0/PKU-Tool-Man/blob/main/image/image-20210101172039596.png" alt="image-20210101172039596" style="zoom:50%;" />
+<img src="https://github.com/Dcat0/PKU-Tool-Man/blob/main/image/image-20210101172039596.png" alt="image-20210101172039596" width="455" />
 
 ##### 代码说明：
 
