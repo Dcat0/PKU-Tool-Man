@@ -40,7 +40,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class ChatActivity extends Activity {
-    ChatDatabase_sqlite chat_content;
+    ChatDatabase_sqlite chatContent;
     SQLiteDatabase db;
     String databaseName;
 
@@ -71,6 +71,7 @@ public class ChatActivity extends Activity {
 
     EditText et_chat_message;
 
+    //轮询获取聊天内容
     Timer timer = new  Timer();   //定义全局变量
     TimerTask task = new TimerTask() {
         @Override
@@ -142,6 +143,7 @@ public class ChatActivity extends Activity {
         text = (TextView) findViewById(R.id.to_whom);
         text.setText(Data.getOtherName());//显示聊天对象
 
+        //轮询时间设置
         long delay = 1000;
         long intevalPeriod = 2000;
 
@@ -169,8 +171,8 @@ public class ChatActivity extends Activity {
          */
 
         //加载数据库中信息
-        chat_content = new ChatDatabase_sqlite(ChatActivity.this);
-        db = chat_content.getWritableDatabase();
+        chatContent = new ChatDatabase_sqlite(ChatActivity.this);
+        db = chatContent.getWritableDatabase();
         Cursor cursor = db.rawQuery("select * from " + databaseName + " where order_id =" + Integer.toString(order_id), null);
 
         while (cursor.moveToNext()){
@@ -272,6 +274,12 @@ public class ChatActivity extends Activity {
         SimpleDateFormat df2 = new SimpleDateFormat("yyyy-MM-dd HH:mm");//设置日期格式,显示用时
         String send_time2 = df2.format(new Date());
         System.out.println(send_time);// new Date()为获取当前系统时间
+
+        //限制字数
+        if(my_send_message.length() >= 200){
+            Toast.makeText(ChatActivity.this, "发送内容不可超过200字", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         String request_chat_json = "{\"orderID\":"+ Integer.toString(Data.getOrderID()) + "," + "\"senderID\":" + Integer.toString(Data.getUserID())
                 + ",\"receiverID\":" + Integer.toString(Data.getChatID()) + ",\"message\":" + "\"" + my_send_message + "\"" + "}\"";
